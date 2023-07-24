@@ -6,25 +6,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users") // cambiamo nome perchè in postgres user e' una parola riservata
+@Table(name = "users")
 public class User {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
 	@NotNull
 	private String name;
+
 	@NotNull
 	private String surname;
+
 	@NotNull
 	private String email;
 
-    public Long getId() {
+	@OneToMany(mappedBy= "user")
+	private List <Prenotazione> prenotazioni;
+
+	public Long getId() {
 		return id;
 	}
 
@@ -34,26 +40,26 @@ public class User {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getSurname() {
 		return surname;
 	}
-	
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+
 }
