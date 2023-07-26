@@ -30,6 +30,7 @@ public class CategoriaController {
 		model.addAttribute("categorie",this.categoriaService.allCategorie());
 		return "categorie.html";
 	}
+
 	
 	
 
