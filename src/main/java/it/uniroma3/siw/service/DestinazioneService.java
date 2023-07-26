@@ -18,17 +18,17 @@ public class DestinazioneService {
 	
 	
 	@Transactional
-	private Iterable<Destinazione> findAllDestinazioni(){
+	public Iterable<Destinazione> allDestinazioni(){
 		return this.destinazioneRepository.findAll();
 	}
 	
 	@Transactional
-	private List<Destinazione> searchDestinazioniByNome(String nome){
+	public List<Destinazione> searchDestinazioniByNome(String nome){
 		return this.destinazioneRepository.findByNomeContainingIgnoreCase(nome);
 	}
 	
 	@Transactional
-	private void saveDestinazione(Destinazione d) {
+	public void saveDestinazione(Destinazione d) {
 		this.destinazioneRepository.save(d);
 	}
 

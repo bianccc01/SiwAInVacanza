@@ -1,14 +1,14 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import it.uniroma3.siw.model.Categoria;
-import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.service.CategoriaService;
-import it.uniroma3.siw.service.DestinazioneService;
 
+@Controller
 public class CategoriaController {
 	
 	@Autowired 
@@ -19,8 +19,8 @@ public class CategoriaController {
 		return "index.html";
 	}
 	
-	@GetMapping("/formNewDestinazione")
-	public String formNewDestinazione(Model model) {
+	@GetMapping("/formNewCategoria")
+	public String formNewCategoria(Model model) {
 		model.addAttribute("categoria", new Categoria());
 		return "formNewCategoria.html";
 	}
@@ -28,7 +28,7 @@ public class CategoriaController {
 	@GetMapping("/categorie")
 	public String Getcategorie(Model model) {
 		model.addAttribute("categorie",this.categoriaService.allCategorie());
-		return "listaCategorie.html";
+		return "categorie.html";
 	}
 	
 	
