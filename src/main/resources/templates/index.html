@@ -10,6 +10,7 @@
 
 <body>
 	<header>
+		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
