@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import it.uniroma3.siw.model.Categoria;
+
 import it.uniroma3.siw.service.CategoriaService;
 
 @Controller
@@ -66,15 +70,41 @@ public class CategoriaController {
 		Set<Categoria> categorie=this.categoriaService.allCategorie();
 		Categoria categ=this.categoriaService.findCategoriaById(id);
 		categorie.remove(categ);
-		return "categorie.html";
+		return "admin/categorie.html";
 		
 	}
 	
+	/*@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
+	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
+		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
+		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
+		List<Destinazione> destinazioni = categ.getDestinazioni();
+		destinazioni.add(dest);
+		this.destinazioneService.saveDestinazione(categ);
+		
+		List<Destinazione> destinazioniNew = destinazioniNotCategoria(categoriaId);  //come actorsToAdd
+		
+		model.addAttribute("categoria", categ);
+		model.addAttribute("destinazioniNew", destinazioniNew);
+
+		return "admin/categoria.html";
+	}
 	
-	
-	
-	//aggiungi destinazione
-	//rimuovi destinazione
+	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
+	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
+		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
+		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
+		List<Destinazione> destinazioni = categ.getDestinazioni();
+		destinazioni.remove(dest);
+		this.destinazioneService.saveDestinazione(categ);
+		
+		List<Destinazione> destinazioniNew = destinazioniInCategoria(categoriaId);  //come actorsToAdd
+		
+		model.addAttribute("categoria", categ);
+		model.addAttribute("destinazioniNew", destinazioniNew);
+
+		return "admin/categoria.html";
+	}*/
 	
 	
 
