@@ -84,6 +84,10 @@ public class Destinazione {
 		return this.images;
 	}
 	
+	public String getFirstImage() {
+		return this.images.get(0).getBase64Image();
+	}
+	
 	
 
 }

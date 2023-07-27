@@ -24,12 +24,22 @@
 
 	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Lista di destinazioni</h1>
+  
+  
+  <form th:action="@{/cercaDestinazioni}" method="post" class="search-form">
+    <label for="searchInput" class="search-label"> <p> Ricerca per nome </p> </label>
+  <div class="search-bar">
+    <input type="text" th:value="${nome}" name="nome" id="searchInput" class="boxricerca" />
+    <input type="submit" class="search-button"/>
+  </div>
+</form>
 
 <ul>
   <li th:each="d : ${destinazioni}">
   <div class = "boxdestinazione">
+    <img th:src="@{'data:image/png;base64,' + ${d.firstImage}}"/>
 		<a class = "nome" th:href="@{'/destinazione' + '/' + ${d.id}}"
-				th:text="${d.nome}"></a>
+				th:text="${d.nome}"> Ibiza</a>
 	</div>
 </li>
 </ul>
