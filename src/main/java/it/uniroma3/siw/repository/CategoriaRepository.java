@@ -12,5 +12,6 @@ public interface CategoriaRepository extends CrudRepository<Categoria,Long> {
 	public boolean existsByNome(String nome);
 	
 	public Set<Categoria> findAll();
+	
 
 }

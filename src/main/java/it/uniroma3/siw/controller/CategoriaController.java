@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import it.uniroma3.siw.model.Categoria;
-
+import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.service.CategoriaService;
 
 @Controller
@@ -61,7 +61,10 @@ public class CategoriaController {
 	
 	@GetMapping("/categoria/{id}")
 	public String getCategoria(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("categoria", this.categoriaService.findCategoriaById(id));
+		Categoria categ=this.categoriaService.findCategoriaById(id);
+		List<Destinazione> dest=categ.getDestinazioni();
+		model.addAttribute("categoria", categ);
+		model.addAttribute("destinazioni", dest);
 		return "categoria.html";
 	}
 	
@@ -98,7 +101,7 @@ public class CategoriaController {
 		destinazioni.remove(dest);
 		this.destinazioneService.saveDestinazione(categ);
 		
-		List<Destinazione> destinazioniNew = destinazioniInCategoria(categoriaId);  //come actorsToAdd
+		List<Destinazione> destinazioniNew = categ.getDestinazioni();  
 		
 		model.addAttribute("categoria", categ);
 		model.addAttribute("destinazioniNew", destinazioniNew);
