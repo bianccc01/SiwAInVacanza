@@ -37,7 +37,7 @@ public class CategoriaController {
 	@GetMapping("/admin/formNewCategoria")
 	public String formNewCategoria(Model model) {
 		model.addAttribute("categoria", new Categoria());
-		return "admin/formNewCategoria.html";
+		return "formNewCategoria.html";
 	}
 	
 	@GetMapping("/categorie")
@@ -53,9 +53,9 @@ public class CategoriaController {
 		if (!bindingResult.hasErrors()) {
 			this.categoriaService.saveCategoria(categ); 
 			model.addAttribute("categoria", categ);
-			return "admin/categorie.html";
+			return "categorie.html";
 		} else {
-			return "admin/formNewCategoria.html"; 
+			return "formNewCategoria.html"; 
 		}
 	}
 	

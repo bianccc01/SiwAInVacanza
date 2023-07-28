@@ -24,8 +24,8 @@ public class Categoria {
 	@NotBlank
 	private String descrizione;
 	
-	@NotBlank
-	private Image image;
+	//@NotBlank
+	//private Image image;
 	
 	@OneToMany(mappedBy="categoria")
 	private List<Destinazione> destinazioni;
@@ -62,13 +62,13 @@ public class Categoria {
 		this.destinazioni = destinazioni;
 	}
 	
-	public Image getImage() {
+	/*public Image getImage() {
 		return image;
 	}
 
 	public void setImage(Image image) {
 		this.image = image;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
