@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		SiwAInVacanza - Homepage
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<h1>Sfoglia le categorie</h1>
+	<div th:if="${categorie==null || categorie.isEmpty()}">Non ci sono categorie da sfogliare</div>
+  <div id="flex-container">
+    <span class="flex-item" th:each="categoria : ${categorie}">
+		<a th:href="@{'/categoria' + '/' + ${categoria.id}}"
+				th:text="${categoria.nome}"></a>
+	</span>
+    
+  </div>
+	
+</body>
+
+</html>
