@@ -24,6 +24,9 @@ public class Categoria {
 	@NotBlank
 	private String descrizione;
 	
+	@NotBlank
+	private Image image;
+	
 	@OneToMany(mappedBy="categoria")
 	private List<Destinazione> destinazioni;
 
@@ -57,6 +60,14 @@ public class Categoria {
 
 	public void setDestinazioni(List<Destinazione> destinazioni) {
 		this.destinazioni = destinazioni;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	@Override

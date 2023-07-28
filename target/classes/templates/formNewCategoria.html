@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		SiwAInVacanza - Homepage
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<h1>Aggiungi una categoria</h1>
+	<form th:action="@{/admin/newCategoria}" method="POST" th:object="${movie}">
+  		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		
+		<div>
+			<label>Nome:</label> 
+			<span><input type="text" th:field="${categoria.nome}" /></span>
+		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+		    </span>
+		</div>
+
+		<div>
+			<label>Descrizione:</label> <span><input type="text" th:field="${categoria.descrizione}" /></span>
+		    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">
+		    </span>
+		</div>
+
+		<div>
+			<label>Immagine:</label> <span><input type="text" th:field="${categoria.image}" /></span>
+		</div>
+		
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+body { 
+    font-family: "Geneva";
+    color:dimgrey;
+}
+
+a { 
+	text-decoration: none; 
+    color: darkgrey;
+}
+
+a:hover { 
+	text-decoration: underline; 
+}
+
+label {
+	width: 8em;
+	display: inline-block;
+}
+
+header {
+  background-color: yellow;
+  color: white;
+  height: 1.5em;
+  margin-bottom: 0.5em;
+  padding: 0.2em;
+  text-align: right; 
+}
+
+header a { 
+	text-decoration: none; 
+    color: white;
+    font-size: 0.6em;
+}
+
+div img {
+  margin-top=-20px
+  text-align: center; 
+}
+
+#flex-container {
+  display: flex;
+  align-items: flex-start;
+  height: 500px;
+}
+
+.flex-item {
+  background-color:black;
+  height:70px;
+  width:100px;
+  margin:10px; 
+  color:white;
+}
+
+span:hover{
+  text-decoration: underline;
+}
+
+
+
+</html>
