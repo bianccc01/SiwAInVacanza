@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Destinazione;
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.service.DestinazioneService;
 import net.bytebuddy.asm.Advice.This;
 
@@ -35,9 +36,14 @@ public class DestinazioneController {
 		return "destinazioni.html";
 	}
 
-	@GetMapping("/destinazione/{id}")
-	public String destinazione(@PathVariable ("id") Long id, Model model) {
-		model.addAttribute("destinazione",this.destinazioneService.findDestinazioneById(id));
+	@GetMapping("/destinazione/{id}/{idImage}")
+	public String destinazione(@PathVariable ("id") Long id, @PathVariable int idImage, Model model) {
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
+		Image image = destinazione.getImages().get(idImage);
+		
+		model.addAttribute("image",destinazione.getImages().get(idImage));
+		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, image.getId()));
+		model.addAttribute("destinazione",destinazione);
 		return "destinazione.html";
 	}
 

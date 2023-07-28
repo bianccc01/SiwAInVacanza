@@ -22,7 +22,7 @@
 		</div>
 	</header>
 
-	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<div class = "logo"><img src="/images/SiwVLogo.png" width="30%" /></div>
 	<h1>Lista di destinazioni</h1>
   
   
@@ -38,7 +38,7 @@
   <li th:each="d : ${destinazioni}">
   <div class = "boxdestinazione">
     <img th:src="@{'data:image/png;base64,' + ${d.firstImage}}"/>
-		<a class = "nome" th:href="@{'/destinazione' + '/' + ${d.id}}"
+		<a class = "nome" th:href="@{'/destinazione' + '/' + ${d.id} + '/' + ${0}}"
 				th:text="${d.nome}"> Ibiza</a>
 	</div>
 </li>

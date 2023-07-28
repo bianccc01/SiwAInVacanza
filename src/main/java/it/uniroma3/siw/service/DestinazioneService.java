@@ -61,5 +61,10 @@ public class DestinazioneService {
 		
 		this.imageRepository.saveAll(destinazione.getImages());
 	}
+	
+	@Transactional
+	public List<Image> allImagesExcept(Destinazione d, Long id){
+		return this.imageRepository.findAllByDestinazioneAndIdNot(d, id);
+	}
 
 }

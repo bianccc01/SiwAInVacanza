@@ -77,9 +77,10 @@ header a{
 
 
 .search-form{
-  position:absolute;
-  left:70%;
-  bottom:55%;
+  position:relative;
+  display:inline-block;
+  left:75%;
+  bottom:10em;
 }
 
 .search-label p {
@@ -89,7 +90,7 @@ header a{
 }
 
 .search-button {
-  position:absolute;
+  position:relative;
   color:transparent;
   background-color:transparent;
   width: 24px; 
@@ -98,8 +99,14 @@ header a{
   background-size: cover; 
   border: none; 
   cursor: pointer;
-  right:-35px;
-  bottom:4px;
+  right:-5px;
+  top:7px;
+}
+
+.logo{
+  position:relative;
+  left:40%;
+  bottom:5px;
 }
 
 
@@ -111,6 +118,13 @@ header a{
 
 ul {
 list-style-type: none;
+}
+
+h1{
+  position:absolute;
+  top:10%;
+  left:10px;
+  display:inline-block;
 }
 
 
