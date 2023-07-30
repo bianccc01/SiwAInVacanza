@@ -88,6 +88,10 @@ public class Destinazione {
 		return this.images.get(0).getBase64Image();
 	}
 	
+	public Long getFirstImageId() {
+		return this.images.get(0).getId();
+	}
+	
 	
 
 }

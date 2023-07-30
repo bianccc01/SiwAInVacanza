@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.service.DestinazioneService;
+import it.uniroma3.siw.service.ImageService;
 import net.bytebuddy.asm.Advice.This;
 
 @Controller
@@ -23,6 +24,9 @@ public class DestinazioneController {
 
 	@Autowired 
 	private DestinazioneService destinazioneService;
+	
+	@Autowired
+	private ImageService imageService;
 
 	@GetMapping("/formNewDestinazione")
 	public String formNewDestinazione(Model model) {
@@ -37,12 +41,12 @@ public class DestinazioneController {
 	}
 
 	@GetMapping("/destinazione/{id}/{idImage}")
-	public String destinazione(@PathVariable ("id") Long id, @PathVariable int idImage, Model model) {
+	public String destinazione(@PathVariable ("id") Long id, @PathVariable ("idImage") Long idImage, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
-		Image image = destinazione.getImages().get(idImage);
+		Image image = this.imageService.getImage(idImage);
 		
-		model.addAttribute("image",destinazione.getImages().get(idImage));
-		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, image.getId()));
+		model.addAttribute("image",image);
+		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		return "destinazione.html";
 	}

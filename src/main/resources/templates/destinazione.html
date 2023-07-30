@@ -19,8 +19,8 @@
             <a href="/login">Login</a>
          </div>
       </header>
-      <div class = "logo"><img src="https://static.vecteezy.com/ti/vettori-gratis/p3/7635048-vettore-modello-design-icona-logo-palma-albero-gratuito-vettoriale.jpg" width="20%" /></div>
-      <h1 th:text="${d.nome}">Ibiza</h1>
+      <div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+        <h1 th:text="${destinazione.nome}">Ibiza</h1>
       <div class = "boxImage"> 
          <img th:src="@{'data:image/png;base64,' + ${image.base64Image}}"/>
       </div>
@@ -28,7 +28,10 @@
          <ul>
             <li th:each="i : ${images}">
                <div class = "minibox">
-                  <img th:src="@{'data:image/png;base64,' + ${i.base64Image}}"/>
+                  <a th:href="@{'/destinazione' + '/' + ${destinazione.id} + '/' + ${i.id}}">
+					<img th:href="@{'/destinazione' + '/' + ${destinazione.id} + '/' + ${i.id}}" 
+                  th:src="@{'data:image/png;base64,' + ${i.base64Image}}"/>
+                  </a>
                </div>
             </li>
          </ul>
