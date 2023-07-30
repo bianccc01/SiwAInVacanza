@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Set;
 
@@ -16,18 +18,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.service.CategoriaService;
+import it.uniroma3.siw.service.DestinazioneService;
 
 @Controller
 public class CategoriaController {
 	
 	@Autowired 
 	private CategoriaService categoriaService;
-	@Autowired
+	//@Autowired
 	//private CategoriaValidator categoriaValidator;
+	@Autowired
+	private DestinazioneService destinazioneService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -62,18 +66,26 @@ public class CategoriaController {
 	@GetMapping("/categoria/{id}")
 	public String getCategoria(@PathVariable("id") Long id, Model model) {
 		Categoria categ=this.categoriaService.findCategoriaById(id);
-		List<Destinazione> dest=categ.getDestinazioni();
 		model.addAttribute("categoria", categ);
-		model.addAttribute("destinazioni", dest);
 		return "categoria.html";
 	}
 	
-	@GetMapping("/admin/categoria/{id}")
+	@GetMapping("/admin/updateCategoria/{id}")
+	public String updateActors(@PathVariable("id") Long id, Model model) {
+
+		//List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(id);
+		//model.addAttribute("notDestinazioni", notDestinazioni);
+		model.addAttribute("categoria", this.categoriaService.findCategoriaById(id));
+
+		return "admin/adminCategoria.html";
+	}
+	
+	@GetMapping("/admin/rimuoviCategoria/{id}")
 	public String removeCategoria(@PathVariable("id") Long id, Model model) {
 		Set<Categoria> categorie=this.categoriaService.allCategorie();
 		Categoria categ=this.categoriaService.findCategoriaById(id);
 		categorie.remove(categ);
-		return "admin/categorie.html";
+		return "admin/adminCategorie.html";
 		
 	}
 	
@@ -85,12 +97,12 @@ public class CategoriaController {
 		destinazioni.add(dest);
 		this.destinazioneService.saveDestinazione(categ);
 		
-		List<Destinazione> destinazioniNew = destinazioniNotCategoria(categoriaId);  //come actorsToAdd
+		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  //come actorsToAdd
 		
 		model.addAttribute("categoria", categ);
-		model.addAttribute("destinazioniNew", destinazioniNew);
+		model.addAttribute("notDestinazioni", notDestinazioni);
 
-		return "admin/categoria.html";
+		return "admin/adminCategoria.html";
 	}
 	
 	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
@@ -101,12 +113,21 @@ public class CategoriaController {
 		destinazioni.remove(dest);
 		this.destinazioneService.saveDestinazione(categ);
 		
-		List<Destinazione> destinazioniNew = categ.getDestinazioni();  
+		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  
 		
 		model.addAttribute("categoria", categ);
-		model.addAttribute("destinazioniNew", destinazioniNew);
+		model.addAttribute("notDestinazioni", notDestinazioni);
 
-		return "admin/categoria.html";
+		return "admin/adminCategoria.html";
+	}
+	
+	private List<Destinazione> destinazioniNotCategoria(Long categoriaId) {
+		List<Destinazione> notDestinazioni = new ArrayList<>();
+
+		for (Destinazione a : destinazioneService.findDestinazioniNotInCategoria(categoriaId)) {
+			notDestinazioni.add(a);
+		}
+		return notDestinazioni;
 	}*/
 	
 	

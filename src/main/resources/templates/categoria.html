@@ -23,9 +23,9 @@
 
 	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1 th:text="${categoria.nome}"></h1>
-	<div th:if="${destinazioni==null || destinazioni.isEmpty()}">Non ci sono destinazioni per questa categoria</div>
+	<div th:if="${categoria.destinazioni==null || categoria.destinazioni.isEmpty()}">Non ci sono destinazioni per questa categoria</div>
   <div id="flex-container">
-    <span class="flex-item" th:each="destinazione : ${destinazioni}">
+    <span class="flex-item" th:each="destinazione : ${categoria.destinazioni}">
 		<a th:href="@{'/destinazione' + '/' + ${destinazione.id}}"
 				th:text="${destinazione.nome}"></a>
 	</span>

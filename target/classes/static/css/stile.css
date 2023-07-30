@@ -50,3 +50,7 @@ header a {
 span:hover{
   text-decoration: underline;
 }
+
+div.col {
+  width: calc(50% - 10px);
+}
