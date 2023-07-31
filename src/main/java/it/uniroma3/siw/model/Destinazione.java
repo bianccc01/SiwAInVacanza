@@ -1,5 +1,7 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -20,6 +22,9 @@ public class Destinazione {
 	
 	@ManyToOne
 	private Categoria categoria;
+	
+	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Image> images = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -70,7 +75,22 @@ public class Destinazione {
 		return Objects.equals(nome, other.nome);
 	}
 	
+	public void addImage(Image image) {
+		this.images.add(image);
+		image.setDestinazione(this);
+	}
 	
+	public List<Image> getImages(){
+		return this.images;
+	}
+	
+	public String getFirstImage() {
+		return this.images.get(0).getBase64Image();
+	}
+	
+	public Long getFirstImageId() {
+		return this.images.get(0).getId();
+	}
 	
 	
 

@@ -1,0 +1,225 @@
+body { 
+    font-family: cursive;
+    color:black;
+    font-size: 20px;
+    background-color:white;
+    margin: 0 auto;
+}
+
+a { 
+	text-decoration: none; 
+  color: darkgrey;
+  float:center;
+}
+
+.siwimage{
+  position: absolute;
+        bottom: 20px;
+        left: 10px;
+}
+
+a:hover { 
+	text-decoration: underline; 
+}
+
+label {
+	width: 8em;
+	display: inline-block;
+}
+
+header {
+  background-color: #fde910;
+  height: 30px;
+  padding: 0.2em;
+  
+}
+
+
+
+header a{ 
+	  text-decoration: none; 
+    color: black;
+    font-size: 20px;
+    display:inline;
+    float:right;
+}
+
+.home{
+  float:left;
+  color:black;
+  margin-right:20px;
+} 
+
+
+.boxdestinazione{
+	position:relative;
+  	width:20em;
+  	height:10em;
+ 	background-color: lightgrey;
+  	border:solid;
+  	margin:2em;
+  	float:left;
+  	bottom:100px;
+  
+}
+
+.boxdestinazione .nome{
+  position:relative;
+  color:black;
+  background-color:#fde910;
+  top:-2em;
+  left:1em;
+  font-size:30px;
+  
+}
+
+.boxdestinazione img{
+  width:100%;
+  height:100%;
+}
+
+
+.search-form{
+  position:relative;
+  display:inline-block;
+  left:70%;
+  bottom:9em;
+}
+
+.search-label p {
+  text-align:center;
+  margin-bottom:1px;
+  white-space:nowrap;
+}
+
+.search-button {
+  position:relative;
+  color:transparent;
+  background-color:transparent;
+  width: 24px; 
+  height: 24px; 
+  background-image:url("https://cdn-icons-png.flaticon.com/512/622/622669.png"); 
+  background-size: cover; 
+  border: none; 
+  cursor: pointer;
+  right:-5px;
+  top:7px;
+}
+
+.logo{
+  position:relative;
+  left:40%;
+  bottom:5px;
+}
+
+
+
+.boxricerca{
+  width:13em;
+  height:0.8em;
+}
+
+ul {
+list-style-type: none;
+}
+
+h1{
+  position:absolute;
+  top:10%;
+  left:10px;
+  display:inline-block;
+}
+
+
+input{
+  font-size: 30px;
+}
+
+
+.error-message {
+  	color: red;
+  	font-style: italic;
+}
+
+.descrizione{
+  width:30em;
+  height:10em;
+  font-size:15px;
+}
+
+.descrizioneContainer p{
+position:relative;
+  bottom:3.5em;
+    
+}
+
+.boxImage{
+  position:relative;
+  left:5%;
+  bottom:100px;
+  width:30em;
+  height:15em;
+  background-color:grey;
+  
+}
+
+.boxImageMini{
+  position:relative;
+  width:30em;
+  height:12em;
+  bottom:4em;
+  left:5%;
+  float:left;
+}
+
+.minibox{
+  	position:relative;
+  	border: solid;
+  	width:8em;
+  	height:5em;
+  	margin-left:14px;
+  	margin-top:12px;
+  	float:left;
+	right:7px;
+	bottom:20px;
+}
+
+.boxImage img{
+  width:100%;
+  height:100%;
+}
+
+.boxImageMini img{
+  width:100%;
+  height:100%;
+}
+
+
+.boxRecensioni{
+  position:relative;
+  left:60%;
+  bottom:460px;
+  width:30em;
+  height:40em;
+  background-color:blue;
+}
+
+.boxRecensioni .recensione{
+  position:relative;
+  background-color:green;
+  width:100%;
+  height:20%;
+  top:30px;
+  margin-top:50px;
+  
+}
+
+.prenota {
+  position:relative;
+  left:12em;
+  bottom:29em;
+  background-color:yellow;
+  font-size:23px;
+  color:black;
+}
+

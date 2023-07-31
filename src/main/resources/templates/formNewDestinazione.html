@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Inserisci una nuova destinazione
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	
+	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
+	<h1>Aggiungi una destinazione</h1>
+	<form th:action="@{/newDestinazione}" method="POST" th:object="${destinazione}" enctype="multipart/form-data">
+		
+	
+		
+		<div>
+			<label>Nome:</label> 
+			<span><input type="text" th:field="${destinazione.nome}" /></span>
+		</div>
+
+	<div class= "descrizioneContainer">
+    <label for="text"> <p>Descrizione: </p></label>
+    <textarea id="text" class="descrizione" name="descrizione" th:field="${destinazione.descrizione}"></textarea>
+</div>
+		
+		 <div>
+        <label>Immagini:</label>
+         <input type="file" th:name="file" multiple="multiple" />
+        </span>
+    </div>
+		
+		<div>
+			<span><button class = "conferma" type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>
