@@ -36,7 +36,7 @@ header a {
 #flex-container {
   display: flex;
   align-items: flex-start;
-  height: 500px;
+  height: 400px;
 }
 
 .flex-item {
