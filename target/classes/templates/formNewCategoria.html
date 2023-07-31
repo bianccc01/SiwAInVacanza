@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Nuova categoria
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<h1>Aggiungi una categoria</h1>
+	<form th:action="@{/admin/newCategoria}" method="POST" th:object="${categoria}">
+  		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		
+		<div>
+			<label>Nome:</label> 
+			<span><input type="text" th:field="${categoria.nome}" /></span>
+		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+		    </span>
+		</div>
+
+		<div>
+			<label>Descrizione:</label> <span><input type="text" th:field="${categoria.descrizione}" /></span>
+		    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">
+		    </span>
+		</div>
+
+		<div>
+			<label>Immagine:</label> <span><input type="text" th:field="${categoria.image}" /></span>
+		</div>
+		
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>

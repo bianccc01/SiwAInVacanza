@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Modifica categoria</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+	<h1 th:text="${categoria.nome}"></h1>
+   <div>
+     <a th:href="@{'/admin/rimuoviCategoria/'+ ${categoria.id}}">Rimuovi categoria</a>
+   </div>
+  <h3>Modifica le destinazioni</h3>
+	<div id="flex-container" >
+	<div class="col">Destinazioni che si possono rimuovere:
+      <li th:if="${categoria.destinazioni.isEmpty()}">Non ci sono destinazioni per questa categoria</li>
+      <li th:each="destinazione : ${categoria.destinazioni}">
+			<span th:text="${destinazione.nome}"></span>
+	  </li>
+      <div>
+			<label>Inserisci il nome della destinazione da eliminare:</label> 
+			<span><input type="text" th:field="${destinazione.nome}" /></span>
+		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+		    </span>
+        <a th:href="@{'/admin/removeDestinazioneToCategoria'+ ${categoria.id}}"><button type="button">Rimuovi</button></a>
+		</div>
+	</div>
+	<div class="col">
+		Destinazioni che si possono aggiungere:
+		<ul>
+			<li th:each="notDestinazione : ${notDestinazioni}">
+				<span th:text="${notDestinazione.nome"></span>
+			</li>
+		</ul>
+       <div>
+			<label>Inserisci il nome della destinazione da aggiungere:</label> 
+			<span><input type="text" th:field="${notDestinazione.nome}" /></span>
+		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+		    </span>
+        <a th:href="@{'/admin/addDestinazioneToCategoria/'+ ${categoria.id}'}"><button type="button">Aggiungi</button></a>
+		</div>
+	</div>
+    </div>
+	<div>
+		<a th:href="@{'/admin/categorie'}"><button type="button">Fine</button></a>
+	</div>
+</body>
+
+</html>

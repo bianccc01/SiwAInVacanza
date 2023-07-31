@@ -5,11 +5,12 @@
 	<title>
 		SiwAInVacanza - Homepage
 	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/stileIndex.css" />
 </head>
 
 <body>
 	<header>
+		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
@@ -21,13 +22,15 @@
 	</header>
 
 	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
-	<h1>Consulta l'archivio</h1>
-	<div>
-		<a href="/categorie">Sfoglia categorie</a>
-	</div>
-	<div>
-		<a href="/allDestinazioni">Visualizza tutte le destinazioni</a>
-	</div>
-</body>
+	<h1>Scegli il viaggio piu' adatto a te</h1>
+	<h2>
+		<a href="/categorie">Sfoglia le categorie</a>
+	</h2>
+  <div id="img1"></div>
+	<h2>
+		<a href="/destinazioni">Visualizza tutte le destinazioni</a>
+	</h2>
+  <div id="img2"><img src="/images/index_destinazioni.webp" /></div>
+</body> 
 
 </html>

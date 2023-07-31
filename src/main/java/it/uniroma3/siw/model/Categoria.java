@@ -16,13 +16,16 @@ public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;  //id
 	
 	@NotBlank
 	private String nome;
 	
 	@NotBlank
 	private String descrizione;
+	
+	//@NotBlank
+	//private Image image;
 	
 	@OneToMany(mappedBy="categoria")
 	private List<Destinazione> destinazioni;
@@ -58,6 +61,14 @@ public class Categoria {
 	public void setDestinazioni(List<Destinazione> destinazioni) {
 		this.destinazioni = destinazioni;
 	}
+	
+	/*public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}*/
 
 	@Override
 	public int hashCode() {

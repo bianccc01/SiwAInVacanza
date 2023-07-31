@@ -1,6 +1,8 @@
 package it.uniroma3.siw.service;
 
 
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;
 	
 	@Transactional
-	public Iterable<Categoria> allCategorie(){
+	public Set<Categoria> allCategorie(){
 		return this.categoriaRepository.findAll();
 	}
 	
