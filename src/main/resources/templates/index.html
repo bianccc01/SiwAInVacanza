@@ -10,8 +10,9 @@
 
 <body>
 	<header>
-		<div style="float:left"><a href="/">Home</a></div>
-		<div th:if="${#request.userPrincipal}">
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
 		</div>
@@ -21,14 +22,14 @@
 		</div>
 	</header>
 
-	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<div><img class="logo" src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Scegli il viaggio piu' adatto a te</h1>
 	<h2>
 		<a href="/categorie">Sfoglia le categorie</a>
 	</h2>
   <div id="img1"></div>
 	<h2>
-		<a href="/destinazioni">Visualizza tutte le destinazioni</a>
+		<a href="/allDestinazioni">Visualizza tutte le destinazioni</a>
 	</h2>
   <div id="img2"><img src="/images/index_destinazioni.webp" /></div>
 </body> 
