@@ -89,6 +89,12 @@ public class CategoriaController {
 		
 	}
 	
+	@GetMapping("/admin/categorie")
+	public String getCategorieAdmin(Model model) {
+		model.addAttribute("categorie",this.categoriaService.allCategorie());
+		return "adminCategorie.html";
+	}
+	
 	/*@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
 	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
