@@ -48,9 +48,3 @@ header a {
   padding: 6em;
   margin: 40px;
 }
-
-#img2 img {
-  height: 100%;
-  width:100%;
-  object-fit: cover;
-}
