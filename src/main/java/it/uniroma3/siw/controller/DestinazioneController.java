@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
 import net.bytebuddy.asm.Advice.This;
@@ -27,10 +28,14 @@ public class DestinazioneController {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 
 	@GetMapping("/formNewDestinazione")
 	public String formNewDestinazione(Model model) {
 		model.addAttribute("destinazione", new Destinazione());
+		model.addAttribute("categorie",this.categoriaService.allCategorie());
 		return "formNewDestinazione.html";
 	}
 
@@ -48,6 +53,8 @@ public class DestinazioneController {
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
+		model.addAttribute("categoria",destinazione.getCategoria());
+		
 		return "destinazione.html";
 	}
 

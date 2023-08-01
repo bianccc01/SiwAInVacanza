@@ -44,6 +44,16 @@
          <input type="file" th:name="file" multiple="multiple" />
         </span>
     </div>
+
+  
+  <label class="categoriaTesto" for="selezionaCategoria">Seleziona una categoria:</label>
+<select class="selezionaCategoria" id="selezionaCategoria" th:field="${destinazione.categoria.id}"> 
+    <option value="">Scegli la categoria</option>
+    <th:block th:each="categoria : ${categorie}">
+        <option th:text="${categoria.nome}" th:value="${categoria.id}"></option>
+    </th:block>
+</select>
+
 		
 		<div>
 			<span><button class = "conferma" type="submit">Conferma</button></span>

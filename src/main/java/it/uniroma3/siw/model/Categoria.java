@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -24,8 +25,8 @@ public class Categoria {
 	@NotBlank
 	private String descrizione;
 	
-	//@NotBlank
-	//private Image image;
+	@OneToOne
+	private Image image;
 	
 	@OneToMany(mappedBy="categoria")
 	private List<Destinazione> destinazioni;
@@ -62,13 +63,13 @@ public class Categoria {
 		this.destinazioni = destinazioni;
 	}
 	
-	/*public Image getImage() {
+	public Image getImage() {
 		return image;
 	}
 
 	public void setImage(Image image) {
 		this.image = image;
-	}*/
+	}
 
 	@Override
 	public int hashCode() {

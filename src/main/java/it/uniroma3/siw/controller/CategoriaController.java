@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
@@ -51,18 +53,17 @@ public class CategoriaController {
 	}
 
 	
-	@PostMapping("/admin/newCategoria")
-	public String newCategoria(@Valid @ModelAttribute("categoria") Categoria categ, BindingResult bindingResult, Model model) {
-		
-		//this.categoriaValidator.validate(categ, bindingResult);
-		if (!bindingResult.hasErrors()) {
-			this.categoriaService.saveCategoria(categ); 
-			model.addAttribute("categoria", categ);
-			return "categorie.html";
-		} else {
-			return "formNewCategoria.html"; 
-		}
+	@PostMapping("/newCategoria")
+	public String newCategoria(@ModelAttribute("categoria") Categoria categoria, 
+			@RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+		this.categoriaService.saveCategoria(categoria);
+		this.categoriaService.newImagesCat(file, categoria);
+
+		model.addAttribute("categorie", this.categoriaService.allCategorie());
+		return "categorie.html";
 	}
+
 	
 	@GetMapping("/categoria/{id}")
 	public String getCategoria(@PathVariable("id") Long id, Model model) {

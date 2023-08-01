@@ -3,15 +3,16 @@
 
 <head>
 	<title>
-		Nuova categoria
+		Inserisci una nuova categoria
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
 	<header>
-		<div style="float:left"><a href="/">Home</a></div>
-		<div th:if="${#request.userPrincipal}">
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
 		</div>
@@ -21,32 +22,33 @@
 		</div>
 	</header>
 
-	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
-	<h1>Aggiungi una categoria</h1>
-	<form th:action="@{/admin/newCategoria}" method="POST" th:object="${categoria}">
-  		<div th:if="${#fields.hasGlobalErrors()}">
-  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
-  		</div>
+	
+	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
+	<h1>Aggiungi una destinazione</h1>
+	<form th:action="@{/newCategoria}" method="POST" th:object="${categoria}" enctype="multipart/form-data">
+		
+	
 		
 		<div>
 			<label>Nome:</label> 
 			<span><input type="text" th:field="${categoria.nome}" /></span>
-		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
-		    </span>
 		</div>
 
-		<div>
-			<label>Descrizione:</label> <span><input type="text" th:field="${categoria.descrizione}" /></span>
-		    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">
-		    </span>
-		</div>
+	<div class= "descrizioneContainer">
+    <label for="text"> <p>Descrizione: </p></label>
+    <textarea id="text" class="descrizione" name="descrizione" th:field="${categoria.descrizione}"></textarea>
+</div>
+		
+		 <div>
+        <label>Immagini:</label>
+         <input type="file" th:name="file" multiple="multiple" />
+        </span>
+    </div>
 
-		<div>
-			<label>Immagine:</label> <span><input type="text" th:field="${categoria.image}" /></span>
-		</div>
+  
 		
 		<div>
-			<span><button type="submit">Conferma</button></span>
+			<span><button class = "conferma" type="submit">Conferma</button></span>
 		</div>
 	</form>
 </body>
