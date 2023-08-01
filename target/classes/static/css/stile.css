@@ -1,4 +1,4 @@
-body {
+body { 
     font-family: cursive;
     color:black;
     font-size: 20px;
@@ -213,5 +213,28 @@ position:relative;
   background-color:yellow;
   font-size:23px;
   color:black;
+}
+
+
+#flex-container {
+  display: flex;
+  align-items: flex-start;
+  height: 400px;
+}
+
+.flex-item {
+  background-color:black;
+  height:70px;
+  width:100px;
+  margin:10px; 
+  color:white;
+}
+
+span:hover{
+  text-decoration: underline;
+}
+
+div.col {
+  width: calc(50% - 10px);
 }
 
