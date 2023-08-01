@@ -15,7 +15,7 @@ import it.uniroma3.siw.repository.CategoriaRepository;
 public class CategoriaService {
 	
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoriaRepository categoriaRepository; //commento prova
 	
 	@Transactional
 	public Set<Categoria> allCategorie(){
