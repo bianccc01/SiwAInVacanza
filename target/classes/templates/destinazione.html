@@ -10,7 +10,7 @@
       <header>
          <a class = "home" href="/"> Home </a>
          <a class = "home" href="/"> Modifica descrizione </a>
-         <a class = "home" href="/"> Modifica nome </a>
+         <a class = "home" href="/"> Modifica nome destinazione </a>
          <div th:if="${#request.userPrincipal}">
             <span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
             <a href="/logout">Logout</a>
