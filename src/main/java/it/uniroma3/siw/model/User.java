@@ -30,6 +30,9 @@ public class User {
 
 	@OneToMany(mappedBy= "user")
 	private List <Prenotazione> prenotazioni = new ArrayList<>();
+	
+	@OneToMany(mappedBy="utente")
+	private List <Recensione> recensioni = new ArrayList<>();
 
 	public Long getId() {
 		return id;
