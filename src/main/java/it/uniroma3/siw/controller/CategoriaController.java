@@ -35,10 +35,6 @@ public class CategoriaController {
 	@Autowired
 	private DestinazioneService destinazioneService;
 	
-	@GetMapping("/")
-	public String index() {
-		return "index.html";
-	}
 	
 	@GetMapping("/admin/formNewCategoria")
 	public String formNewCategoria(Model model) {

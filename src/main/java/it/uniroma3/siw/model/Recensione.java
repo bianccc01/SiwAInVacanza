@@ -20,7 +20,7 @@ public class Recensione {
 	private int voto;
 	
 	@ManyToOne
-	private User user;
+	private User utente;
 
 	public Long getId() {
 		return id;
@@ -55,11 +55,11 @@ public class Recensione {
 	}
 
 	public User getUser() {
-		return user;
+		return utente;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.utente = user;
 	}
 	
 	

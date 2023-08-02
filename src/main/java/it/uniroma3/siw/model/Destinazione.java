@@ -91,7 +91,5 @@ public class Destinazione {
 	public Long getFirstImageId() {
 		return this.images.get(0).getId();
 	}
-	
-	
 
 }

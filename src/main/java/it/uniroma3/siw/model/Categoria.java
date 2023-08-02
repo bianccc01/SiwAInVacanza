@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class Categoria {
 	private Image image;
 	
 	@OneToMany(mappedBy="categoria")
-	private List<Destinazione> destinazioni;
+	private List<Destinazione> destinazioni = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -86,6 +87,10 @@ public class Categoria {
 			return false;
 		Categoria other = (Categoria) obj;
 		return Objects.equals(nome, other.nome);
+	}
+	
+	public void addDestinazione(Destinazione destinazione) {
+		this.destinazioni.add(destinazione);
 	}
 	
 	

@@ -61,10 +61,10 @@ public class DestinazioneController {
 	@PostMapping("/newDestinazione")
 	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, 
 			@RequestParam("file") MultipartFile[] files, Model model) throws IOException {
-
+		
+		destinazione.getCategoria().addDestinazione(destinazione);
 		this.destinazioneService.saveDestinazione(destinazione);
 		this.destinazioneService.newImagesDest(files, destinazione);
-
 		model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
 		return "destinazioni.html";
 

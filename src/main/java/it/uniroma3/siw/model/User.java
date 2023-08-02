@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class User {
 	private String email;
 
 	@OneToMany(mappedBy= "user")
-	private List <Prenotazione> prenotazioni;
+	private List <Prenotazione> prenotazioni = new ArrayList<>();
 
 	public Long getId() {
 		return id;
