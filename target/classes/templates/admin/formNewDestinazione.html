@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		Inserisci una nuova categoria
+		Inserisci una nuova destinazione
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
@@ -25,18 +25,18 @@
 	
 	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
 	<h1>Aggiungi una destinazione</h1>
-	<form th:action="@{/newCategoria}" method="POST" th:object="${categoria}" enctype="multipart/form-data">
+	<form th:action="@{/admin/newDestinazione}" method="POST" th:object="${destinazione}" enctype="multipart/form-data">
 		
 	
 		
 		<div>
 			<label>Nome:</label> 
-			<span><input type="text" th:field="${categoria.nome}" /></span>
+			<span><input type="text" th:field="${destinazione.nome}" /></span>
 		</div>
 
 	<div class= "descrizioneContainer">
     <label for="text"> <p>Descrizione: </p></label>
-    <textarea id="text" class="descrizione" name="descrizione" th:field="${categoria.descrizione}"></textarea>
+    <textarea id="text" class="descrizione" name="descrizione" th:field="${destinazione.descrizione}"></textarea>
 </div>
 		
 		 <div>
@@ -46,6 +46,14 @@
     </div>
 
   
+  <label class="categoriaTesto" for="selezionaCategoria">Seleziona una categoria:</label>
+<select class="selezionaCategoria" id="selezionaCategoria" th:field="${destinazione.categoria.id}"> 
+    <option value="">Scegli la categoria</option>
+    <th:block th:each="categoria : ${categorie}">
+        <option th:text="${categoria.nome}" th:value="${categoria.id}"></option>
+    </th:block>
+</select>
+
 		
 		<div>
 			<span><button class = "conferma" type="submit">Conferma</button></span>

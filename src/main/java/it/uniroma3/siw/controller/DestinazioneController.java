@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.service.CategoriaService;
@@ -32,20 +33,27 @@ public class DestinazioneController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@GetMapping("/formNewDestinazione")
+	@GetMapping("/admin/formNewDestinazione")
 	public String formNewDestinazione(Model model) {
 		model.addAttribute("destinazione", new Destinazione());
 		model.addAttribute("categorie",this.categoriaService.allCategorie());
-		return "formNewDestinazione.html";
+		return "admin/formNewDestinazione.html";
 	}
 
-	@GetMapping("/allDestinazioni")
+	@GetMapping("/guest/allDestinazioni")
 	public String allDestinazioni(Model model) {
 		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
-		return "destinazioni.html";
+		return "guest/destinazioni.html";
+	}
+	
+	@GetMapping("/guest/destinazioni/{idCategoria}")
+	public String allDestinazioni(@PathVariable ("idCategoria") Long idCat, Model model) {
+		Categoria categoria = this.categoriaService.findCategoriaById(idCat);
+		model.addAttribute("destinazioni",categoria.getDestinazioni());
+		return "guest/destinazioni.html";
 	}
 
-	@GetMapping("/destinazione/{id}/{idImage}")
+	@GetMapping("/guest/destinazione/{id}/{idImage}")
 	public String destinazione(@PathVariable ("id") Long id, @PathVariable ("idImage") Long idImage, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
@@ -55,10 +63,10 @@ public class DestinazioneController {
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
 		
-		return "destinazione.html";
+		return "guest/destinazione.html";
 	}
 
-	@PostMapping("/newDestinazione")
+	@PostMapping("/admin/newDestinazione")
 	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, 
 			@RequestParam("file") MultipartFile[] files, Model model) throws IOException {
 		
@@ -66,14 +74,14 @@ public class DestinazioneController {
 		this.destinazioneService.saveDestinazione(destinazione);
 		this.destinazioneService.newImagesDest(files, destinazione);
 		model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
-		return "destinazioni.html";
+		return "guest/destinazioni.html";
 
 	}
 	
-	@PostMapping("/cercaDestinazioni")
+	@PostMapping("/guest/cercaDestinazioni")
 	public String cercaDestinazioni(Model model, @RequestParam String nome) {
 		model.addAttribute("destinazioni", this.destinazioneService.searchDestinazioniByNome(nome));
-		return "destinazioni.html";
+		return "guest/destinazioni.html";
 	}
 }
 

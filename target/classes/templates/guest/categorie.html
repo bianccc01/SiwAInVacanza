@@ -26,7 +26,7 @@
 	<div th:if="${categorie==null || categorie.isEmpty()}">Non ci sono categorie da sfogliare</div>
   <div id="flex-container">
     <span class="flex-item" th:each="categoria : ${categorie}">
-		<a th:href="@{'/categoria' + '/' + ${categoria.id}}"
+		<a th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
 				th:text="${categoria.nome}"></a>
 	</span>
     

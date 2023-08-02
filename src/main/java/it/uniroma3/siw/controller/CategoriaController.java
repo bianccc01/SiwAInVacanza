@@ -39,17 +39,17 @@ public class CategoriaController {
 	@GetMapping("/admin/formNewCategoria")
 	public String formNewCategoria(Model model) {
 		model.addAttribute("categoria", new Categoria());
-		return "formNewCategoria.html";
+		return "admin/formNewCategoria.html";
 	}
 	
-	@GetMapping("/categorie")
+	@GetMapping("/guest/categorie")
 	public String Getcategorie(Model model) {
 		model.addAttribute("categorie",this.categoriaService.allCategorie());
-		return "categorie.html";
+		return "guest/categorie.html";
 	}
 
 	
-	@PostMapping("/newCategoria")
+	@PostMapping("/admin/newCategoria")
 	public String newCategoria(@ModelAttribute("categoria") Categoria categoria, 
 			@RequestParam("file") MultipartFile file, Model model) throws IOException {
 
@@ -57,11 +57,11 @@ public class CategoriaController {
 		this.categoriaService.newImagesCat(file, categoria);
 
 		model.addAttribute("categorie", this.categoriaService.allCategorie());
-		return "categorie.html";
+		return "guest/categorie.html";
 	}
 
 	
-	@GetMapping("/categoria/{id}")
+	@GetMapping("/guest/categoria/{id}")
 	public String getCategoria(@PathVariable("id") Long id, Model model) {
 		Categoria categ=this.categoriaService.findCategoriaById(id);
 		model.addAttribute("categoria", categ);
@@ -90,7 +90,7 @@ public class CategoriaController {
 	@GetMapping("/admin/categorie")
 	public String getCategorieAdmin(Model model) {
 		model.addAttribute("categorie",this.categoriaService.allCategorie());
-		return "adminCategorie.html";
+		return "admin/adminCategorie.html";
 	}
 	
 	/*@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")

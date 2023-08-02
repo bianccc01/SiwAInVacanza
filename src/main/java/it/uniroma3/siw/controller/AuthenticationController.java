@@ -28,30 +28,30 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "formRegisterUser";
+		return "guest/formRegisterUser";
 	}
 	
 	@GetMapping(value = "/login") 
 	public String showLoginForm (Model model) {
-		return "formLogin";
+		return "guest/formLogin";
 	}
 
 	@GetMapping(value = "/") 
 	public String index(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken) {
-	        return "index.html";
+	        return "guest/index.html";
 		}
 		
 		else {		
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-				return "indexAdmin.html";
+				return "admin/indexAdmin.html";
 			}
 		}
         
-		return "index.html";
+		return "guest/index.html";
 	}
 		
     @GetMapping(value = "/success")
@@ -60,9 +60,9 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "indexAdmin.html";
+            return "admin/indexAdmin.html";
         }
-        return "index.html";
+        return "guest/index.html";
     }
 
 	@PostMapping(value = { "/register" })
@@ -77,9 +77,9 @@ public class AuthenticationController {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
-            return "registrationSuccessful";
+            return "guest/registrationSuccessful";
         }
         
-        return "formRegisterUser";
+        return "guest/formRegisterUser";
     }
 }
