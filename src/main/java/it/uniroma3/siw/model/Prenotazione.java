@@ -1,5 +1,7 @@
 package it.uniroma3.siw.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -10,11 +12,23 @@ public class Prenotazione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
+	@NotBlank
+	private String nome;
+	
+	@NotBlank
+	private String cognome;
+	
 	@ManyToOne
 	private User user;
 	
 	@NotBlank
 	private int nPartecipanti;
+	
+	@NotBlank
+	private LocalDate partenza;
+	
+	@NotBlank
+	private LocalDate ritorno;
 
 	public Long getId() {
 		return id;

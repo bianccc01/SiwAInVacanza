@@ -2,17 +2,13 @@ package it.uniroma3.siw.service;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.DestinazioneRepository;
-import it.uniroma3.siw.repository.ImageRepository;
 
 @Service
 public class DestinazioneService {
@@ -21,7 +17,7 @@ public class DestinazioneService {
 	private DestinazioneRepository destinazioneRepository;
 	
 	@Autowired
-	private ImageRepository imageRepository;
+	private ImageService imageService;
 	
 	
 	@Transactional
@@ -59,12 +55,12 @@ public class DestinazioneService {
 			destinazione.addImage(image);
 		}
 		
-		this.imageRepository.saveAll(destinazione.getImages());
+		this.imageService.saveAllImage(destinazione.getImages());
 	}
 	
 	@Transactional
 	public List<Image> allImagesExcept(Destinazione d, Long id){
-		return this.imageRepository.findAllByDestinazioneAndIdNot(d, id);
+		return this.imageService.getImmaginiSecondarie(d, id);
 	}
 
 }

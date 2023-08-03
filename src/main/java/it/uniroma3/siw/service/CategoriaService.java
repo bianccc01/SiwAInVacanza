@@ -19,7 +19,7 @@ public class CategoriaService {
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private ImageRepository imageRepository;
+	private ImageService imageService;
 
 	@Transactional
 	public Set<Categoria> allCategorie(){
@@ -46,7 +46,7 @@ public class CategoriaService {
 		image.setName(imageName);
 		image.setBytes(imageData);
 
-		this.imageRepository.save(image);
+		this.imageService.saveImage(image);
 
 
 		categoria.setImage(image);
