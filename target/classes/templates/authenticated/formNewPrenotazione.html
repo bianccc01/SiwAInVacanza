@@ -25,7 +25,7 @@
 	
 	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
 	<h1>Aggiungi una destinazione</h1>
-	<form th:action="@{/authenticated/newPrenotazione}" method="POST" th:object="${prenotazione}">
+	<form th:action="@{'/authenticated/newPrenotazione/' + ${idDestinazione}}" method="POST" th:object="${prenotazione}">
 		
 	
 		
@@ -51,7 +51,7 @@
 		
 		<div>
 			<label>Ritorno:</label> 
-			<span><input type="date" th:field="${prenotazione.arrivo}" /></span>
+			<span><input type="date" th:field="${prenotazione.ritorno}" /></span>
 		</div>
 		
 		<div>

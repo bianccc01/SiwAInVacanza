@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import it.uniroma3.siw.model.Prenotazione;
 import it.uniroma3.siw.model.User;
@@ -19,6 +20,9 @@ public class PrenotazioneService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private CredentialsService credentialsService;
+	
 	@Transactional
 	public Prenotazione getPrenotazione(Long id) {
 		return this.prenotazioneRepository.findById(id).get();
@@ -30,13 +34,23 @@ public class PrenotazioneService {
 	}
 	
 	@Transactional
-	public Iterable<Prenotazione> getPrenotazioneUser(User user){
+	public Iterable<Prenotazione> getPrenotazioneUser(Authentication auth){
+		User user = this.credentialsService.getUser(auth);
 		return this.prenotazioneRepository.findAllByUser(user);
 	}
 	
 	@Transactional
 	public void savePrenotazione(Prenotazione prenotazione) {
 		this.prenotazioneRepository.save(prenotazione);
+	}
+	
+	@Transactional
+	public void inizializzaPrenotazione(Prenotazione prenotazione, Authentication authentication) {
+		User user = this.credentialsService.getUser(authentication);
+		user.addPrenotazione(prenotazione);
+		this.savePrenotazione(prenotazione);
+		prenotazione.getDestinazionePrenotata().getPrenotazioni().add(prenotazione);
+		
 	}
 
 }

@@ -25,6 +25,10 @@ public class Destinazione {
 	
 	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();
+	
+	@OneToMany(mappedBy="destinazionePrenotata")
+	private List<Prenotazione> prenotazioni = new ArrayList<>();
+	
 
 	public Long getId() {
 		return id;
@@ -91,5 +95,19 @@ public class Destinazione {
 	public Long getFirstImageId() {
 		return this.images.get(0).getId();
 	}
+
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni;
+	}
+
+	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+		this.prenotazioni = prenotazioni;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+	
+	
 
 }

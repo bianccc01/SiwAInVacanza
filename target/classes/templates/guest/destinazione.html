@@ -38,6 +38,7 @@
          <div class ="recensione"> </div>
          <div class = "recensione"> </div>
       </div>
-      <a class = "prenota" href="/authenticated/formNewPrenotazione"> Effettua la prenotazione </a>
+      <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
+
    </body>
 </html>

@@ -22,6 +22,7 @@ import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Prenotazione;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.PrenotazioneService;
 
 @Controller
@@ -33,27 +34,31 @@ public class PrenotazioneController {
 	@Autowired
 	private CredentialsService credentialsService;
 	
-	@GetMapping("/authenticated/formNewPrenotazione")
-	public String formNewDestinazione(Model model) {
-		model.addAttribute("prenotazione", new Prenotazione());
+	@Autowired
+	private DestinazioneService destinazioneService;
+	
+	@GetMapping("/authenticated/formNewPrenotazione/{idDestinazione}")
+	public String formNewDestinazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
+		Prenotazione prenotazione = new Prenotazione();
+		model.addAttribute("idDestinazione",idDestinazione);
+		model.addAttribute("prenotazione", prenotazione);
 		return "authenticated/formNewPrenotazione.html";
 	}
 
 	@GetMapping("/authenticated/prenotazioni")
 	public String allDestinazioni(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = this.credentialsService.getUser(authentication);
-		model.addAttribute("prenotazioni",this.prenotazioneService.getPrenotazioneUser(user));
+		model.addAttribute("prenotazioni",this.prenotazioneService.getPrenotazioneUser(authentication));
 		return "authenticated/prenotazioni.html";
 	}
 	
-	@PostMapping("/authenticated/newPrenotazione")
-	public String newDestinazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model) throws IOException {
+	@PostMapping("/authenticated/newPrenotazione/{idDestinazione}")
+	public String newDestinazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
+			Model model) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = this.credentialsService.getUser(authentication);
-		user.addPrenotazione(prenotazione);
-		this.prenotazioneService.savePrenotazione(prenotazione);
-		model.addAttribute("prenotazioni", this.prenotazioneService.getPrenotazioneUser(user));
+		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
+		prenotazioneService.inizializzaPrenotazione(prenotazione, authentication);
+		model.addAttribute("prenotazioni", this.prenotazioneService.getPrenotazioneUser(authentication));
 		return "authenticated/prenotazioni.html";
 
 	}
