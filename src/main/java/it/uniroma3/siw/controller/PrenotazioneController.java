@@ -24,6 +24,7 @@ import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.PrenotazioneService;
+import it.uniroma3.siw.service.UserService;
 
 @Controller
 public class PrenotazioneController {
@@ -36,6 +37,9 @@ public class PrenotazioneController {
 	
 	@Autowired
 	private DestinazioneService destinazioneService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/authenticated/formNewPrenotazione/{idDestinazione}")
 	public String formNewDestinazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
@@ -56,8 +60,7 @@ public class PrenotazioneController {
 	public String newDestinazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
 			Model model) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
-		prenotazioneService.inizializzaPrenotazione(prenotazione, authentication);
+		prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
 		model.addAttribute("prenotazioni", this.prenotazioneService.getPrenotazioneUser(authentication));
 		return "authenticated/prenotazioni.html";
 

@@ -23,6 +23,9 @@ public class PrenotazioneService {
 	@Autowired
 	private CredentialsService credentialsService;
 	
+	@Autowired
+	private DestinazioneService destinazioneService;
+	
 	@Transactional
 	public Prenotazione getPrenotazione(Long id) {
 		return this.prenotazioneRepository.findById(id).get();
@@ -45,8 +48,8 @@ public class PrenotazioneService {
 	}
 	
 	@Transactional
-	public void inizializzaPrenotazione(Prenotazione prenotazione, Authentication authentication) {
-		User user = this.credentialsService.getUser(authentication);
+	public void inizializzaPrenotazione(Prenotazione prenotazione, User user, Long idDestinazione) {
+		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
 		user.addPrenotazione(prenotazione);
 		this.savePrenotazione(prenotazione);
 		prenotazione.getDestinazionePrenotata().getPrenotazioni().add(prenotazione);
