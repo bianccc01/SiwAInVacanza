@@ -21,6 +21,8 @@ public class Recensione {
 	
 	@ManyToOne
 	private User utente;
+	
+	private Image image;
 
 	public Long getId() {
 		return id;
@@ -60,6 +62,14 @@ public class Recensione {
 
 	public void setUser(User user) {
 		this.utente = user;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 	
 	
