@@ -34,7 +34,7 @@ public class RecensioneService {
 	}
 
 	@Transactional
-	public void saveCategoria(Recensione recensione) {
+	public void saveRecensione(Recensione recensione) {
 		this.recensioneRepository.save(recensione);
 	}
 
