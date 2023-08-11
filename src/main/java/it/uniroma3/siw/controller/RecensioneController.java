@@ -1,6 +1,6 @@
 package it.uniroma3.siw.controller;
 
-import java.io.IOException;
+
 
 import java.util.ArrayList;
 
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.service.RecensioneService;
@@ -45,11 +44,9 @@ public class RecensioneController {
 
 	
 	@PostMapping("/authenticated/newRecensione")
-	public String newRecensione(@ModelAttribute("recensione") Recensione recensione, 
-			@RequestParam("file") MultipartFile file, Model model) throws IOException {
+	public String newRecensione(@ModelAttribute("recensione") Recensione recensione, Model model) {
 
 		this.recensioneService.saveRecensione(recensione);
-		//this.recensioneService.newImagesCat(file, recensione);
 
 		model.addAttribute("recensioni", this.recensioneService.allRecensioni());
 		return "guest/recensioni.html";

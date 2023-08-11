@@ -1,5 +1,7 @@
 package it.uniroma3.siw.model;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -22,7 +24,16 @@ public class Recensione {
 	@ManyToOne
 	private User utente;
 	
-	private Image image;
+    @ManyToOne
+    private Destinazione destinazione;
+
+    public Recensione(User user, Destinazione dest) {
+        this.utente = user;
+        this.destinazione = dest;
+    }
+
+    public Recensione() {
+    }
 
 	public Long getId() {
 		return id;
@@ -64,14 +75,29 @@ public class Recensione {
 		this.utente = user;
 	}
 	
-	public Image getImage() {
-		return image;
+	public Destinazione getDestinazione() {
+		return destinazione;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
+	public void setDestinazione(Destinazione dest) {
+		this.destinazione = dest;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(utente, destinazione);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recensione other = (Recensione) obj;
+		return Objects.equals(utente, other.utente)&&Objects.equals(destinazione, other.destinazione);
+	}
 
 }

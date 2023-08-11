@@ -38,7 +38,7 @@ public class RecensioneService {
 		this.recensioneRepository.save(recensione);
 	}
 
-	@Transactional
+	/*@Transactional
 	public void newImagesCat(MultipartFile file, Recensione recensione) throws IOException {
 
 		byte[] imageData = file.getBytes();
@@ -54,7 +54,7 @@ public class RecensioneService {
 		recensione.setImage(image);
 
 
-	}
+	}*/
 
 
 }

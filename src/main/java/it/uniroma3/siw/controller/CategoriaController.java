@@ -69,7 +69,7 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/admin/updateCategoria/{id}")
-	public String updateActors(@PathVariable("id") Long id, Model model) {
+	public String updateCategoria(@PathVariable("id") Long id, Model model) {
 
 		//List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(id);
 		//model.addAttribute("notDestinazioni", notDestinazioni);
