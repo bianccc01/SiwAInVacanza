@@ -25,7 +25,7 @@
 	
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%"/></div></div>
 	<h1>Inserisci una recensione</h1>
-	<form th:action="@{'/authenticated/newRecensione/' + ${destinazione.id} + '/' + ${#request.userPrincipal.principal.id}}" method="POST" th:object="${recensione}" enctype="multipart/form-data">
+	<form th:action="@{'/authenticated/newRecensione/' + ${destinazione.id} + '/' + ${#request.userPrincipal.id}}" method="POST" th:object="${recensione}" enctype="multipart/form-data">
 		
 	
 		
