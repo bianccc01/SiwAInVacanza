@@ -40,8 +40,8 @@ public class RecensioneController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/authenticated/formNewRecensione/{id}")
-	public String formNewRecensione(@PathVariable("id") Long destId,Model model) {
+	@GetMapping("/authenticated/formNewRecensione/{destId}")
+	public String formNewRecensione(@PathVariable("destId") Long destId,Model model) {
 		Destinazione dest = this.destinazioneService.findDestinazioneById(destId);
 		if(dest!=null) {
 			model.addAttribute("recensione", new Recensione());
@@ -69,7 +69,7 @@ public class RecensioneController {
 				this.recensioneService.saveRecensione(rec, dest, user);
 		}
 	
-		return "guest/recensioni.html";
+		return "guest/destinazione.html";
 	}
 
 	
