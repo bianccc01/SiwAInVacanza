@@ -21,7 +21,7 @@
 		</div>
 	</header>
 
-	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"></h1>
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
   <div class='recensioni' th:each="recensione : ${recensioni}"> 
