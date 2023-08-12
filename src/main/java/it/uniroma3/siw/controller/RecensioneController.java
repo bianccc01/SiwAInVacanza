@@ -50,9 +50,10 @@ public class RecensioneController {
 		return "formNewRecensione.html";
 	}
 	
-	@GetMapping("/guest/recensioni")
-	public String getRecensioni(Model model) {
+	@GetMapping("/guest/recensioni/{destId}")
+	public String getRecensioni(Model model,@PathVariable("destId") Long destId) {
 		model.addAttribute("recensioni",this.recensioneService.allRecensioni());
+		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
 		return "guest/recensioni.html";
 	}
 

@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		Tutte le categorie
+		Tutte le recensioni
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
@@ -22,14 +22,14 @@
 	</header>
 
 	<div><img src="/images/SiwVLogo.png" width="20%" /></div>
-	<h1>Sfoglia le categorie</h1>
-	<div th:if="${categorie==null || categorie.isEmpty()}">Non ci sono categorie da sfogliare</div>
-  <div id="flex-container">
-    <span class="flex-item" th:each="categoria : ${categorie}">
-		<a th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
-				th:text="${categoria.nome}"></a>
-	</span>
-    
+	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"></h1>
+	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
+  <div class='recensioni' th:each="recensione : ${recensioni}"> 
+      <span id="titolo" th:text="${recensione.utente.getNome()}"> </span>
+      
+      <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
+      	<p th:if="${recensione.testo==null}"> </p>
+		<p th:unless="${recensione.testo!=null}" th:text="${recensione.testo}"></p>
   </div>
 	
 </body>

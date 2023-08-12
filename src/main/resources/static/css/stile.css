@@ -253,3 +253,11 @@ position:relative;
   bottom:4.5em;
   display:inline-block;
 }
+
+.recensioni {
+  border:solid;
+}
+
+#titolo {
+  font-weight:bold;
+}

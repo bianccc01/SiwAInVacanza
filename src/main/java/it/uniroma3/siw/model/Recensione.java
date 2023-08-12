@@ -15,7 +15,6 @@ public class Recensione {
 	@NotBlank
 	private String titolo;
 	
-	@NotBlank
 	private String testo;
 	
 	@NotBlank
