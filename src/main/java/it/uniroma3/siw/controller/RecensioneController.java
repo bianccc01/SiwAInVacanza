@@ -20,8 +20,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Recensione;
+import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.RecensioneService;
+import it.uniroma3.siw.service.UserService;
 
 
 @Controller
@@ -29,10 +33,20 @@ public class RecensioneController {
 	
 	@Autowired 
 	private RecensioneService recensioneService;
+	
+	@Autowired
+	private DestinazioneService destinazioneService;
+	
+	@Autowired
+	private UserService userService;
 
-	@GetMapping("/authenticated/formNewRecensione")
-	public String formNewRecensione(Model model) {
-		model.addAttribute("recensione", new Recensione());
+	@GetMapping("/authenticated/formNewRecensione/{id}")
+	public String formNewRecensione(@PathVariable("id") Long destId,Model model) {
+		Destinazione dest = this.destinazioneService.findDestinazioneById(destId);
+		if(dest!=null) {
+			model.addAttribute("recensione", new Recensione());
+			model.addAttribute("destinazione", dest);
+		}
 		return "formNewRecensione.html";
 	}
 	
@@ -43,12 +57,18 @@ public class RecensioneController {
 	}
 
 	
-	@PostMapping("/authenticated/newRecensione")
-	public String newRecensione(@ModelAttribute("recensione") Recensione recensione, Model model) {
-
-		this.recensioneService.saveRecensione(recensione);
-
-		model.addAttribute("recensioni", this.recensioneService.allRecensioni());
+	@PostMapping("/authenticated/newRecensione/{destId}/{userId}")
+	public String newRecensione(@Valid @ModelAttribute("recensione") Recensione rec, BindingResult bindingResult, @PathVariable("destId") Long destId, @PathVariable("userId") Long userId, Model model) {
+		Destinazione dest = this.destinazioneService.findDestinazioneById(destId);
+		User user = this.userService.getUser(userId);
+		if(dest!=null && user!=null) {
+			rec.setDestinazione(dest);
+			rec.setUser(user);
+			//this.reviewValidator.validate(review, bindingResult);
+			//if (!bindingResult.hasErrors()) {
+				this.recensioneService.saveRecensione(rec, dest, user);
+		}
+	
 		return "guest/recensioni.html";
 	}
 
@@ -60,22 +80,22 @@ public class RecensioneController {
 		return "guest/recensione.html";
 	}
 	
-	/*@GetMapping("/admin/updateCategoria/{id}")
-	public String updateActors(@PathVariable("id") Long id, Model model) {
-
-		//List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(id);
-		//model.addAttribute("notDestinazioni", notDestinazioni);
-		model.addAttribute("categoria", this.categoriaService.findCategoriaById(id));
-
-		return "admin/adminCategoria.html";
-	}*/
-	
 	@GetMapping("/admin/rimuoviRecensione/{id}")
-	public String removeRecensione(@PathVariable("id") Long id, Model model) {
+	public String removeRecensioneAdmin(@PathVariable("id") Long id, Model model) {
 		Set<Recensione> recensioni=this.recensioneService.allRecensioni();
 		Recensione rec=this.recensioneService.findRecensioneById(id);
 		recensioni.remove(rec);
-		return "admin/adminCategorie.html";
+		return "admin/adminRecensioni.html";
+		
+	}
+	
+	@GetMapping("/authenticated/rimuoviRecensione/{recId}/{guestId}")
+	public String removeRecensione(@PathVariable("id") Long id,@PathVariable("guestId") Long userId, Model model) {
+		Set<Recensione> recensioni=this.recensioneService.allRecensioni();
+		Recensione rec=this.recensioneService.findRecensioneById(id);
+		if(rec.getUser()==this.userService.getUser(userId))
+			recensioni.remove(rec);
+		return "guest/Recensioni.html";
 		
 	}
 	

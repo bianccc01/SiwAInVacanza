@@ -27,13 +27,6 @@ public class Recensione {
     @ManyToOne
     private Destinazione destinazione;
 
-    public Recensione(User user, Destinazione dest) {
-        this.utente = user;
-        this.destinazione = dest;
-    }
-
-    public Recensione() {
-    }
 
 	public Long getId() {
 		return id;

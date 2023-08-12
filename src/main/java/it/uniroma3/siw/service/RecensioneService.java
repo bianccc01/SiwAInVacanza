@@ -9,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Recensione;
+import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.DestinazioneRepository;
 import it.uniroma3.siw.repository.ImageRepository;
 import it.uniroma3.siw.repository.RecensioneRepository;
+import it.uniroma3.siw.repository.UserRepository;
 
 @Service
 public class RecensioneService {
@@ -21,7 +25,10 @@ public class RecensioneService {
 	private RecensioneRepository recensioneRepository;
 
 	@Autowired
-	private ImageRepository imageRepository;
+	private DestinazioneRepository destinazioneRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Transactional
 	public Set<Recensione> allRecensioni(){
@@ -36,6 +43,15 @@ public class RecensioneService {
 	@Transactional
 	public void saveRecensione(Recensione recensione) {
 		this.recensioneRepository.save(recensione);
+	}
+	
+	@Transactional
+	public void saveRecensione(Recensione rec, Destinazione dest, User user) {
+		this.recensioneRepository.save(rec);
+		dest.getRecensioni().add(rec);
+		user.getRecensioni().add(rec);
+		this.destinazioneRepository.save(dest);
+		this.userRepository.save(user);
 	}
 
 	/*@Transactional
