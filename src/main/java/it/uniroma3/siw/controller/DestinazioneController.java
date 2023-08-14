@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
+
+import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
@@ -25,6 +28,8 @@ public class DestinazioneController {
 
 	@Autowired 
 	private DestinazioneService destinazioneService;
+	@Autowired 
+	private DestinazioneValidator destinazioneValidator;
 	
 	@Autowired
 	private ImageService imageService;
@@ -68,14 +73,19 @@ public class DestinazioneController {
 	}
 
 	@PostMapping("/admin/newDestinazione")
-	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, 
+	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile[] files, Model model) throws IOException {
-		
-		destinazione.getCategoria().addDestinazione(destinazione);
-		this.destinazioneService.saveDestinazione(destinazione);
-		this.destinazioneService.newImagesDest(files, destinazione);
-		model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
-		return "guest/destinazioni.html";
+		this.destinazioneValidator.validate(destinazione, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			destinazione.getCategoria().addDestinazione(destinazione);
+			this.destinazioneService.saveDestinazione(destinazione);
+			this.destinazioneService.newImagesDest(files, destinazione);
+			model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
+			return "guest/destinazioni.html";
+		}
+		else {
+			return "admin/formNewDestinazione";
+		}
 
 	}
 	
