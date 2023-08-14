@@ -25,7 +25,7 @@ public class Destinazione {
 	@ManyToOne
 	private Categoria categoria;
 	
-	@OneToMany(mappedBy="recensione")
+	@OneToMany(mappedBy="destinazione")
 	private List<Recensione> recensioni= new ArrayList<>();
 	
 	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
@@ -73,7 +75,7 @@ public class DestinazioneController {
 	}
 
 	@PostMapping("/admin/newDestinazione")
-	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, BindingResult bindingResult,
+	public String newDestinazione(@Valid @ModelAttribute("destinazione") Destinazione destinazione, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile[] files, Model model) throws IOException {
 		this.destinazioneValidator.validate(destinazione, bindingResult);
 		if (!bindingResult.hasErrors()) {
