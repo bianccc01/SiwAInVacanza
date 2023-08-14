@@ -39,9 +39,11 @@ header a{
 } 
 
 .logo{
-  position:relative;
+  display:flex;
   left:40%;
   bottom:5px;
+  justify-content: center;
+
 }
 
 #img1 {

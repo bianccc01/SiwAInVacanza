@@ -99,12 +99,12 @@ header a{
 }
 
 .logo{
-  position:relative;
+  display:flex;
   left:40%;
   bottom:5px;
+  justify-content: center;
+
 }
-
-
 
 .boxricerca{
   width:13em;
