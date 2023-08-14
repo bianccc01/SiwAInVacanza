@@ -70,6 +70,9 @@ public class DestinazioneController {
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
 		model.addAttribute("recensioni",rec);
+		model.addAttribute("numero_recensioni", rec.size());
+		
+		
 		
 		return "guest/destinazione.html";
 	}

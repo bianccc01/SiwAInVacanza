@@ -55,8 +55,9 @@ public class RecensioneController {
 	
 	@GetMapping("/guest/recensioni/{destId}")
 	public String getRecensioni(Model model,@PathVariable("destId") Long destId) {
-		model.addAttribute("recensioni",this.recensioneService.allRecensioni());
-		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
+		Destinazione dest=this.destinazioneService.findDestinazioneById(destId);
+		model.addAttribute("recensioni",this.recensioneService.allRecensioniDestinazione(dest));
+		model.addAttribute("destinazione", dest);
 		return "guest/recensioni.html";
 	}
 
@@ -108,53 +109,6 @@ public class RecensioneController {
 		
 	}
 	
-	/*@GetMapping("/admin/categorie")
-	public String getCategorieAdmin(Model model) {
-		model.addAttribute("categorie",this.categoriaService.allCategorie());
-		return "admin/adminCategorie.html";
-	}*/
-	
-	/*@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
-	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
-		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
-		List<Destinazione> destinazioni = categ.getDestinazioni();
-		destinazioni.add(dest);
-		this.destinazioneService.saveDestinazione(categ);
-		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  //come actorsToAdd
-		
-		model.addAttribute("categoria", categ);
-		model.addAttribute("notDestinazioni", notDestinazioni);
 
-		return "admin/adminCategoria.html";
-	}
-	
-	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
-	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
-		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
-		List<Destinazione> destinazioni = categ.getDestinazioni();
-		destinazioni.remove(dest);
-		this.destinazioneService.saveDestinazione(categ);
-		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  
-		
-		model.addAttribute("categoria", categ);
-		model.addAttribute("notDestinazioni", notDestinazioni);
-
-		return "admin/adminCategoria.html";
-	}
-	
-	private List<Destinazione> destinazioniNotCategoria(Long categoriaId) {
-		List<Destinazione> notDestinazioni = new ArrayList<>();
-
-		for (Destinazione a : destinazioneService.findDestinazioniNotInCategoria(categoriaId)) {
-			notDestinazioni.add(a);
-		}
-		return notDestinazioni;
-	}*/
-	
-	
 
 }

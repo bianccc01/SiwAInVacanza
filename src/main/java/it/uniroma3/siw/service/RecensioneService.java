@@ -2,7 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
-
+import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +43,11 @@ public class RecensioneService {
 	@Transactional
 	public void saveRecensione(Recensione recensione) {
 		this.recensioneRepository.save(recensione);
+	}
+	
+	@Transactional
+	public List<Recensione> allRecensioniDestinazione(Destinazione dest){
+		return this.recensioneRepository.findByDestinazione(dest);
 	}
 	
 	@Transactional
