@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.controller.validation.RecensioneValidator;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.model.User;
@@ -33,6 +34,8 @@ public class RecensioneController {
 	
 	@Autowired 
 	private RecensioneService recensioneService;
+	@Autowired 
+	private RecensioneValidator recensioneValidator;
 	
 	@Autowired
 	private DestinazioneService destinazioneService;
@@ -59,17 +62,22 @@ public class RecensioneController {
 
 	
 	@PostMapping("/authenticated/newRecensione/{destId}/{userId}")
-	public String newRecensione(@Valid @ModelAttribute("recensione") Recensione rec, BindingResult bindingResult, @PathVariable("destId") Long destId, @PathVariable("userId") Long userId, Model model) {
+	public String newRecensione(@Valid @ModelAttribute("recensione") Recensione rec, BindingResult bindingResult, 
+			@PathVariable("destId") Long destId, @PathVariable("userId") Long userId, Model model) {
+		
 		Destinazione dest = this.destinazioneService.findDestinazioneById(destId);
 		User user = this.userService.getUser(userId);
 		if(dest!=null && user!=null) {
 			rec.setDestinazione(dest);
-			rec.setUser(user);
-			//this.reviewValidator.validate(review, bindingResult);
-			//if (!bindingResult.hasErrors()) {
+			rec.setUtente(user);
+			this.recensioneValidator.validate(rec, bindingResult);
+			if (!bindingResult.hasErrors()) {
 				this.recensioneService.saveRecensione(rec, dest, user);
+			}
+			else
+				return "authenticated/formNewRecensione.html";
 		}
-	
+		
 		return "guest/destinazione.html";
 	}
 
@@ -94,7 +102,7 @@ public class RecensioneController {
 	public String removeRecensione(@PathVariable("id") Long id,@PathVariable("guestId") Long userId, Model model) {
 		Set<Recensione> recensioni=this.recensioneService.allRecensioni();
 		Recensione rec=this.recensioneService.findRecensioneById(id);
-		if(rec.getUser()==this.userService.getUser(userId))
+		if(rec.getUtente()==this.userService.getUser(userId))
 			recensioni.remove(rec);
 		return "guest/Recensioni.html";
 		

@@ -16,7 +16,7 @@ public class CategoriaValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		Categoria categoria = (Categoria)o;
 		if (categoria.getNome()!=null && categoriaRepository.existsByNome(categoria.getNome())) {
-			errors.reject("movie.duplicate");
+			errors.reject("categoria.duplicate");
 		}
 	}
 	@Override

@@ -59,11 +59,11 @@ public class Recensione {
 		this.voto = voto;
 	}
 
-	public User getUser() {
+	public User getUtente() {
 		return utente;
 	}
 
-	public void setUser(User user) {
+	public void setUtente(User user) {
 		this.utente = user;
 	}
 	

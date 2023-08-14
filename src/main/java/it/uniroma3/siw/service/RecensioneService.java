@@ -54,23 +54,6 @@ public class RecensioneService {
 		this.userRepository.save(user);
 	}
 
-	/*@Transactional
-	public void newImagesCat(MultipartFile file, Recensione recensione) throws IOException {
-
-		byte[] imageData = file.getBytes();
-		String imageName = file.getOriginalFilename();
-
-		Image image = new Image();
-		image.setName(imageName);
-		image.setBytes(imageData);
-
-		this.imageRepository.save(image);
-
-
-		recensione.setImage(image);
-
-
-	}*/
 
 
 }
