@@ -35,8 +35,10 @@
          </ul>
       </div>
       <div class = "boxRecensioni">
-         <div class ="recensione"> </div>
-         <div class = "recensione"> </div>
+         <div class ="recensione" th:each="recensione : ${recensioni}">
+		<a th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
+				th:text="${categoria.nome}"></a>
+		 </div>
       </div>
       <a class = "prenota"> Effettua prenotazione </a>
       <a class = "prenota" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id} }"> Lascia una recensione </a>

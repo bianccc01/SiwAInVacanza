@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.controller.validation.CategoriaValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.service.CategoriaService;
@@ -30,8 +31,8 @@ public class CategoriaController {
 	
 	@Autowired 
 	private CategoriaService categoriaService;
-	//@Autowired
-	//private CategoriaValidator categoriaValidator;
+	@Autowired
+	private CategoriaValidator categoriaValidator;
 	@Autowired
 	private DestinazioneService destinazioneService;
 	
@@ -50,14 +51,20 @@ public class CategoriaController {
 
 	
 	@PostMapping("/admin/newCategoria")
-	public String newCategoria(@ModelAttribute("categoria") Categoria categoria, 
+	public String newCategoria(@ModelAttribute("categoria") Categoria categoria, BindingResult bindingResult, 
 			@RequestParam("file") MultipartFile file, Model model) throws IOException {
+		
+		this.categoriaValidator.validate(categoria, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.categoriaService.saveCategoria(categoria);
+			this.categoriaService.newImagesCat(file, categoria);
 
-		this.categoriaService.saveCategoria(categoria);
-		this.categoriaService.newImagesCat(file, categoria);
-
-		model.addAttribute("categorie", this.categoriaService.allCategorie());
-		return "guest/categorie.html";
+			model.addAttribute("categorie", this.categoriaService.allCategorie());
+			return "admin/adminCategorie.html";
+		}
+		else {
+			return "/admin/formNewCategoria";
+		}
 	}
 
 	

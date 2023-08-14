@@ -2,7 +2,6 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.List;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class DestinazioneController {
@@ -57,11 +56,13 @@ public class DestinazioneController {
 	public String destinazione(@PathVariable ("id") Long id, @PathVariable ("idImage") Long idImage, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
+		List<Recensione> rec=destinazione.getRecensioni();
 		
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
+		model.addAttribute("recensioni",rec);
 		
 		return "guest/destinazione.html";
 	}
