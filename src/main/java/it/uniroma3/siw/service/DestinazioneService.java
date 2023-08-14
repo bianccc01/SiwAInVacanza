@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.DestinazioneRepository;
@@ -40,8 +41,18 @@ public class DestinazioneService {
 	}
 	
 	@Transactional
+	public Destinazione findDestinazioneByNome(String nome){
+		return this.destinazioneRepository.findByNome(nome);
+	}
+
+	@Transactional
 	public void saveDestinazione(Destinazione d) {
 		this.destinazioneRepository.save(d);
+	}
+	
+	@Transactional
+	public List<Destinazione> findDestinazioniNotInCategoria(Categoria categ) {
+		return this.destinazioneRepository.findByCategoriaNotContaining(categ);
 	}
 	
 	@Transactional

@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validation.CategoriaValidator;
 import it.uniroma3.siw.model.Categoria;
+import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 
@@ -101,15 +102,17 @@ public class CategoriaController {
 		return "admin/adminCategorie.html";
 	}
 	
-	/*@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
+	@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
 	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
+		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nomeDest);
 		List<Destinazione> destinazioni = categ.getDestinazioni();
-		destinazioni.add(dest);
-		this.destinazioneService.saveDestinazione(categ);
+		if(!destinazioni.contains(dest)) {
+			destinazioni.add(dest);
+			this.categoriaService.saveCategoria(categ);
+		}
 		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  //come actorsToAdd
+		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categ); 
 		
 		model.addAttribute("categoria", categ);
 		model.addAttribute("notDestinazioni", notDestinazioni);
@@ -120,12 +123,14 @@ public class CategoriaController {
 	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
 	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.searchDestinazioneByNome(nomeDest).get();
+		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nomeDest);
 		List<Destinazione> destinazioni = categ.getDestinazioni();
-		destinazioni.remove(dest);
-		this.destinazioneService.saveDestinazione(categ);
+		if(destinazioni.contains(dest)) {
+			destinazioni.remove(dest);
+			this.categoriaService.saveCategoria(categ);
+		}
 		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categoriaId);  
+		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categ);  
 		
 		model.addAttribute("categoria", categ);
 		model.addAttribute("notDestinazioni", notDestinazioni);
@@ -133,14 +138,14 @@ public class CategoriaController {
 		return "admin/adminCategoria.html";
 	}
 	
-	private List<Destinazione> destinazioniNotCategoria(Long categoriaId) {
+	private List<Destinazione> destinazioniNotCategoria(Categoria categ) {
 		List<Destinazione> notDestinazioni = new ArrayList<>();
 
-		for (Destinazione a : destinazioneService.findDestinazioniNotInCategoria(categoriaId)) {
+		for (Destinazione a : destinazioneService.findDestinazioniNotInCategoria(categ)) {
 			notDestinazioni.add(a);
 		}
 		return notDestinazioni;
-	}*/
+	}
 	
 	
 
