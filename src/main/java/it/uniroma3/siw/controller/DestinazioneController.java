@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -70,6 +72,10 @@ public class DestinazioneController {
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
 		model.addAttribute("recensioni",destinazione.getRecensioni());
+		List<User> utenti=new ArrayList<>();
+		for(Recensione r : destinazione.getRecensioni())
+			utenti.add(r.getUtente());
+		model.addAttribute("utenti", utenti);
 		
 		return "guest/destinazione.html";
 	}

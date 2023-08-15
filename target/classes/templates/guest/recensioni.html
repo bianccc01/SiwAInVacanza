@@ -29,7 +29,7 @@
       
       <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
       	<p th:if="${recensione.testo==null}"> </p>
-		<p th:unless="${recensione.testo!=null}" th:text="${recensione.testo}"></p>
+		<p th:unless="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
   </div>
 	
 </body>
