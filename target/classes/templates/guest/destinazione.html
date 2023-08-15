@@ -34,8 +34,8 @@
             </li>
          </ul>
       </div>
-      <div class = "boxRecensioni" th:if="${numero_recensioni}>2">
-		  <div class ="recensione" th:"${recensione_user}!=null">
+      <div class = "boxRecensioni" th:if="${#lists.size(recensioni)}>2">
+		  <div class ="recensione" th:if="${recensione_user}!=null">
             
          </div>
          <div class ="recensione" th:"${recensione_user}==null">
@@ -47,17 +47,13 @@
 		 <div class ="recensione">
 			 
 		 </div>
-         
-         
-         <div class = "boxRecensioni" th:unless="${numero_recensioni}==1 || ${numero_recensioni}==2">
-            
-         </div>
-         
-         <div class ="recensione" th:each="recensione : ${recensioni}">
-		<a th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
-				th:text="${categoria.nome}"></a>
-		 </div>
+      </div> 
+      <div class = "boxRecensioni" th:unless="${#lists.size(recensioni)}==1 || ${#lists.size(recensioni)}==2">
+      	<div class ="recensione" th:each="recensione : ${recensioni}">
+			
+		</div>  
       </div>
+         
       <a class = "prenota"> Effettua prenotazione </a>
       <a class = "prenota" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id} }"> Lascia una recensione </a>
    </body>

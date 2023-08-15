@@ -21,6 +21,7 @@ import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Recensione;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
@@ -63,16 +64,12 @@ public class DestinazioneController {
 	public String destinazione(@PathVariable ("id") Long id, @PathVariable ("idImage") Long idImage, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
-		List<Recensione> rec=destinazione.getRecensioni();
 		
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
-		model.addAttribute("recensioni",rec);
-		model.addAttribute("numero_recensioni", rec.size());
-		
-		
+		model.addAttribute("recensioni",destinazione.getRecensioni());
 		
 		return "guest/destinazione.html";
 	}
