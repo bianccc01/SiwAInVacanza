@@ -25,7 +25,7 @@
 	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"> </h1>
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
   <div class='recensioni' th:each="recensione : ${recensioni}"> 
-      <span id="titolo" th:text="${recensione.utente.getNome()}"> </span>
+      <span id="titolo" th:text="${recensione.utente.nome}"> </span>
       
       <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
       	<p th:if="${recensione.testo==null}"> </p>
