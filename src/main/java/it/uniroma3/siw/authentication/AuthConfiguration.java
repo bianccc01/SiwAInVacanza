@@ -1,6 +1,7 @@
 package it.uniroma3.siw.authentication;
 
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 import static it.uniroma3.siw.model.Credentials.ADMIN_ROLE;
-//import static it.uniroma3.siw.model.Credentials.DEFAULT_ROLE;
+import static it.uniroma3.siw.model.Credentials.DEFAULT_ROLE;
 
 @Configuration
 @EnableWebSecurity
@@ -49,9 +50,13 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		
+		// solo gli utenti autenticati possono accedere a risorse con path /authenticated/**
+		.antMatchers(HttpMethod.GET, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE)
+		.antMatchers(HttpMethod.POST, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE)
+		
 		// tutti gli utenti autenticati possono accere alle pagine rimanenti 
-		.anyRequest().authenticated()
-		.and().exceptionHandling().accessDeniedPage("/index")
+		//.anyRequest().authenticated()
+		//.and().exceptionHandling().accessDeniedPage("/index")
 
 		// LOGIN: qui definiamo come è gestita l'autenticazione
 		// usiamo il protocollo formlogin 
