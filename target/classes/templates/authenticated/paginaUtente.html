@@ -35,14 +35,14 @@
 			<span th:text=${user.email}> </span>
 		</div>
         <div>
-			<button class = "conferma" th:href="@{/authenticated/updateUser/ + ${user.id}}">Modifica</button>
+			<button class = "conferma" th:href="@{'/authenticated/updateUser/' + ${user.id}}">Modifica</button>
 		</div>
       </div>
       <div class="immagine_utente"> 
         
       </div>
     </div>
-	<div th:href="@{/authenticated/recensioni/ + ${user.id}}">Visualizza e gestisci le tue recensioni</div>
+	<div th:href="@{'/authenticated/recensioni/' + ${user.id}}">Visualizza e gestisci le tue recensioni</div>
     <div href:"">Visualizza e gestisci le tue prenotazioni</div>
 </body>
 
