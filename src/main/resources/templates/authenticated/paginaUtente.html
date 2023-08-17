@@ -12,7 +12,6 @@
 	<header>
 		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
-    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -22,16 +21,29 @@
 	</header>
 
 	<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
-	<h1 th:text="'Account di' + ${user.name}"> </h1>
-	<div th:if="${categoria.destinazioni==null || categoria.destinazioni.isEmpty()}">Non ci sono destinazioni per questa categoria</div>
-  <div id="flex-container">
-    <span class="flex-item" th:each="destinazione : ${categoria.destinazioni}">
-		<a th:href="@{'/destinazione' + '/' + ${destinazione.id}}"
-				th:text="${destinazione.nome}"></a>
-	</span>
-    
-  </div>
-	
+	<h1> Il tuo account</h1>
+    <div id="flex-container-utente">
+      <div class="box_utente"> 
+	 	<h2>I tuoi dati</h2>
+        <div>Nome:
+			<span th:text=${user.name}> </span>
+		</div>
+        <div>Cognome:
+			<span th:text=${user.surname}> </span>
+		</div>
+        <div>Email:
+			<span th:text=${user.email}> </span>
+		</div>
+        <div>
+			<button class = "conferma" th:href="@{/authenticated/updateUser/ + ${user.id}}">Modifica</button>
+		</div>
+      </div>
+      <div class="immagine_utente"> 
+        
+      </div>
+    </div>
+	<div th:href="@{/authenticated/recensioni/ + ${user.id}}">Visualizza e gestisci le tue recensioni</div>
+    <div href:"">Visualizza e gestisci le tue prenotazioni</div>
 </body>
 
 </html>
