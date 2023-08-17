@@ -5,13 +5,12 @@
 	<title>
 		SiwAInVacanza - Homepage Admin
 	</title>
-	<link rel="stylesheet" href="/css/stileIndex.css" />
+	<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
 	<header>
-    <a class = "home" href="/"> Home </a>
-		
+    <div style="float:left"><a href="/">Home</a></div>
     <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
