@@ -80,8 +80,8 @@ public class CategoriaController {
 	@GetMapping("/admin/updateCategoria/{id}")
 	public String updateCategoria(@PathVariable("id") Long id, Model model) {
 
-		//List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(id);
-		//model.addAttribute("notDestinazioni", notDestinazioni);
+		List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(this.categoriaService.findCategoriaById(id));
+		model.addAttribute("notDestinazioni", notDestinazioni);
 		model.addAttribute("categoria", this.categoriaService.findCategoriaById(id));
 
 		return "admin/adminCategoria.html";
@@ -103,9 +103,9 @@ public class CategoriaController {
 	}
 	
 	@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
-	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
+	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nome, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nomeDest);
+		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);
 		List<Destinazione> destinazioni = categ.getDestinazioni();
 		if(!destinazioni.contains(dest)) {
 			destinazioni.add(dest);
@@ -121,9 +121,9 @@ public class CategoriaController {
 	}
 	
 	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
-	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nomeDest, Model model) {
+	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nome, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
-		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nomeDest);
+		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);
 		List<Destinazione> destinazioni = categ.getDestinazioni();
 		if(destinazioni.contains(dest)) {
 			destinazioni.remove(dest);
