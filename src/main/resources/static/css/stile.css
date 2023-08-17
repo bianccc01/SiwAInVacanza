@@ -261,3 +261,26 @@ position:relative;
 #titolo {
   font-weight:bold;
 }
+
+#img1 {
+  background-color: black;
+  height: 2em;
+  margin-bottom: 2em;
+  padding: 6em;
+  margin: 40px;
+
+}
+
+#img2 {
+  background-color: black;
+  height: 2em;
+  margin-bottom: 2em;
+  padding: 6em;
+  margin: 40px;
+}
+
+#img2 img {
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
