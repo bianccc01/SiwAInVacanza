@@ -55,5 +55,13 @@ public class PrenotazioneService {
 		prenotazione.getDestinazionePrenotata().getPrenotazioni().add(prenotazione);
 		
 	}
+	
+	@Transactional
+	public void eliminaPrenotazione(Long idPrenotazione) {
+		Prenotazione prenotazione = this.prenotazioneRepository.findById(idPrenotazione).get();
+		prenotazione.getUser().getPrenotazioni().remove(prenotazione);
+		prenotazione.getDestinazionePrenotata().getPrenotazioni().remove(prenotazione);
+		this.prenotazioneRepository.delete(prenotazione);
+	}
 
 }

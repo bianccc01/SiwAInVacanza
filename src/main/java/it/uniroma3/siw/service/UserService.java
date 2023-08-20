@@ -65,6 +65,5 @@ public class UserService {
     @Transactional
     public User getUserAuthentication(Authentication authentication) {
     	return this.credentialsService.getUser(authentication);
-    	
-    }
+    	}
 }

@@ -42,7 +42,7 @@ public class PrenotazioneController {
 	private UserService userService;
 	
 	@GetMapping("/authenticated/formNewPrenotazione/{idDestinazione}")
-	public String formNewDestinazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
+	public String formNewPrenotazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
 		Prenotazione prenotazione = new Prenotazione();
 		model.addAttribute("idDestinazione",idDestinazione);
 		model.addAttribute("prenotazione", prenotazione);
@@ -50,20 +50,29 @@ public class PrenotazioneController {
 	}
 
 	@GetMapping("/authenticated/prenotazioni")
-	public String allDestinazioni(Model model) {
+	public String allPrenotazioni(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("prenotazioni",this.prenotazioneService.getPrenotazioneUser(authentication));
 		return "authenticated/prenotazioni.html";
 	}
 	
 	@PostMapping("/authenticated/newPrenotazione/{idDestinazione}")
-	public String newDestinazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
+	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
 			Model model) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
 		model.addAttribute("prenotazioni", this.prenotazioneService.getPrenotazioneUser(authentication));
 		return "authenticated/prenotazioni.html";
-
+	}
+	
+	
+	@GetMapping("/authenticated/eliminaPrenotazione/{idPrenotazione}")
+	public String eliminaDestinazione(@PathVariable("idPrenotazione") Long idPrenotazione, Model model) {
+		this.prenotazioneService.eliminaPrenotazione(idPrenotazione);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("prenotazioni",this.prenotazioneService.getPrenotazioneUser(authentication));
+		return "authenticated/prenotazioni.html";
+		
 	}
 	
 

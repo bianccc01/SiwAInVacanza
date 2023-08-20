@@ -27,9 +27,16 @@
 
 <ul>
   <li th:each="p : ${prenotazioni}">
-		<p th:text="${p.nomeDestinazionePrenotata}"> Ibiza </p>
-</li>
+    <div class = "prenotazione">
+      <span th:text="${p.nomeDestinazionePrenotata}"> Ibiza</span>
+      <span th:text="${p.nome}"> Nome</span>
+    <span th:text="${p.cognome}"> Cognome</span>
+    <span th:text="${p.nPartecipanti}"> 5</span>
+     <a class = "eliminaPrenotazione" th:href="@{'/authenticated/eliminaPrenotazione' + '/' + ${p.id}}"> Elimina</a>
+    </div>
+  </li>
 </ul>
+
   
 
 </html>
