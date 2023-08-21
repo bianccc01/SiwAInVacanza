@@ -11,6 +11,7 @@
 		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<span th:href="/authenticated/userDetails">>Vai al tuo account </span>
 			<a href="/logout">Logout</a>
 		</div>
 		<div th:unless="${#request.userPrincipal}">

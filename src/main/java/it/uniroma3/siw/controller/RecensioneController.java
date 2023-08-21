@@ -2,15 +2,15 @@ package it.uniroma3.siw.controller;
 
 
 
-import java.util.ArrayList;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.validation.RecensioneValidator;
 import it.uniroma3.siw.model.Destinazione;
@@ -64,10 +63,11 @@ public class RecensioneController {
 	
 	@PostMapping("/authenticated/newRecensione/{destId}/{userId}")
 	public String newRecensione(@Valid @ModelAttribute("recensione") Recensione rec, BindingResult bindingResult, 
-			@PathVariable("destId") Long destId, @PathVariable("userId") Long userId, Model model) {
+			@PathVariable("destId") Long destId, Model model) {
 		
 		Destinazione dest = this.destinazioneService.findDestinazioneById(destId);
-		User user = this.userService.getUser(userId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = this.userService.getUserAuthentication(authentication);
 		if(dest!=null && user!=null) {
 			rec.setDestinazione(dest);
 			rec.setUtente(user);
@@ -99,13 +99,11 @@ public class RecensioneController {
 		
 	}
 	
-	@GetMapping("/authenticated/rimuoviRecensione/{recId}/{guestId}")
-	public String removeRecensione(@PathVariable("id") Long id,@PathVariable("guestId") Long userId, Model model) {
-		Set<Recensione> recensioni=this.recensioneService.allRecensioni();
+	@GetMapping("/authenticated/rimuoviRecensione/{recId}")
+	public String removeRecensione(@PathVariable("id") Long id, Model model) {
 		Recensione rec=this.recensioneService.findRecensioneById(id);
-		if(rec.getUtente()==this.userService.getUser(userId))
-			recensioni.remove(rec);
-		return "guest/Recensioni.html";
+		this.recensioneService.rimuoviRecensione(rec);
+		return "guest/destinazione.html";
 		
 	}
 	

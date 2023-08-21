@@ -14,6 +14,7 @@
 		
     <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<span th:href="/authenticated/userDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 

@@ -1,8 +1,9 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -22,11 +22,11 @@ import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
-import it.uniroma3.siw.model.Recensione;
-import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
+import it.uniroma3.siw.service.RecensioneService;
+
 
 @Controller
 public class DestinazioneController {
@@ -35,6 +35,8 @@ public class DestinazioneController {
 	private DestinazioneService destinazioneService;
 	@Autowired 
 	private DestinazioneValidator destinazioneValidator;
+	@Autowired
+	private RecensioneService recensioneService;
 	
 	@Autowired
 	private ImageService imageService;
@@ -72,11 +74,8 @@ public class DestinazioneController {
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
 		model.addAttribute("recensioni",destinazione.getRecensioni());
-		List<User> utenti=new ArrayList<>();
-		for(Recensione r : destinazione.getRecensioni())
-			utenti.add(r.getUtente());
-		model.addAttribute("utenti", utenti);
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication));
 		return "guest/destinazione.html";
 	}
 
