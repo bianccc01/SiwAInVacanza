@@ -11,13 +11,15 @@
 		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<span th:href="/admin/adminDetails">>Vai al tuo account </span>
 			<a href="/logout">Logout</a>
 		</div>
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
 	</header>
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+	
+	<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1 th:text="${categoria.nome}"></h1>
    <div>
      <a th:href="@{'/admin/rimuoviCategoria/'+ ${categoria.id}}">Rimuovi categoria</a>
@@ -25,13 +27,13 @@
   <h3>Modifica le destinazioni</h3>
 	<div id="flex-container" >
 	<div class="col">Destinazioni che si possono rimuovere:
-      <li th:if="${categoria.destinazioni.isEmpty()}">Non ci sono destinazioni per questa categoria</li>
-      <li th:each="destinazione : ${categoria.destinazioni}">
+      <li th:if="${categoria.getDestinazioni().isEmpty()}">Non ci sono destinazioni per questa categoria</li>
+      <li th:each="destinazione : ${categoria.getDestinazioni()}">
 			<span th:text="${destinazione.nome}"></span>
 	  </li>
       <div>
 			<label>Inserisci il nome della destinazione da eliminare:</label> 
-			<span><input type="text" th:field="${destinazione.nome}" /></span>
+			<span><input type="text" th:field="${nome}" /></span>
 		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
 		    </span>
         <a th:href="@{'/admin/removeDestinazioneToCategoria'+ ${categoria.id}}"><button type="button">Rimuovi</button></a>
@@ -46,7 +48,7 @@
 		</ul>
        <div>
 			<label>Inserisci il nome della destinazione da aggiungere:</label> 
-			<span><input type="text" th:field="${notDestinazione.nome}" /></span>
+			<span><input type="text" th:field="${nome}" /></span>
 		    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
 		    </span>
         <a th:href="@{'/admin/addDestinazioneToCategoria/'+ ${categoria.id}'}"><button type="button">Aggiungi</button></a>

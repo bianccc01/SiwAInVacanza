@@ -8,27 +8,17 @@
 
 <body>
 	<header>
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li class="login">
-                <div th:if="${#request.userPrincipal}">
-                    <span th:text="${#request.userPrincipal.principal.username}"/>
-                    <a href="/logout">Logout</a>
-                </div>
-                <div th:unless="${#request.userPrincipal}">
-                    <a href="/login">Login</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+    <div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
 
-	<div>
-		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
-	</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+</header>
+		<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Congratulazioni ti sei registrato!</h1>
 	<div>
 		<span>Nome: </span>
@@ -42,5 +32,6 @@
 		<span>Email: </span>
 		<span th:text="${user.email}"></span>
 	</div>
+	<div href="/login">Torna alla pagina del login</div>
 </body>
 </html>

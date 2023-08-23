@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Tutte le recensioni
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div style="float:left"><a href="/">Home</a></div>
+		<div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<span th:href="/authenticated/userDetails">>Vai al tuo account </span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"> </h1>
+	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
+  <div class='recensioni' th:each="recensione : ${recensioni}"> 
+      <span id="titolo" th:text="${recensione.utente.nome}"> </span>
+      
+      <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
+		<p th:unless="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
+  </div>
+	
+</body>
+
+</html>
+

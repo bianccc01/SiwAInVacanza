@@ -14,6 +14,7 @@
 		
     <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<span th:href="/admin/adminDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -23,8 +24,8 @@
 	</header>
 
 	
-	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
-	<h1>Aggiungi una destinazione</h1>
+	<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+	<h1>Aggiungi una categoria</h1>
 	<form th:action="@{/admin/newCategoria}" method="POST" th:object="${categoria}" enctype="multipart/form-data">
 		
 	
@@ -36,7 +37,7 @@
 
 	<div class= "descrizioneContainer">
     <label for="text"> <p>Descrizione: </p></label>
-    <textarea id="text" class="descrizione" name="descrizione" th:field="${categoria.descrizione}"></textarea>
+    <textarea id="text" class="descrizione" name="descrizione" th:field="${categoria.descrizione}"> </textarea>
 </div>
 		
 		 <div>

@@ -99,12 +99,12 @@ header a{
 }
 
 .logo{
-  position:relative;
+  display:flex;
   left:40%;
   bottom:5px;
+  justify-content: center;
+
 }
-
-
 
 .boxricerca{
   width:13em;
@@ -272,3 +272,55 @@ position:relative;
   float:right;
   margin-right:20px;
 }
+.recensioni {
+  border:solid;
+}
+
+#titolo {
+  font-weight:bold;
+}
+
+#img1 {
+  background-color: black;
+  height: 2em;
+  margin-bottom: 2em;
+  padding: 6em;
+  margin: 40px;
+
+}
+
+#img2 {
+  background-color: black;
+  height: 2em;
+  margin-bottom: 2em;
+  padding: 6em;
+  margin: 40px;
+}
+
+#img2 img {
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+
+#flex-container-utente {
+  display: flex;
+  align-items: flex-start;
+  height: 200px;
+  justify-content: space-between;
+
+}
+
+.immagine_utente{
+  width: 150px;
+      height: 150px;
+      background: red;
+      border-radius: 50%
+}
+
+.box_utente{
+  width:60%;
+  border:dashed;
+  
+}
+

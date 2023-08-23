@@ -1,8 +1,10 @@
 package it.uniroma3.siw.model;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Objects;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +24,9 @@ public class Destinazione {
 	
 	@ManyToOne
 	private Categoria categoria;
+	
+	@OneToMany(mappedBy="destinazione")
+	private List<Recensione> recensioni= new ArrayList<>();
 	
 	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();
@@ -95,6 +100,16 @@ public class Destinazione {
 	public Long getFirstImageId() {
 		return this.images.get(0).getId();
 	}
+	
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensione(List<Recensione> rec) {
+		this.recensioni = rec;
+	}
+
+	
 
 	public List<Prenotazione> getPrenotazioni() {
 		return prenotazioni;

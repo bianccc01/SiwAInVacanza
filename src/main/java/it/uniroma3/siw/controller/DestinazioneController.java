@@ -1,11 +1,12 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
-
-
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,19 +14,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
+import javax.validation.Valid;
+
+import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
-import net.bytebuddy.asm.Advice.This;
+import it.uniroma3.siw.service.RecensioneService;
+
 
 @Controller
 public class DestinazioneController {
 
 	@Autowired 
 	private DestinazioneService destinazioneService;
+	@Autowired 
+	private DestinazioneValidator destinazioneValidator;
+	@Autowired
+	private RecensioneService recensioneService;
 	
 	@Autowired
 	private ImageService imageService;
@@ -62,19 +73,26 @@ public class DestinazioneController {
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
-		
+		model.addAttribute("recensioni",destinazione.getRecensioni());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication));
 		return "guest/destinazione.html";
 	}
 
 	@PostMapping("/admin/newDestinazione")
-	public String newDestinazione(@ModelAttribute("destinazione") Destinazione destinazione, 
+	public String newDestinazione(@Valid @ModelAttribute("destinazione") Destinazione destinazione, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile[] files, Model model) throws IOException {
-		
-		destinazione.getCategoria().addDestinazione(destinazione);
-		this.destinazioneService.saveDestinazione(destinazione);
-		this.destinazioneService.newImagesDest(files, destinazione);
-		model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
-		return "guest/destinazioni.html";
+		this.destinazioneValidator.validate(destinazione, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			destinazione.getCategoria().addDestinazione(destinazione);
+			this.destinazioneService.saveDestinazione(destinazione);
+			this.destinazioneService.newImagesDest(files, destinazione);
+			model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
+			return "guest/destinazioni.html";
+		}
+		else {
+			return "admin/formNewDestinazione";
+		}
 
 	}
 	
