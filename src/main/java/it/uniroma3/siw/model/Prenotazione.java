@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,11 +29,8 @@ public class Prenotazione {
 	@ManyToOne
 	private Destinazione destinazionePrenotata;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate partenza;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate ritorno;
+	@ManyToOne
+	private Periodo periodo;
 
 	public Long getId() {
 		return id;
@@ -101,6 +99,27 @@ public class Prenotazione {
 	public String getNomeDestinazionePrenotata() {
 		return this.destinazionePrenotata.getNome();
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cognome, destinazionePrenotata, id, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prenotazione other = (Prenotazione) obj;
+		return Objects.equals(cognome, other.cognome)
+				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome);
+	}
+	
+	
 	
 	
 	
