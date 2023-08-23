@@ -1,7 +1,12 @@
 package it.uniroma3.siw.model;
 
+import java.time.LocalDate;
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Prenotazione {
@@ -10,11 +15,22 @@ public class Prenotazione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
+	@NotBlank
+	private String nome;
+	
+	@NotBlank
+	private String cognome;
+	
 	@ManyToOne
 	private User user;
 	
-	@NotBlank
 	private int nPartecipanti;
+	
+	@ManyToOne
+	private Destinazione destinazionePrenotata;
+	
+	@ManyToOne
+	private Periodo periodo;
 
 	public Long getId() {
 		return id;
@@ -39,6 +55,57 @@ public class Prenotazione {
 	public void setnPartecipanti(int nPartecipanti) {
 		this.nPartecipanti = nPartecipanti;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+
+	public Destinazione getDestinazionePrenotata() {
+		return destinazionePrenotata;
+	}
+
+	public void setDestinazionePrenotata(Destinazione destinazionePrenotata) {
+		this.destinazionePrenotata = destinazionePrenotata;
+	}
+	
+	public String getNomeDestinazionePrenotata() {
+		return this.destinazionePrenotata.getNome();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cognome, destinazionePrenotata, id, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prenotazione other = (Prenotazione) obj;
+		return Objects.equals(cognome, other.cognome)
+				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome);
+	}
+	
+	
+	
 	
 	
 	

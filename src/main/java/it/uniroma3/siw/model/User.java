@@ -64,6 +64,29 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public void addPrenotazione(Prenotazione prenotazione) {
+		prenotazione.setUser(this);
+		this.prenotazioni.add(prenotazione);
+	}
+
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni;
+	}
+
+	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+		this.prenotazioni = prenotazioni;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+	
+	
 
 
 }

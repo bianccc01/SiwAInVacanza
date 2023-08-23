@@ -253,3 +253,22 @@ position:relative;
   bottom:4.5em;
   display:inline-block;
 }
+
+.prenotazione{
+  position:relative;
+  top:15px;
+  border:solid;
+  margin-top:50px;
+}
+
+.prenotazione span{
+  white-space:nowrap;
+  margin-right: 50px;
+}
+
+
+.eliminaPrenotazione{
+  color:red;
+  float:right;
+  margin-right:20px;
+}

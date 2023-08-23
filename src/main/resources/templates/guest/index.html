@@ -11,6 +11,7 @@
 <body>
 	<header>
     <a class = "home" href="/"> Home </a>
+    <a class = "home" href="/authenticated/prenotazioni"> Prenotazioni </a>
 		
     <div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>

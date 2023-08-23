@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Inserisci una nuova prenotazione
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
+    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	
+	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
+	<h1>Aggiungi una destinazione</h1>
+	<form th:action="@{'/authenticated/newPrenotazione/' + ${idDestinazione}}" method="POST" th:object="${prenotazione}">
+		
+	
+		
+		<div>
+			<label>Nome:</label> 
+			<span><input type="text" th:field="${prenotazione.nome}" /></span>
+		</div>
+		
+		<div>
+			<label>Cognome:</label> 
+			<span><input type="text" th:field="${prenotazione.cognome}" /></span>
+		</div>
+		
+		<div>
+			<label>Numero partecipanti:</label> 
+			<span><input type="number" th:field="${prenotazione.nPartecipanti}" /></span>
+		</div>
+		
+		<div>
+			<label>Partenza:</label> 
+			<span><input type="date" th:field="${prenotazione.partenza}" /></span>
+		</div>
+		
+		<div>
+			<label>Ritorno:</label> 
+			<span><input type="date" th:field="${prenotazione.ritorno}" /></span>
+		</div>
+		
+		<div>
+			<span><button class = "conferma" type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>
