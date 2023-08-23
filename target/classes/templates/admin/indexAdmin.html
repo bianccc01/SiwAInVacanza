@@ -13,7 +13,7 @@
     <div style="float:left"><a href="/">Home</a></div>
     <div th:if="${#request.userPrincipal}">
     		<span th:text="'  Bentornato ' + ${#request.userPrincipal.principal.username}"> </span>
-    		<span th:href="/authenticated/userDetails">>Vai al tuo account </span>
+    		<span th:href="/admin/adminDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 

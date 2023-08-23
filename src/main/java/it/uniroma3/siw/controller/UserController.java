@@ -25,6 +25,14 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("admin/adminDetails")
+	public String getAdminDetails(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("user",this.userService.getUserAuthentication(authentication));
+		return "paginaUtente.html";
+		
+	}
+	
 	
 
 
