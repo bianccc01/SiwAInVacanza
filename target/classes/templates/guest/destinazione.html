@@ -35,6 +35,8 @@
             </li>
          </ul>
       </div>
+      
+      <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
 
       <div class = "boxRecensioni" th:if="${#lists.size(recensioni)}>2" >
 		  <div class ="recensione" th:if="${recUtente}!=null">
@@ -58,11 +60,12 @@
          </div>
 		 <div class ="recensione" th:if="${#lists.size(recensioni)}>2">
 		 	<span th:href="@{'/guest/recensioni/' + ${destinazione.id}}">
-			 Visualizza altre recensioni </spa>
+			 Visualizza altre recensioni </span>
 		 </div>
       </div> 
          
-      <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
-
+      
+      
+      
    </body>
 </html>
