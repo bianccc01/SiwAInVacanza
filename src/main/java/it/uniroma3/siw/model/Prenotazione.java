@@ -72,21 +72,6 @@ public class Prenotazione {
 		this.cognome = cognome;
 	}
 
-	public LocalDate getPartenza() {
-		return partenza;
-	}
-
-	public void setPartenza(LocalDate partenza) {
-		this.partenza = partenza;
-	}
-
-	public LocalDate getRitorno() {
-		return ritorno;
-	}
-
-	public void setRitorno(LocalDate ritorno) {
-		this.ritorno = ritorno;
-	}
 
 	public Destinazione getDestinazionePrenotata() {
 		return destinazionePrenotata;
