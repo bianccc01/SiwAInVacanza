@@ -10,25 +10,25 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Prenotazione {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-	
+	private Long id;
+
 	@NotBlank
 	private String nome;
-	
+
 	@NotBlank
 	private String cognome;
-	
+
 	@ManyToOne
 	private User user;
-	
+
 	private int nPartecipanti;
-	
+
 	@ManyToOne
 	private Destinazione destinazionePrenotata;
-	
+
 	@ManyToOne
 	private Periodo periodo;
 
@@ -80,9 +80,17 @@ public class Prenotazione {
 	public void setDestinazionePrenotata(Destinazione destinazionePrenotata) {
 		this.destinazionePrenotata = destinazionePrenotata;
 	}
-	
+
 	public String getNomeDestinazionePrenotata() {
 		return this.destinazionePrenotata.getNome();
+	}
+
+	public Periodo getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
 
 	@Override
@@ -103,13 +111,13 @@ public class Prenotazione {
 				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(id, other.id)
 				&& Objects.equals(nome, other.nome);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 
 }
