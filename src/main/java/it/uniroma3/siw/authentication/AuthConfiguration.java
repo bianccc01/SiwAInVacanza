@@ -52,8 +52,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		
 		// solo gli utenti autenticati possono accedere a risorse con path /authenticated/**
-		.antMatchers(HttpMethod.GET, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE)
-		.antMatchers(HttpMethod.POST, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE)
+		.antMatchers(HttpMethod.GET, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
+		.antMatchers(HttpMethod.POST, "/authenticated/**").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
 		
 		// tutti gli utenti autenticati possono accere alle pagine rimanenti 
 		//.anyRequest().authenticated()
