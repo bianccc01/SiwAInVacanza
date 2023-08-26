@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Credentials {
 	
 	@NotNull
 	private String password;
-	
+
 	private String role;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -68,5 +69,24 @@ public class Credentials {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Credentials other = (Credentials) obj;
+		return Objects.equals(username, other.username);
+	}
+	
+	
 
 }

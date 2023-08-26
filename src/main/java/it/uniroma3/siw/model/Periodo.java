@@ -33,6 +33,8 @@ public class Periodo {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate ritorno;
+	
+	private float moltiplicatore;
 
 	public Long getId() {
 		return id;

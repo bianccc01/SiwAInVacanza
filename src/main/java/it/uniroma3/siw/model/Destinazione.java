@@ -34,7 +34,9 @@ public class Destinazione {
 	@OneToMany(mappedBy="destinazionePrenotata")
 	private List<Prenotazione> prenotazioni = new ArrayList<>();
 	
-
+	//@NotBlank
+	//private int prezzoBase;
+	
 	public Long getId() {
 		return id;
 	}
