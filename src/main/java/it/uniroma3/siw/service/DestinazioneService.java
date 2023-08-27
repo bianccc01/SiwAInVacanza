@@ -49,7 +49,7 @@ public class DestinazioneService {
 	
 	@Transactional
 	public List<Destinazione> findDestinazioniNotInCategoria(Categoria categ) {
-		return this.destinazioneRepository.findByCategoriaNotContaining(categ);
+		return this.destinazioneRepository.findByCategoriaNotIn(categ);
 	}
 	
 	@Transactional

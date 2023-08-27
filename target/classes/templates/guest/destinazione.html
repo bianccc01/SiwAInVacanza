@@ -38,7 +38,7 @@
       
       <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
 
-      <div class = "boxRecensioni" th:if="${#lists.size(recensioni)}>2" >
+      <div class = "boxRecensioni" >
 		  <div class ="recensione" th:if="${recUtente}!=null">
             <span id="titolo" th:text="${recUtente.utente.getNome()}"> </span>
       		<p th:text="${recUtente.titolo} + ${recUtente.voto}"> </p>

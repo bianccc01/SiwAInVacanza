@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: giorg
+Built-By: hp
 Build-Jdk: 17.0.6
 Implementation-Title: SiwAInVacanza
 Implementation-Version: 0.0.1-SNAPSHOT

@@ -18,6 +18,6 @@ public interface DestinazioneRepository extends CrudRepository<Destinazione,Long
 	
 	public Destinazione findByNome(String nome);
 	
-	public List<Destinazione> findByCategoriaNotContaining(Categoria categ);
+	public List<Destinazione> findByCategoriaNotIn(Categoria categ);
 
 }

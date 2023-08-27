@@ -102,7 +102,7 @@ public class CategoriaController {
 		return "admin/adminCategorie.html";
 	}
 	
-	@GetMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
+	@PostMapping(value="/admin/addDestinazioneToCategoria/{categoriaId}")
 	public String addDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nome, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
 		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);
@@ -120,7 +120,7 @@ public class CategoriaController {
 		return "admin/adminCategoria.html";
 	}
 	
-	@GetMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
+	@PostMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
 	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nome, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
 		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);

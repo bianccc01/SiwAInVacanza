@@ -25,7 +25,7 @@
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Sfoglia le categorie</h1>
 	<div th:if="${categorie==null || categorie.isEmpty()}">Non ci sono categorie da sfogliare</div>
-  <div id="flex-container">
+  <div th:unless="${categorie==null || categorie.isEmpty()}" id="flex-container">
     <span class="flex-item" th:each="categoria : ${categorie}">
 		<a th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
 				th:text="${categoria.nome}"></a>
