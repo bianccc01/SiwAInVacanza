@@ -80,7 +80,7 @@ public class CategoriaController {
 	@GetMapping("/admin/updateCategoria/{id}")
 	public String updateCategoria(@PathVariable("id") Long id, Model model) {
 
-		List<Destinazione> notDestinazioni = this.destinazioniNotCategoria(this.categoriaService.findCategoriaById(id));
+		List<Destinazione> notDestinazioni = this.destinazioneService.findDestinazioniNotInCategoria();
 		model.addAttribute("notDestinazioni", notDestinazioni);
 		model.addAttribute("categoria", this.categoriaService.findCategoriaById(id));
 
@@ -112,7 +112,7 @@ public class CategoriaController {
 			this.categoriaService.saveCategoria(categ);
 		}
 		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categ); 
+		List<Destinazione> notDestinazioni = this.destinazioneService.findDestinazioniNotInCategoria(); 
 		
 		model.addAttribute("categoria", categ);
 		model.addAttribute("notDestinazioni", notDestinazioni);
@@ -130,7 +130,7 @@ public class CategoriaController {
 			this.categoriaService.saveCategoria(categ);
 		}
 		
-		List<Destinazione> notDestinazioni = destinazioniNotCategoria(categ);  
+		List<Destinazione> notDestinazioni = this.destinazioneService.findDestinazioniNotInCategoria();
 		
 		model.addAttribute("categoria", categ);
 		model.addAttribute("notDestinazioni", notDestinazioni);
@@ -138,14 +138,6 @@ public class CategoriaController {
 		return "admin/adminCategoria.html";
 	}
 	
-	private List<Destinazione> destinazioniNotCategoria(Categoria categ) {
-		List<Destinazione> notDestinazioni = new ArrayList<>();
-
-		for (Destinazione a : destinazioneService.findDestinazioniNotInCategoria(categ)) {
-			notDestinazioni.add(a);
-		}
-		return notDestinazioni;
-	}
 	
 	
 
