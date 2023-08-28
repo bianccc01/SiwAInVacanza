@@ -64,13 +64,18 @@ public class RecensioneService {
 		this.userRepository.save(user);
 	}
 
-	public Recensione getRecensioneUtente(Authentication auth) {
+	public Recensione getRecensioneUtente(Authentication auth,Destinazione dest) {
 		User user=this.credentialsService.getUser(auth);
-		return this.recensioneRepository.findByUtente(user);
+		return this.recensioneRepository.findByUtenteAndDestinazione(user,dest);
 	}
 
 	public void rimuoviRecensione(Recensione rec) {
 		this.recensioneRepository.delete(rec);
+	}
+
+	public List<Recensione> getRecensioniNotUtente(Authentication auth, Destinazione dest) {
+		User user=this.credentialsService.getUser(auth);
+		return this.recensioneRepository.findByDestinazioneEqualsAndUtenteNotLike(dest,user);
 	}
 
 

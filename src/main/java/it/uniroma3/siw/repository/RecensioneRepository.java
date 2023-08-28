@@ -20,7 +20,9 @@ public interface RecensioneRepository extends CrudRepository<Recensione,Long> {
 	
 	public List<Recensione> findByDestinazione(Destinazione d);
 
-	public Recensione findByUtente(User user);
+	public Recensione findByUtenteAndDestinazione(User user,Destinazione dest);
+
+	public List<Recensione> findByDestinazioneEqualsAndUtenteNotLike(Destinazione dest, User user);
 	
 
 }

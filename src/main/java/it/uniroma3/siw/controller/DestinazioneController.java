@@ -68,14 +68,14 @@ public class DestinazioneController {
 	public String destinazione(@PathVariable ("id") Long id, @PathVariable ("idImage") Long idImage, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
-		model.addAttribute("recensioni",destinazione.getRecensioni());
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication));
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
 		return "guest/destinazione.html";
 	}
 
