@@ -2,10 +2,12 @@ package it.uniroma3.siw.repository;
 
 
 import java.util.List;
+
 import java.util.Set;
 
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Recensione;
@@ -22,7 +24,13 @@ public interface RecensioneRepository extends CrudRepository<Recensione,Long> {
 
 	public Recensione findByUtenteAndDestinazione(User user,Destinazione dest);
 
-	public List<Recensione> findByDestinazioneEqualsAndUtenteNotLike(Destinazione dest, User user);
+	public List<Recensione> findByDestinazioneAndUtenteNot(Destinazione dest, User user);
+	
+	/*@Query(value="select * "
+			+ "from recensione r "
+			+ "where r.destinazione = :dest "
+			+ "and r.utente <> :user ", nativeQuery=true)
+	public List<Recensione> findRecensioniNotUtente(@Param("dest") Destinazione dest, @Param("user") User user);*/
 	
 
 }

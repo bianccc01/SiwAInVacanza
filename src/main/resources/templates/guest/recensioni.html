@@ -25,11 +25,19 @@
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"> </h1>
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
-  <div class='recensioni' th:each="recensione : ${recensioni}"> 
+		<div class ="recensioni" th:if="${recUtente}!=null">
+            <span id="titolo" th:text="${recUtente.utente.getNome()}"> </span>
+      		<p th:text="${recUtente.titolo} + ${recUtente.voto}"> </p>
+			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
+			<button class = "conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
+     	</div>
+        <div class ="recensioni" th:unless="${recUtente}==null">
+			<button class = "conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}">Aggiungi recensione</button>
+        </div>
+  	<div class='recensioni' th:each="recensione : ${recensioniNotUtente}"> 
       <span id="titolo" th:text="${recensione.utente.nome}"> </span>
-      
       <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
-		<p th:unless="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
+		<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
   </div>
 	
 </body>

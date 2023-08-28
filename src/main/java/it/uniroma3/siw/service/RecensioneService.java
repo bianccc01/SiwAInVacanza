@@ -75,7 +75,7 @@ public class RecensioneService {
 
 	public List<Recensione> getRecensioniNotUtente(Authentication auth, Destinazione dest) {
 		User user=this.credentialsService.getUser(auth);
-		return this.recensioneRepository.findByDestinazioneEqualsAndUtenteNotLike(dest,user);
+		return this.recensioneRepository.findByDestinazioneAndUtenteNot(dest,user);
 	}
 
 

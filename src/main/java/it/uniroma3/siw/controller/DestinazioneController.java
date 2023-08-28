@@ -74,6 +74,7 @@ public class DestinazioneController {
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
+		model.addAttribute("recensioni",destinazione.getRecensioni());
 		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
 		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
 		return "guest/destinazione.html";

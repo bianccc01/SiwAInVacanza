@@ -55,8 +55,12 @@ public class RecensioneController {
 	@GetMapping("/guest/recensioni/{destId}")
 	public String getRecensioni(Model model,@PathVariable("destId") Long destId) {
 		Destinazione dest=this.destinazioneService.findDestinazioneById(destId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
 		model.addAttribute("recensioni",this.recensioneService.allRecensioniDestinazione(dest));
 		model.addAttribute("destinazione", dest);
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,dest));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,dest));
 		return "guest/recensioni.html";
 	}
 

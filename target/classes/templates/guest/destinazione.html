@@ -38,31 +38,33 @@
       
       <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
 
-      <div class = "boxRecensioni" >
+      <div class = "boxRecensioni"  >
 		  <div class ="recensione" th:if="${recUtente}!=null">
             <span id="titolo" th:text="${recUtente.utente.getNome()}"> </span>
       		<p th:text="${recUtente.titolo} + ${recUtente.voto}"> </p>
-			<p th:unless="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
+			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
 			<button class = "conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
          </div>
          <div class ="recensione" th:unless="${recUtente}==null">
 			<button class = "conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}">Aggiungi recensione</button>
          </div>
-         <div class ="recensione" th:if="${recensioni.get(0).utente}==${recUtente.utente}">
-            <span id="titolo" th:text="${recensioni.get(1).utente.getNome()}"> </span>
-      		<p th:text="${recensioni.get(1).titolo} + ${recensioni.get(1).voto}"> </p>
-			<p th:if="${recensioni.get(1).testo!=null}" th:text="${recensioni.get(1).testo}"> </p>
+         <div class ="recensione" th:if="${recensioniNotUtente!=null || !recensioniNotUtente.isEmpty()} ^ ${#lists.size(recensioniNotUtente)}==2">
+            <span id="titolo" th:text="${recensioniNotUtente.utente.getNome()}"> </span>
+      		<p th:text="${recensioniNotUtente.titolo} + ${recensioniNotUtente.voto}"> </p>
+			<p th:if="${recensioniNotUtente.testo!=null}" th:text="${recensioniNotUtente.testo}"> </p>
          </div>
-         <div class ="recensione" th:unless="${recensioni.get(0).utente}!=${recUtente.utente}">
-            <span id="titolo" th:text="${recensioni.get(0).utente.getNome()}"> </span>
-      		<p th:text="${recensioni.get(0).titolo} + ${recensioni.get(0).voto}"> </p>
-			<p th:if="${recensioni.get(0).testo!=null}" th:text="${recensioni.get(0).testo}"> </p>
+         <div class ="recensione" th:if="${recensioniNotUtente!=null || !recensioniNotUtente.isEmpty()} ^ ${#lists.size(recensioniNotUtente)}==2" 
+         th:each="recensione : ${recensioniNotUtente}">
+            <span id="titolo" th:text="${recensione.utente.getNome()}"> </span>
+      		<p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
+			<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
          </div>
-		 <div class ="recensione" th:if="${#lists.size(recensioni)}>2">
+		 <div class ="recensione" th:if="${#lists.size(recensioniNotUtente)}>2">
 		 	<span th:href="@{'/guest/recensioni/' + ${destinazione.id}}">
 			 Visualizza altre recensioni </span>
 		 </div>
       </div> 
+      
          
       
       
