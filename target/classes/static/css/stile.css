@@ -55,8 +55,28 @@ header a{
   
 }
 
+.boxcategoria{
+  	width:20em;
+  	height:10em;
+ 	background-color: lightgrey;
+  	border:solid;
+  	margin:2em;
+  	float:left;
+  	bottom:100px;
+  
+}
+
 .boxdestinazione .nome{
   position:relative;
+  color:black;
+  background-color:#fde910;
+  top:-2em;
+  left:1em;
+  font-size:30px;
+  
+}
+
+.boxcategoria .nome{
   color:black;
   background-color:#fde910;
   top:-2em;
