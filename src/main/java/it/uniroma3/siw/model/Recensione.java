@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -18,6 +20,8 @@ public class Recensione {
 	private String testo;
 	
 	@NotBlank
+	@Min(1)
+	@Max(5)
 	private int voto;
 	
 	@ManyToOne

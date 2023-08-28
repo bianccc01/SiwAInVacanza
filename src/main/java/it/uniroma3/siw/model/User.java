@@ -2,7 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,6 +84,22 @@ public class User {
 
 	public void setRecensioni(List<Recensione> recensioni) {
 		this.recensioni = recensioni;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(email);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email);
 	}
 	
 	
