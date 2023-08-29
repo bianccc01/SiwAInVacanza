@@ -65,7 +65,7 @@ public class RecensioneController {
 	}
 
 	
-	@PostMapping("/authenticated/newRecensione/{destId}/{userId}")
+	@PostMapping("/authenticated/newRecensione/{destId}")
 	public String newRecensione(@Valid @ModelAttribute("recensione") Recensione rec, BindingResult bindingResult, 
 			@PathVariable("destId") Long destId, Model model) {
 		

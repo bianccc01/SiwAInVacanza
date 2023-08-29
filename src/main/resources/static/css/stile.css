@@ -210,7 +210,7 @@ position:relative;
 .boxRecensioni{
   position:relative;
   left:60%;
-  bottom:460px;
+  bottom:250px;
   width:30em;
   height:40em;
 
@@ -218,17 +218,23 @@ position:relative;
 
 .boxRecensioni .recensione{
   position:relative;
-
   width:100%;
   height:20%;
   top:30px;
 	border:solid;
   }
 
+.recensione .conferma{
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  
+}
+
 
 .prenota {
   position:relative;
-  right:22em;
+  right:18em;
   top:4em;
   background-color:yellow;
   font-size:23px;
