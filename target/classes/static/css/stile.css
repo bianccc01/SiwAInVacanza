@@ -363,7 +363,14 @@ position:relative;
 .log {
   position:relative;
   text-align:center;
-  margin: 75px 50px;
+  margin-right: 10%;
+  color:black;
+}
+
+.log1 {
+  position:relative;
+  text-align:center;
+  margin-left: 350px;
   color:black;
 }
 
