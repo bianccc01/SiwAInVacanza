@@ -28,6 +28,7 @@
   <ul>
     <li th:each="categoria : ${categorie}">
       <div class="boxcategoria">
+		<img th:src="@{'data:image/png;base64,' + ${categoria.image}}"/>
 		<a class="nome" th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
 				th:text="${categoria.nome}"></a>
       </div>

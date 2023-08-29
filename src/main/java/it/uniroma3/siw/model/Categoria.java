@@ -26,7 +26,7 @@ public class Categoria {
 	@NotBlank
 	private String descrizione;
 	
-	@NotBlank
+	
 	@OneToOne
 	private Image image;
 	
