@@ -266,9 +266,7 @@ font-weight:bold;
   color:white;
 }
 
-span:hover{
-  text-decoration: underline;
-}
+
 
 div.col {
   width: calc(50% - 10px);
@@ -364,15 +362,26 @@ position:relative;
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
-	margin: 75px 200px;
+margin: 75px 200px;
 
 }
 
-.log {
+.log div {
   position:relative;
   text-align:center;
   margin-right: 10%;
   color:black;
+  padding: 5px;
+}
+
+.log button{
+	padding:5px;
+	margin-left: 10%;
+}
+
+.log a{
+	padding:5px;
+	margin-left: 10%;
 }
 
 .log1 {
@@ -380,6 +389,20 @@ position:relative;
   text-align:center;
   margin-left: 350px;
   color:black;
+}
+
+.log2 {
+  position:relative;
+  text-align:center;
+  color:black;
+  margin-left: 500px;
+}
+
+.log3 {
+  position:relative;
+  text-align:left;
+  color:black;
+  
 }
 
 .log .errore{

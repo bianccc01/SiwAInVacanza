@@ -18,7 +18,7 @@
 	<form class="container" th:action="@{/login}" method="POST">
 		
 		<div class="log">
-			<h1>Login</h1>
+			<h1 class="log2">Login</h1>
 			<div>
 				<span>Username:</span>
 				<span><input name="username" type="text" required /></span>
@@ -34,7 +34,7 @@
 				<span><button type="submit">Login</button></span>
 			</div>
 			<div >
-		<a  th:href="@{/register}" th:text="Registrati">Non sei ancora registrato? Clicca qui</a>
+		<a  th:href="@{/register}" >Non sei ancora registrato? Clicca qui</a>
 	</div>
 		</div>
 	</form>
