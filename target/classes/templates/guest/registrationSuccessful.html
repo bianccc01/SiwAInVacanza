@@ -19,7 +19,9 @@
 		</div>
 </header>
 		<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
-	<h1>Congratulazioni ti sei registrato!</h1>
+		
+	<div class="container">
+	<h1 class="log">Congratulazioni ti sei registrato!</h1>
 	<div>
 		<span>Nome: </span>
 		<span th:text="${user.name}"></span>
@@ -32,6 +34,7 @@
 		<span>Email: </span>
 		<span th:text="${user.email}"></span>
 	</div>
-	<div href="/login">Torna alla pagina del login</div>
+	<a href="/login">Torna alla pagina del login</a>
+	</div>
 </body>
 </html>
