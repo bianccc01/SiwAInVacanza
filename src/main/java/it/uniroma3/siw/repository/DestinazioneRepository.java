@@ -22,6 +22,8 @@ public interface DestinazioneRepository extends CrudRepository<Destinazione,Long
 	public Destinazione findByNome(String nome);
 	
 	public List<Destinazione> findByCategoriaIsNull();
+
+	public void findByCategoria(Categoria categoria);
 	
 	
 

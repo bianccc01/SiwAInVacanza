@@ -66,6 +66,9 @@ public class RecensioneService {
 
 	public Recensione getRecensioneUtente(Authentication auth,Destinazione dest) {
 		User user=this.credentialsService.getUser(auth);
+		if(user==null) {
+			return null;
+		}
 		return this.recensioneRepository.findByUtenteAndDestinazione(user,dest);
 	}
 
@@ -73,9 +76,25 @@ public class RecensioneService {
 		this.recensioneRepository.delete(rec);
 	}
 
+	public List<Recensione> getRecensioniDueNotUtente(Authentication auth, Destinazione dest) {
+		User user=this.credentialsService.getUser(auth);
+		if(user==null) {
+			return null;
+		}
+		return this.recensioneRepository.findFirst2ByDestinazioneAndUtenteNot(dest,user);
+		
+	}
+	
 	public List<Recensione> getRecensioniNotUtente(Authentication auth, Destinazione dest) {
 		User user=this.credentialsService.getUser(auth);
+		if(user==null) {
+			return null;
+		}
 		return this.recensioneRepository.findByDestinazioneAndUtenteNot(dest,user);
+	}
+	
+	public List<Recensione> getRecensioniTre(Destinazione dest){
+		return this.recensioneRepository.findFirst3ByDestinazione(dest);
 	}
 
 

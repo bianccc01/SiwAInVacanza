@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,14 +70,18 @@ public class DestinazioneController {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication!=null) {
+			model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+			model.addAttribute("recDueNotUtente", this.recensioneService.getRecensioniDueNotUtente(authentication,destinazione));
+			model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
+		}
 		
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
 		model.addAttribute("categoria",destinazione.getCategoria());
-		model.addAttribute("recensioni",destinazione.getRecensioni());
-		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
-		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
+		model.addAttribute("recensioniTre", this.recensioneService.getRecensioniTre(destinazione));
+		model.addAttribute("recensioni", this.recensioneService.allRecensioniDestinazione(destinazione));
 		return "guest/destinazione.html";
 	}
 
@@ -102,6 +107,8 @@ public class DestinazioneController {
 		model.addAttribute("destinazioni", this.destinazioneService.searchDestinazioniByNome(nome));
 		return "guest/destinazioni.html";
 	}
+	
+	
 }
 
 
