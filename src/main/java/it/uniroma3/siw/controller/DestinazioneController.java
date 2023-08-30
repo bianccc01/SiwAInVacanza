@@ -62,6 +62,7 @@ public class DestinazioneController {
 	public String allDestinazioni(@PathVariable ("idCategoria") Long idCat, Model model) {
 		Categoria categoria = this.categoriaService.findCategoriaById(idCat);
 		model.addAttribute("destinazioni",categoria.getDestinazioni());
+		model.addAttribute("categoria",categoria);
 		return "guest/destinazioni.html";
 	}
 

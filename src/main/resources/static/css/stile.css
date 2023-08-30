@@ -409,3 +409,14 @@ margin: 75px 200px;
   color:red;
 }
 
+.destinazione{
+	position: absolute;
+	text-align: left;
+	margin-left: 80px;
+	margin-top:30px;
+	border-left: 6px solid yellow;
+	
+	
+	
+}
+
