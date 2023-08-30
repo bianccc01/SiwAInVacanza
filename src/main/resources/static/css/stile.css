@@ -221,7 +221,7 @@ position:relative;
   width:100%;
   height:20%;
   top:30px;
-	border:solid;
+border:solid;
   }
 
 .recensione .conferma{
@@ -229,6 +229,16 @@ position:relative;
   bottom:0px;
   right:0px;
   
+}
+
+.recensione #titolo{
+font-weight:bold;
+  
+}
+
+.recensione .testo{
+	position: absolute;
+  	margin: 2px;
 }
 
 
@@ -304,9 +314,7 @@ position:relative;
   border:solid;
 }
 
-#titolo {
-  font-weight:bold;
-}
+
 
 #img1 {
   background-color: black;
