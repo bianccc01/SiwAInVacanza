@@ -31,7 +31,7 @@
 			<label>Titolo:</label> 
 			<span><input type="text" th:field="${recensione.titolo}" /></span>
           <label>Voto:</label> 
-			<span><input type="number" th:field="${recensione.voto}" /></span>
+			<span><input type="number" min="1" max="5" th:field="${recensione.voto}" /></span>
 		</div>
 
 	<div class= "descrizioneContainer">

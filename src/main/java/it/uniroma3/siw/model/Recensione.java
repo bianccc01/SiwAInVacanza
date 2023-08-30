@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Recensione {
@@ -19,7 +20,7 @@ public class Recensione {
 	
 	private String testo;
 	
-	@NotBlank
+	@NotNull
 	@Min(1)
 	@Max(5)
 	private int voto;

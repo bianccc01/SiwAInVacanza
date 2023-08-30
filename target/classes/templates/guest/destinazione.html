@@ -40,7 +40,7 @@
 
       <div class = "boxRecensioni" th:if="${#request.userPrincipal}" >
 		  <div class ="recensione" th:if="${recUtente}!=null">
-            <span id="titolo" th:text="${recUtente.utente.getNome()}"> </span>
+            <span id="titolo" th:text="${recUtente.utente.getName()}"> </span>
       		<p th:text="${recUtente.titolo} + ${recUtente.voto}"> </p>
 			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
 			<a class="conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}"><button type="button">Rimuovi</button></a>
@@ -49,7 +49,7 @@
 			<a class="conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}"><button type="button">Aggiungi recensione</button></a>
          </div>
          <div class ="recensione" th:if="${recensioniNotUtente!=null || !recensioniNotUtente.isEmpty()}" th:each="recensione : ${recDueNotUtente}">
-            <span id="titolo" th:text="${recensione.utente.getNome()}"> </span>
+            <span id="titolo" th:text="${recensione.utente.getName()}"> </span>
       		<p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
 			<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
          </div>
@@ -59,8 +59,8 @@
 		 </div>
       </div> 
       <div class = "boxRecensioni" th:unless="${#request.userPrincipal}" >
-		  <div class ="recensione" th:if="${recensioni!=null || !recensioni.isEmpty()" th:each="recensione : ${recensioniTre}">
-            <span id="titolo" th:text="${recensione.utente.getNome()}"> </span>
+		  <div class ="recensione" th:if="${recensioni!=null || !recensioni.isEmpty()}" th:each="recensione : ${recensioniTre}">
+            <span id="titolo" th:text="${recensione.utente.getName()}"> </span>
       		<p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
 			<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
          </div>

@@ -27,7 +27,7 @@
 	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"> </h1>
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
 		<div class ="recensioni" th:if="${recUtente!=null and #request.userPrincipal}">
-            <span id="titolo" th:text="${recUtente.utente.getNome()}"> </span>
+            <span id="titolo" th:text="${recUtente.utente.getName()}"> </span>
       		<p th:text="${recUtente.titolo} + ${recUtente.voto}"> </p>
 			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
 			<button class = "conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
@@ -36,12 +36,12 @@
 			<button class = "conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}">Aggiungi recensione</button>
         </div>
   	<div class='recensioni' th:if="${#request.userPrincipal}" th:each="recensione : ${recensioniNotUtente}"> 
-      <span id="titolo" th:text="${recensione.utente.nome}"> </span>
+      <span id="titolo" th:text="${recensione.utente.name}"> </span>
       <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
 		<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
   </div>
   <div class='recensioni' th:unless="${#request.userPrincipal}" th:each="recensione : ${recensioni}"> 
-      <span id="titolo" th:text="${recensione.utente.nome}"> </span>
+      <span id="titolo" th:text="${recensione.utente.name}"> </span>
       <p th:text="${recensione.titolo} + ${recensione.voto}"> </p>
 		<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
   </div>

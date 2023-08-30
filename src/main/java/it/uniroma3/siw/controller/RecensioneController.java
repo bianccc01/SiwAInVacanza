@@ -49,7 +49,7 @@ public class RecensioneController {
 			model.addAttribute("recensione", new Recensione());
 			model.addAttribute("destinazione", dest);
 		}
-		return "formNewRecensione.html";
+		return "authenticated/formNewRecensione.html";
 	}
 	
 	@GetMapping("/guest/recensioni/{destId}")
