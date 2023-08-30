@@ -75,4 +75,6 @@ public class DestinazioneService {
 		return this.imageService.getImmaginiSecondarie(d, id);
 	}
 
+	
+
 }

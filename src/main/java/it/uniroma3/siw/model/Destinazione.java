@@ -22,14 +22,14 @@ public class Destinazione {
 	@NotBlank
 	private String descrizione;
 	
-	@NotBlank
+	
 	@ManyToOne
 	private Categoria categoria;
 	
 	@OneToMany(mappedBy="destinazione")
 	private List<Recensione> recensioni= new ArrayList<>();
 	
-	@NotBlank
+	
 	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();
 	
