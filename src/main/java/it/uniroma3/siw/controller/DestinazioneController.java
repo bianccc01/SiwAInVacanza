@@ -70,12 +70,10 @@ public class DestinazioneController {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
 		Image image = this.imageService.getImage(idImage);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication!=null) {
-			model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
-			model.addAttribute("recDueNotUtente", this.recensioneService.getRecensioniDueNotUtente(authentication,destinazione));
-			model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
-		}
-		
+
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+		model.addAttribute("recDueNotUtente", this.recensioneService.getRecensioniDueNotUtente(authentication,destinazione));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
 		model.addAttribute("image",image);
 		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
 		model.addAttribute("destinazione",destinazione);
