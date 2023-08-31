@@ -341,21 +341,25 @@ position:relative;
   display: flex;
   align-items: flex-start;
   height: 200px;
-  justify-content: space-between;
-
+  width: 50%;
+  justify-content: space-around;
+  background-color: #f2f2f2;
+border-radius: 10px;
 }
 
 .immagine_utente{
-  width: 150px;
-      height: 150px;
+  width: 180px;
+      height: 180px;
       background: red;
-      border-radius: 50%
+      border-radius: 50%;
+      margin-top: 10px;
+      margin-right: 20px;
 }
 
 .box_utente{
-  width:60%;
-  border:dashed;
-  
+  width:40%;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .container{
@@ -414,9 +418,8 @@ margin: 75px 200px;
 	text-align: left;
 	margin-left: 80px;
 	margin-top:30px;
-	border-left: 6px solid yellow;
-	
-	
-	
+	border-left: 6px solid yellow;	
 }
+
+
 

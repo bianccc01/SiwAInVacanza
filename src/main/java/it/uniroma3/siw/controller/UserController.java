@@ -21,7 +21,7 @@ public class UserController {
 	public String getUserDetails(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("user",this.userService.getUserAuthentication(authentication));
-		return "paginaUtente.html";
+		return "authenticated/paginaUtente.html";
 		
 	}
 	
