@@ -22,7 +22,7 @@ public class CategoriaService {
 
 	@Autowired
 	private ImageService imageService;
-	
+
 	@Autowired
 	private DestinazioneRepository destinazioneRepository;
 
@@ -51,13 +51,14 @@ public class CategoriaService {
 		image.setName(imageName);
 		image.setBytes(imageData);
 
-		this.imageService.saveImage(image);
-
-
 		categoria.setImage(image);
 
+		this.imageService.saveImage(image);
 
 	}
+
+
+
 
 	@Transactional
 	public void deleteCategoria(Categoria categ) {
@@ -70,6 +71,6 @@ public class CategoriaService {
 		this.categoriaRepository.delete(categ);
 	}
 
-	
+
 
 }

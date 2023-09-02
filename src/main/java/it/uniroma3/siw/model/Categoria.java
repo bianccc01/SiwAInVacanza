@@ -67,9 +67,14 @@ public class Categoria {
 	public Image getImage() {
 		return image;
 	}
+	
+	public String getBase64Image() {
+		return this.image.getBase64Image();
+	}
 
 	public void setImage(Image image) {
 		this.image = image;
+		image.setCategoria(this);
 	}
 
 	@Override

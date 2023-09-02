@@ -57,6 +57,7 @@ public class CategoriaController {
 			@RequestParam("file") MultipartFile file, Model model) throws IOException {
 		
 		this.categoriaValidator.validate(categoria, bindingResult);
+		
 		if (!bindingResult.hasErrors()) {
 			this.categoriaService.saveCategoria(categoria);
 			this.categoriaService.newImagesCat(file, categoria);
