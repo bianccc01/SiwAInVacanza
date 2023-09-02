@@ -89,9 +89,8 @@ public class CategoriaController {
 	
 	@GetMapping("/admin/rimuoviCategoria/{id}")
 	public String removeCategoria(@PathVariable("id") Long id, Model model) {
-		Set<Categoria> categorie=this.categoriaService.allCategorie();
 		Categoria categ=this.categoriaService.findCategoriaById(id);
-		categorie.remove(categ);
+		this.categoriaService.deleteCategoria(categ);
 		return "admin/adminCategorie.html";
 		
 	}
@@ -109,7 +108,9 @@ public class CategoriaController {
 		List<Destinazione> destinazioni = categ.getDestinazioni();
 		if(!destinazioni.contains(dest)) {
 			destinazioni.add(dest);
+			dest.setCategoria(categ);
 			this.categoriaService.saveCategoria(categ);
+			this.destinazioneService.saveDestinazione(dest);
 		}
 		
 		List<Destinazione> notDestinazioni = this.destinazioneService.findDestinazioniNotInCategoria(); 
@@ -127,7 +128,9 @@ public class CategoriaController {
 		List<Destinazione> destinazioni = categ.getDestinazioni();
 		if(destinazioni.contains(dest)) {
 			destinazioni.remove(dest);
+			dest.setCategoria(null);
 			this.categoriaService.saveCategoria(categ);
+			this.destinazioneService.saveDestinazione(dest);
 		}
 		
 		List<Destinazione> notDestinazioni = this.destinazioneService.findDestinazioniNotInCategoria();

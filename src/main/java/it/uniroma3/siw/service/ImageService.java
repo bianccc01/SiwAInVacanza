@@ -19,7 +19,8 @@ public class ImageService {
 	
 	@Transactional
 	public Image getImage(Long id) {
-		return this.imageRepository.findById(id).get();
+		if (id==0) return null;
+		else return this.imageRepository.findById(id).get();
 	}
 	
 	@Transactional

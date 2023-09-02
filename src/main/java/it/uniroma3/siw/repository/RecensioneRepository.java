@@ -26,11 +26,8 @@ public interface RecensioneRepository extends CrudRepository<Recensione,Long> {
 
 	public List<Recensione> findByDestinazioneAndUtenteNot(Destinazione dest, User user);
 	
-	/*@Query(value="select * "
-			+ "from recensione r "
-			+ "where r.destinazione = :dest "
-			+ "and r.utente <> :user ", nativeQuery=true)
-	public List<Recensione> findRecensioniNotUtente(@Param("dest") Destinazione dest, @Param("user") User user);*/
+	public List<Recensione> findFirst2ByDestinazioneAndUtenteNot(Destinazione dest,User user);
 	
+	public List<Recensione> findFirst3ByDestinazione(Destinazione dest);
 
 }

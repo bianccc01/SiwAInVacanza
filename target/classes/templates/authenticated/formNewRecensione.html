@@ -22,27 +22,29 @@
 			<a href="/login">Login</a>
 		</div>
 	</header>
-
-	
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%"/></div></div>
-	<h1>Inserisci una recensione</h1>
-	<form th:action="@{'/authenticated/newRecensione/' + ${destinazione.id} }" method="POST" th:object="${recensione}" enctype="multipart/form-data">
+	
+	<form class="container" th:action="@{'/authenticated/newRecensione/' + ${destinazione.id} }" method="POST" th:object="${recensione}" enctype="multipart/form-data">
+		<h1 class="log1">Inserisci una recensione</h1>
+		<div class="log">
 		<div>
 			<label>Titolo:</label> 
 			<span><input type="text" th:field="${recensione.titolo}" /></span>
+		</div>
+		<div>
           <label>Voto:</label> 
-			<span><input type="number" th:field="${recensione.voto}" /></span>
+			<span><input type="number" min="1" max="5" th:field="${recensione.voto}" /></span>
 		</div>
 
 	<div class= "descrizioneContainer">
     <label for="text"> <p>Commento: </p></label>
     <textarea id="text" class="descrizione" name="descrizione" th:field="${recensione.testo}"> </textarea>
-      
-</div>
+	</div>
 	
 		<div>
 			<span><button class = "conferma" type="submit">Conferma</button></span>
 		</div>
+	</div>
 	</form>
 </body>
 

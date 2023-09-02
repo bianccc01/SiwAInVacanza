@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.model.Prenotazione;
+import it.uniroma3.siw.model.Recensione;
+import it.uniroma3.siw.repository.CategoriaRepository;
 import it.uniroma3.siw.repository.DestinazioneRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class DestinazioneService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 	
 	
 	@Transactional
@@ -75,5 +81,10 @@ public class DestinazioneService {
 	public List<Image> allImagesExcept(Destinazione d, Long id){
 		return this.imageService.getImmaginiSecondarie(d, id);
 	}
+
+
+	
+
+	
 
 }

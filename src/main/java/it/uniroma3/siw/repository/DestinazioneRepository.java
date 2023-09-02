@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
+import it.uniroma3.siw.model.Recensione;
 
 public interface DestinazioneRepository extends CrudRepository<Destinazione,Long> {
 	
@@ -22,6 +23,10 @@ public interface DestinazioneRepository extends CrudRepository<Destinazione,Long
 	public Destinazione findByNome(String nome);
 	
 	public List<Destinazione> findByCategoriaIsNull();
+
+	public void findByCategoria(Categoria categoria);
+
+
 	
 	
 

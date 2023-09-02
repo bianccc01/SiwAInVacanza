@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siw.model.Categoria;
+import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.CategoriaRepository;
+import it.uniroma3.siw.repository.DestinazioneRepository;
 import it.uniroma3.siw.repository.ImageRepository;
 
 @Service
@@ -20,6 +22,9 @@ public class CategoriaService {
 
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private DestinazioneRepository destinazioneRepository;
 
 	@Transactional
 	public Set<Categoria> allCategorie(){
@@ -54,6 +59,17 @@ public class CategoriaService {
 
 	}
 
+	@Transactional
+	public void deleteCategoria(Categoria categ) {
+		if(!categ.getDestinazioni().isEmpty()) {
+			for(Destinazione d:categ.getDestinazioni()) {
+				d.setCategoria(null);
+				this.destinazioneRepository.save(d);
+			}
+		}
+		this.categoriaRepository.delete(categ);
+	}
 
+	
 
 }

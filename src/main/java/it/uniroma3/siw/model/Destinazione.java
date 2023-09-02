@@ -21,7 +21,6 @@ public class Destinazione {
 	
 	@NotBlank
 	private String descrizione;
-	
 	@ManyToOne
 	private Categoria categoria;
 	

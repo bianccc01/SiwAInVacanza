@@ -49,7 +49,7 @@ public class RecensioneController {
 			model.addAttribute("recensione", new Recensione());
 			model.addAttribute("destinazione", dest);
 		}
-		return "formNewRecensione.html";
+		return "authenticated/formNewRecensione.html";
 	}
 	
 	@GetMapping("/guest/recensioni/{destId}")
@@ -83,7 +83,7 @@ public class RecensioneController {
 				return "authenticated/formNewRecensione.html";
 		}
 		
-		return "guest/destinazione.html";
+		return "guest/index.html";
 	}
 
 	
@@ -104,10 +104,10 @@ public class RecensioneController {
 	}
 	
 	@GetMapping("/authenticated/rimuoviRecensione/{recId}")
-	public String removeRecensione(@PathVariable("id") Long id, Model model) {
+	public String removeRecensione(@PathVariable("recId") Long id, Model model) {
 		Recensione rec=this.recensioneService.findRecensioneById(id);
 		this.recensioneService.rimuoviRecensione(rec);
-		return "guest/destinazione.html";
+		return "guest/index.html";
 		
 	}
 	

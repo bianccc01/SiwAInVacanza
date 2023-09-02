@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,10 +38,10 @@ public class DestinazioneController {
 	private DestinazioneValidator destinazioneValidator;
 	@Autowired
 	private RecensioneService recensioneService;
-	
+
 	@Autowired
 	private ImageService imageService;
-	
+
 	@Autowired
 	private CategoriaService categoriaService;
 
@@ -56,34 +57,33 @@ public class DestinazioneController {
 		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
 		return "guest/destinazioni.html";
 	}
-	
+
 	@GetMapping("/guest/destinazioni/{idCategoria}")
 	public String allDestinazioni(@PathVariable ("idCategoria") Long idCat, Model model) {
 		Categoria categoria = this.categoriaService.findCategoriaById(idCat);
 		model.addAttribute("destinazioni",categoria.getDestinazioni());
+		model.addAttribute("categoria",categoria);
 		return "guest/destinazioni.html";
 	}
 
 	@GetMapping("/guest/destinazione/{id}/{idImage}")
 	public String destinazione(@PathVariable("id") Long id, @PathVariable("idImage") Long idImage, Model model) {
-	    Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-	    model.addAttribute("destinazione", destinazione);
-	    model.addAttribute("categoria", destinazione.getCategoria());
-	    model.addAttribute("recensioni", destinazione.getRecensioni());
-	    model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication, destinazione));
-	    model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication, destinazione));
-	    model.addAttribute("image", null);
-	    model.addAttribute("images", this.destinazioneService.allImagesExcept(destinazione, idImage));
+		Image image = this.imageService.getImage(idImage);
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+		model.addAttribute("recDueNotUtente", this.recensioneService.getRecensioniDueNotUtente(authentication,destinazione));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
+		model.addAttribute("image",image);
+		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
+		model.addAttribute("destinazione",destinazione);
+		model.addAttribute("categoria",destinazione.getCategoria());
+		model.addAttribute("recensioniTre", this.recensioneService.getRecensioniTre(destinazione));
+		model.addAttribute("recensioni", this.recensioneService.allRecensioniDestinazione(destinazione));
 
-	    if (idImage != 0) {
-	        Image image = this.imageService.getImage(idImage);
-	        model.addAttribute("image", image);
-	        model.addAttribute("images", this.destinazioneService.allImagesExcept(destinazione, idImage));
-	    }
 
-	    return "guest/destinazione.html";
+		return "guest/destinazione.html";
 	}
 
 
@@ -103,12 +103,14 @@ public class DestinazioneController {
 		}
 
 	}
-	
+
 	@PostMapping("/guest/cercaDestinazioni")
 	public String cercaDestinazioni(Model model, @RequestParam String nome) {
 		model.addAttribute("destinazioni", this.destinazioneService.searchDestinazioniByNome(nome));
 		return "guest/destinazioni.html";
 	}
+
+
 }
 
 

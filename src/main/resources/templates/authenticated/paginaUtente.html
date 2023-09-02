@@ -24,7 +24,7 @@
 	<h1> Il tuo account</h1>
     <div id="flex-container-utente">
       <div class="box_utente"> 
-	 	<h2>I tuoi dati</h2>
+	 	<h2>Dati personali</h2>
         <div>Nome:
 			<span th:text=${user.name}> </span>
 		</div>
@@ -34,15 +34,13 @@
         <div>Email:
 			<span th:text=${user.email}> </span>
 		</div>
-        <div>
-			<button class = "conferma" th:href="@{'/authenticated/updateUser/' + ${user.id}}">Modifica</button>
-		</div>
       </div>
       <div class="immagine_utente"> 
         
       </div>
     </div>
-    <div href:"/authenticated/prenotazioni">Visualizza e gestisci le tue prenotazioni</div>
+    <h3>Visualizza e gestisci le tue prenotazioni</h3> 
+	
 </body>
 
 </html>

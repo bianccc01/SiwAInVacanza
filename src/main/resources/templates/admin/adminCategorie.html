@@ -13,7 +13,7 @@
 		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
     		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
-    		<span href="/admin/adminDetails">>Vai al tuo account </span>
+    		<span href="/authenticated/userDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -32,7 +32,7 @@
     <li th:each="categoria : ${categorie}">
       <div class="boxcategoria">
 		<img th:src="@{'data:image/png;base64,' + ${categoria.image}}"/>
-		<a class="nome" th:href="@{'/guest/destinazioni' + '/' + ${categoria.id}}"
+		<a class="nome" th:href="@{'/admin/updateCategoria' + '/' + ${categoria.id}}"
 				th:text="${categoria.nome}"></a>
       </div>
 	</li>
