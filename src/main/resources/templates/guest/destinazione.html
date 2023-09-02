@@ -21,7 +21,9 @@
       <div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
         <h1 th:text="${destinazione.nome}">Ibiza</h1>
       <div class = "boxImage"> 
-         <img th:src="@{'data:image/png;base64,' + ${image.base64Image}}"/>
+        <img th:if="${image == null}" src="/images/SiwVLogo.png" />
+		<img th:if="${image != null}" th:src="@{'data:image/png;base64,' + ${image.base64Image}}"/>
+
       </div>
       <div class = "boxImageMini">
          <ul>

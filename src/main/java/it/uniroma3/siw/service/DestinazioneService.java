@@ -54,21 +54,22 @@ public class DestinazioneService {
 	
 	@Transactional
 	public void newImagesDest(MultipartFile[] files, Destinazione destinazione) throws IOException {
+		   if (files != null && files.length > 0 && !files[0].isEmpty()) {
+	        for (MultipartFile file : files) {
+	            byte[] imageData = file.getBytes();
+	            String imageName = file.getOriginalFilename();
 
-		for (MultipartFile file : files) {
-			byte[] imageData = file.getBytes();
-			String imageName = file.getOriginalFilename();
+	            Image image = new Image();
+	            image.setName(imageName);
+	            image.setBytes(imageData);
 
-			Image image = new Image();
-			image.setName(imageName);
-			image.setBytes(imageData);
+	            destinazione.addImage(image);
+	        }
 
-
-			destinazione.addImage(image);
-		}
-		
-		this.imageService.saveAllImage(destinazione.getImages());
+	        this.imageService.saveAllImage(destinazione.getImages());
+	    }
 	}
+
 	
 	@Transactional
 	public List<Image> allImagesExcept(Destinazione d, Long id){

@@ -10,9 +10,10 @@ import javax.transaction.Transactional;
 @Entity
 public class Image {
 	
-	   @Id
-	   @GeneratedValue(strategy = GenerationType.AUTO)
-	   private Long id;
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_entity_seq")
+	    @SequenceGenerator(name = "my_entity_seq", sequenceName = "my_entity_sequence", initialValue = 1000)
+	    private Long id;
 	   
 	   private String name;
 	   

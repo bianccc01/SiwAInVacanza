@@ -37,11 +37,16 @@
 
 <ul>
   <li th:each="d : ${destinazioni}">
-  <div class = "boxdestinazione">
-    <img th:src="@{'data:image/png;base64,' + ${d.firstImage}}"/>
-		<a class = "nome" th:href="@{'/guest/destinazione' + '/' + ${d.id} + '/' + ${d.firstImageId}}"
-				th:text="${d.nome}"> Ibiza</a>
-	</div>
+  <div class="boxdestinazione" th:if="${d.getFirstImage() == null}">
+    <img src="/images/SiwVLogo.png" />
+    <a class="nome" th:href="@{'/guest/destinazione/' + ${d.id} + '/0'}" th:text="${d.nome}">Ibiza</a>
+</div>
+
+<div class="boxdestinazione" th:if="${d.getFirstImage() != null}">
+    <img th:src="@{'data:image/png;base64,' + ${d.getFirstImage()}}"/>
+    <a class="nome" th:href="@{'/guest/destinazione/' + ${d.id} + '/' + ${d.firstImageId}}" th:text="${d.nome}">Ibiza</a>
+</div>
+
 </li>
 </ul>
   

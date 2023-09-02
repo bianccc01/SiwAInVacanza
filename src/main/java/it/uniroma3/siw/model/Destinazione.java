@@ -22,14 +22,12 @@ public class Destinazione {
 	@NotBlank
 	private String descrizione;
 	
-	@NotBlank
 	@ManyToOne
 	private Categoria categoria;
 	
 	@OneToMany(mappedBy="destinazione")
 	private List<Recensione> recensioni= new ArrayList<>();
 	
-	@NotBlank
 	@OneToMany(mappedBy="destinazione" ,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();
 	
@@ -98,11 +96,15 @@ public class Destinazione {
 	}
 	
 	public String getFirstImage() {
-		return this.images.get(0).getBase64Image();
+		if(images.isEmpty())
+			return null;
+		else return this.images.get(0).getBase64Image();
 	}
 	
 	public Long getFirstImageId() {
-		return this.images.get(0).getId();
+		if(images.isEmpty())
+			return null;
+		else return this.images.get(0).getId();
 	}
 	
 	public List<Recensione> getRecensioni() {
