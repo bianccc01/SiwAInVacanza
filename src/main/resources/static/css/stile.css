@@ -129,6 +129,7 @@ header a{
   left:40%;
   bottom:5px;
   justify-content: center;
+  margin-top: -30px;
 
 }
 
@@ -137,15 +138,13 @@ header a{
   height:0.8em;
 }
 
-ul {
-list-style-type: none;
-}
+
 
 h1{
-  position:absolute;
+  position:relative;
   top:10%;
-  left:10px;
-  display:inline-block;
+  font-size: 40px;
+  text-align:center;
 }
 
 
@@ -318,29 +317,14 @@ position:relative;
   border:solid;
 }
 
-
-
-#img1 {
-  background-color: black;
-  height: 2em;
-  margin-bottom: 2em;
-  padding: 6em;
-  margin: 40px;
-
+ul {
+	list-style-type: none;
 }
 
-#img2 {
-  background-color: black;
-  height: 2em;
-  margin-bottom: 2em;
-  padding: 6em;
-  margin: 40px;
-}
-
-#img2 img {
-  height: 100%;
-  width:100%;
-  object-fit: cover;
+.index {
+	display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
 }
 
 #flex-container-utente {
@@ -437,4 +421,53 @@ margin: 75px 200px;
   border-radius: 5px;
 }
 
+#img1{
+	height: 400px;
+ width: 600px;
+background-image:url('/images/index_cat.jpg'); /* Inserisci il percorso dell'immagine qui */
+            background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
+            background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
+            color: white; /* Colore del testo sull'immagine */
+            text-align: center; /* Allinea il testo al centro */
+            padding: 20px;
+             margin-bottom: 2em;
+  margin: 40px;
+ 
+}
+
+#img1 h2{
+	background-color:yellow;
+	position: relative;
+	text-align:center;
+	margin-top: 200px;
+}
+
+#img1 a{
+	color:black;
+}
+
+#img2 a{
+	color:black;
+}
+
+#img2{
+	height: 400px;
+ width: 600px;
+background-image:url('/images/index_dest.jpg'); /* Inserisci il percorso dell'immagine qui */
+            background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
+            background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
+            color: white; /* Colore del testo sull'immagine */
+            text-align: center; /* Allinea il testo al centro */
+            padding: 20px;
+             margin-bottom: 2em;
+  margin: 40px;
+ 
+}
+
+#img2 h2{
+	background-color:yellow;
+	position: relative;
+	text-align:center;
+	margin-top: 200px;
+}
 

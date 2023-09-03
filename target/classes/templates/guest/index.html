@@ -26,14 +26,18 @@
 		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
-	<h2>
-		<a href="/guest/categorie">Sfoglia le categorie</a>
-	</h2>
-  <div id="img1"> </div>
-	<h2>
-		<a href="/guest/allDestinazioni">Visualizza tutte le destinazioni</a>
-	</h2>
-  <div id="img2"><img src="/images/index_destinazioni.webp" /></div>
+	<div class="index">
+  		<div id="img1">
+			<h2>
+				<a href="/guest/categorie">Sfoglia le categorie</a>
+			</h2>
+		</div>
+  		<div id="img2">
+  			<h2>
+				<a href="/guest/allDestinazioni">Visualizza tutte le destinazioni</a>
+			</h2>
+  		</div>
+  	</div>
 </body> 
 
 </html>
