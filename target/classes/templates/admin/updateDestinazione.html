@@ -9,8 +9,6 @@
    <body>
       <header>
          <a class = "home" href="/"> Home </a>
-         <a class = "home" href="/"> Modifica descrizione </a>
-         <a class = "home" href="/"> Modifica nome destinazione </a>
          <div th:if="${#request.userPrincipal}">
             <span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
             <span href="/authenticated/userDetails">>Vai al tuo account </span>
@@ -37,10 +35,33 @@
             </li>
          </ul>
       </div>
-      <div class = "boxRecensioni">
-         <div class ="recensione"> </div>
-         <div class = "recensione"> </div>
-      </div>
-      <a class = "prenota"> Effettua prenotazione </a>
+      <h3 class="destinazione" th:text="${destinazione.descrizione}"> </h3>
+      modifica descrizione
+      <h2>Visualizza e gestisci le recensioni </h2>
+	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per questa destinazione</div>
+		<div class ="recensioni" th:if="${recUtente!=null and #request.userPrincipal}">
+            <span id="titolo" th:text="${recUtente.utente.getName()}"> </span>
+            <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recUtente.utente.base64Image}}"/></span>
+      		<p th:text="${recUtente.titolo}+ ' ' + ${recUtente.voto}+ '*'"> </p>
+			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
+			<button class = "conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
+     	</div>
+        <div class ="recensioni" th:unless="${recUtente!=null and #request.userPrincipal}">
+			<button class = "conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}">Aggiungi recensione</button>
+        </div>
+  	<div class='recensioni' th:if="${#request.userPrincipal}" th:each="recensione : ${recensioniNotUtente}"> 
+      <span id="titolo" th:text="${recensione.utente.name}"> </span>
+      <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recensione.utente.base64Image}}"/></span>
+      <p th:text="${recensione.titolo}+ ' ' + ${recensione.voto}+ '*'"> </p>
+		<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
+		<button class = "conferma" th:href="@{'/admin/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
+  </div>
+  <div class='recensioni' th:unless="${#request.userPrincipal}" th:each="recensione : ${recensioni}"> 
+      <span id="titolo" th:text="${recensione.utente.name}"> </span>
+      <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recensione.utente.base64Image}}"/></span>
+     <p th:text="${recensione.titolo}+ ' ' + ${recensione.voto}+ '*'"> </p>
+		<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
+		<button class = "conferma" th:href="@{'/admin/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
+  </div>
    </body>
 </html>

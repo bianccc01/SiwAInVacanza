@@ -57,6 +57,12 @@ public class DestinazioneController {
 		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
 		return "guest/destinazioni.html";
 	}
+	
+	@GetMapping("/admin/allDestinazioni")
+	public String allDestinazioniAdmin(Model model) {
+		model.addAttribute("destinazioni",this.destinazioneService.allDestinazioni());
+		return "admin/adminDestinazioni.html";
+	}
 
 	@GetMapping("/guest/destinazioni/{idCategoria}")
 	public String allDestinazioni(@PathVariable ("idCategoria") Long idCat, Model model) {
@@ -96,7 +102,7 @@ public class DestinazioneController {
 			this.destinazioneService.saveDestinazione(destinazione);
 			this.destinazioneService.newImagesDest(files, destinazione);
 			model.addAttribute("destinazioni", this.destinazioneService.allDestinazioni());
-			return "guest/destinazioni.html";
+			return "admin/adminDestinazioni.html";
 		}
 		else {
 			return "admin/formNewDestinazione";
@@ -110,7 +116,23 @@ public class DestinazioneController {
 		return "guest/destinazioni.html";
 	}
 
+	@GetMapping("/admin/destinazione/{id}/{idImage}")
+	public String destinazioneAdmin(@PathVariable("id") Long id, @PathVariable("idImage") Long idImage, Model model) {
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		Image image = this.imageService.getImage(idImage);
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
+		model.addAttribute("image",image);
+		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, idImage));
+		model.addAttribute("destinazione",destinazione);
+		model.addAttribute("categoria",destinazione.getCategoria());
+		model.addAttribute("recensioni", this.recensioneService.allRecensioniDestinazione(destinazione));
+
+
+		return "admin/updateDestinazione.html";
+	}
 }
 
 

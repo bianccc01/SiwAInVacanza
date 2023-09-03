@@ -96,10 +96,9 @@ public class RecensioneController {
 	
 	@GetMapping("/admin/rimuoviRecensione/{id}")
 	public String removeRecensioneAdmin(@PathVariable("id") Long id, Model model) {
-		Set<Recensione> recensioni=this.recensioneService.allRecensioni();
 		Recensione rec=this.recensioneService.findRecensioneById(id);
-		recensioni.remove(rec);
-		return "admin/adminRecensioni.html";
+		this.recensioneService.rimuoviRecensione(rec);
+		return "admin/indexAdmin.html";
 		
 	}
 	
