@@ -424,7 +424,7 @@ margin: 75px 200px;
 #img1{
 	height: 400px;
  width: 600px;
-background-image:url('/images/index_cat.jpg'); /* Inserisci il percorso dell'immagine qui */
+background-image:url('/images/categoria_index.jpg'); /* Inserisci il percorso dell'immagine qui */
             background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
             background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
             color: white; /* Colore del testo sull'immagine */
@@ -453,7 +453,7 @@ background-image:url('/images/index_cat.jpg'); /* Inserisci il percorso dell'imm
 #img2{
 	height: 400px;
  width: 600px;
-background-image:url('/images/index_dest.jpg'); /* Inserisci il percorso dell'immagine qui */
+background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso dell'immagine qui */
             background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
             background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
             color: white; /* Colore del testo sull'immagine */
