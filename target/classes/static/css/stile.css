@@ -378,21 +378,21 @@ margin: 75px 200px;
 	margin-left: 10%;
 }
 
-.log1 {
+.log1 h1{
   position:relative;
   text-align:center;
   margin-left: 350px;
   color:black;
 }
 
-.log2 {
+.log2 h1 {
   position:relative;
   text-align:center;
   color:black;
   margin-left: 500px;
 }
 
-.log3 {
+.log3 h1{
   position:relative;
   text-align:left;
   color:black;

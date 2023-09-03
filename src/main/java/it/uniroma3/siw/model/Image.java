@@ -28,6 +28,9 @@ public class Image {
 	   
 	   @ManyToOne
 	   private Destinazione destinazione;
+	   
+	   @OneToOne
+	   private User user;
 
 	public Long getId() {
 		return id;
@@ -83,6 +86,14 @@ public class Image {
 
 	public void setDestinazione(Destinazione destinazione) {
 		this.destinazione = destinazione;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	   
 	   

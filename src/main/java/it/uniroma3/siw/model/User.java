@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -27,6 +28,9 @@ public class User {
 
 	@NotNull
 	private String email;
+	
+	@OneToOne
+	private Image image;
 
 	@OneToMany(mappedBy= "user")
 	private List <Prenotazione> prenotazioni = new ArrayList<>();
@@ -102,6 +106,18 @@ public class User {
 		return Objects.equals(email, other.email);
 	}
 	
+	public Image getImage() {
+		return image;
+	}
+	
+	public String getBase64Image() {
+		return this.image.getBase64Image();
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+		image.setUser(this);
+	}
 	
 
 

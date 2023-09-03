@@ -1,15 +1,21 @@
 package it.uniroma3.siw.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.UserRepository;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +31,9 @@ public class UserService {
     
     @Autowired
     private CredentialsService credentialsService;
+    
+    @Autowired
+	private ImageService imageService;
 
     /**
      * This method retrieves a User from the DB based on its ID.
@@ -67,4 +76,20 @@ public class UserService {
     public User getUserAuthentication(Authentication authentication) {
     	return this.credentialsService.getUser(authentication);
     	}
+    
+    @Transactional
+	public void newImagesCat(MultipartFile file, User user) throws IOException {
+
+		byte[] imageData = file.getBytes();
+		String imageName = file.getOriginalFilename();
+
+		Image image = new Image();
+		image.setName(imageName);
+		image.setBytes(imageData);
+
+		user.setImage(image);
+
+		this.imageService.saveImage(image);
+
+	}
 }

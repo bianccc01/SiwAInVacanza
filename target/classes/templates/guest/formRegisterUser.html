@@ -62,6 +62,12 @@
 			</span>
 		</div>
 		<div>
+			<label> </label>
+			<span><input type="file" th:name="file" /></span>
+			<span th:if="${#fields.hasErrors('user.image')}" th:errors="${user.image}" th:style="'color:red'">
+			</span>
+		</div>
+		<div>
 			<button type="submit">Registra</button>
 		</div>
 		</div>

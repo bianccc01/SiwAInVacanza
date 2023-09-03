@@ -36,7 +36,7 @@
 		</div>
       </div>
       <div class="immagine_utente"> 
-        
+        <img th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
       </div>
     </div>
     <h3>Visualizza e gestisci le tue prenotazioni</h3> 
