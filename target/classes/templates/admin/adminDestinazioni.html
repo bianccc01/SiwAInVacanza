@@ -25,7 +25,9 @@
 
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Lista di destinazioni</h1>
-  
+  <div>
+		<a href="/admin/formNewDestinazione">Aggiungi destinazione</a>
+	</div>
   
   <form th:action="@{/guest/cercaDestinazioni}" method="post" class="search-form">
     <label for="searchInput" class="search-label"> <p> Ricerca per nome </p> </label>
@@ -34,9 +36,7 @@
     <input type="submit" class="search-button"/>
   </div>
 </form>
-<div>
-		<a href="/admin/formNewDestinazione">Aggiungi destinazione</a>
-	</div>
+
 <ul>
   <li th:each="d : ${destinazioni}">
   <div class="boxdestinazione" th:if="${d.getFirstImage() == null}">

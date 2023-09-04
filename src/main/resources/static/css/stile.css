@@ -97,6 +97,8 @@ header a{
 }
 
 
+
+
 .search-form{
   position:relative;
   display:inline-block;
@@ -241,6 +243,16 @@ border:solid;
   bottom:0px;
   right:0px;
   
+}
+
+.recensioni #titolo{
+font-weight:bold;
+  
+}
+
+.recensioni .testo{
+	position: absolute;
+  	margin: 2px;
 }
 
 .recensione #titolo{
@@ -485,18 +497,18 @@ background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso
 	margin-top: 200px;
 }
 
-.recensioni img{
-   width:100%;
-  height:100%; 
-}
+
+
+
 
 #image_rec{
-	width: 20px;
-      height: 20px;
+	width: 40px;
+      height: 40px;
       background: red;
       border-radius: 50%;
       margin-top: 10px;
       margin-right: 20px;
+      background-size: cover;
 }
 
 .descrizioneContainerAdmin {
@@ -504,4 +516,5 @@ background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso
   align-items: flex-start;
   justify-content: space-around;
 }
+
 
