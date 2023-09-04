@@ -50,7 +50,7 @@
       		<p id="titolo" th:text="${recUtente.titolo}+ ' ' + ${recUtente.voto} + '*'"> </p>
 			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
 			</div>
-			<a class="conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}"><button type="button">Rimuovi</button></a>
+			<a class="conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id} }"><button type="button">Rimuovi</button></a>
          </div>
          <div class ="recensione" th:unless="${recUtente}!=null">
 			<a class="conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}"><button type="button">Aggiungi recensione</button></a>

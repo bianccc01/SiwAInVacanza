@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validation.RecensioneValidator;
 import it.uniroma3.siw.model.Destinazione;
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.DestinazioneService;
+import it.uniroma3.siw.service.ImageService;
 import it.uniroma3.siw.service.RecensioneService;
 import it.uniroma3.siw.service.UserService;
 
@@ -41,6 +43,8 @@ public class RecensioneController {
 	
 	@Autowired
 	private UserService userService;
+	
+	
 
 	@GetMapping("/authenticated/formNewRecensione/{destId}")
 	public String formNewRecensione(@PathVariable("destId") Long destId,Model model) {
@@ -102,7 +106,7 @@ public class RecensioneController {
 		
 	}
 	
-	@GetMapping("/authenticated/rimuoviRecensione/{recId}")
+	@GetMapping("/authenticated/rimuoviRecensione/{recId}/{destId}/{imageId}")
 	public String removeRecensione(@PathVariable("recId") Long id, Model model) {
 		Recensione rec=this.recensioneService.findRecensioneById(id);
 		this.recensioneService.rimuoviRecensione(rec);
