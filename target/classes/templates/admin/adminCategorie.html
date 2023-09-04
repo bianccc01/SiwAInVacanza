@@ -31,7 +31,7 @@
   	<ul>
     <li th:each="categoria : ${categorie}">
       <div class="boxcategoria">
-		<img th:src="@{'data:image/png;base64,' + ${categoria.image}}"/>
+		<img th:src="@{'data:image/png;base64,' + ${categoria.base64Image}}"/>
 		<a class="nome" th:href="@{'/admin/updateCategoria' + '/' + ${categoria.id}}"
 				th:text="${categoria.nome}"></a>
       </div>
