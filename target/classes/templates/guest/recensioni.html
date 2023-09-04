@@ -31,10 +31,10 @@
             <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recUtente.utente.base64Image}}"/></span>
       		<p th:text="${recUtente.titolo}+ ' ' + ${recUtente.voto}+ '*'"> </p>
 			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
-			<button class = "conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}">Rimuovi</button>
+			<a class="conferma" th:href="@{'/authenticated/rimuoviRecensione/' + ${recUtente.id}}"><button type="button">Rimuovi</button></a>
      	</div>
         <div class ="recensioni" th:unless="${recUtente!=null and #request.userPrincipal}">
-			<button class = "conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}">Aggiungi recensione</button>
+			<a class="conferma" th:href="@{'/authenticated/formNewRecensione/' + ${destinazione.id}}"><button type="button">Aggiungi recensione</button></a>
         </div>
   	<div class='recensioni' th:if="${#request.userPrincipal}" th:each="recensione : ${recensioniNotUtente}"> 
       <span id="titolo" th:text="${recensione.utente.name}"> </span>

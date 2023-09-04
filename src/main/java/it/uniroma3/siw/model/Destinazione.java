@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Destinazione {
@@ -19,7 +20,7 @@ public class Destinazione {
 	@NotBlank
 	private String nome;
 	
-	@NotBlank
+	
 	private String descrizione;
 	@ManyToOne
 	private Categoria categoria;
