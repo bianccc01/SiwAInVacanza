@@ -46,7 +46,7 @@
 		  <div class ="recensione" th:if="${recUtente}!=null">
 			<div class="testo">
             <span id="titolo" th:text="${recUtente.utente.getName()}"> </span>
-             <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recUtente.utente.image}}"/></span>
+             
       		<p id="titolo" th:text="${recUtente.titolo}+ ' ' + ${recUtente.voto} + '*'"> </p>
 			<p th:if="${recUtente.testo!=null}" th:text="${recUtente.testo}"> </p>
 			</div>
@@ -58,7 +58,7 @@
          <div class ="recensione" th:if="${recensioniNotUtente!=null || !recensioniNotUtente.isEmpty()}" th:each="recensione : ${recDueNotUtente}">
             <div class="testo">
             <span id="titolo" th:text="${recensione.utente.getName()}"> </span>
-             <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recensione.utente.image}}"/></span>
+             
       		<p id="titolo" th:text="${recensione.titolo}+ ' ' + ${recensione.voto}+ '*'"> </p>
 			<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
             </div>
@@ -74,7 +74,7 @@
 		  <div class ="recensione" th:if="${recensioni!=null || !recensioni.isEmpty()}" th:each="recensione : ${recensioniTre}">
             <div class="testo">
             <span id="titolo" th:text="${recensione.utente.getName()}"> </span>
-             <span id="image_rec"><img th:src="@{'data:image/png;base64,' + ${recensione.utente.image}}"/></span>
+             
       		<p id="titolo" th:text="${recensione.titolo}+ ' ' + ${recensione.voto}+ '*'"> </p>
 			<p th:if="${recensione.testo!=null}" th:text="${recensione.testo}"> </p>
             </div>
