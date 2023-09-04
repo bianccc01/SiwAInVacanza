@@ -13,8 +13,6 @@
     <a class = "home" href="/"> Home </a>
 		
     <div th:if="${#request.userPrincipal}">
-    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
-    		<span href="/authenticated/userDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -25,7 +23,10 @@
 
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Lista di destinazioni</h1>
-  
+  <div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
   
   <form th:action="@{/guest/cercaDestinazioni}" method="post" class="search-form">
     <label for="searchInput" class="search-label"> <p> Ricerca per nome </p> </label>

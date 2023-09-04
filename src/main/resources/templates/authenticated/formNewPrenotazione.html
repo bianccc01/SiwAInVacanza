@@ -13,7 +13,6 @@
     <a class = "home" href="/"> Home </a>
 		
     <div th:if="${#request.userPrincipal}">
-    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -25,6 +24,10 @@
 	
 	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
 	<h1>Aggiungi una destinazione</h1>
+	<div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
 	<form th:action="@{'/authenticated/newPrenotazione/' + ${idDestinazione}}" method="POST" th:object="${prenotazione}">
 		
 	

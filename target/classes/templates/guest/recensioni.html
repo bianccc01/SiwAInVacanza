@@ -12,8 +12,6 @@
 	<header>
 		<div style="float:left"><a href="/">Home</a></div>
 		<div th:if="${#request.userPrincipal}">
-    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
-    		<span href="/authenticated/userDetails">>Vai al tuo account </span>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -25,7 +23,10 @@
 	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	
 	<h1 th:text="'Recensioni per ' + ${destinazione.nome}"> </h1>
-	
+	<div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
 		<div class ="recensioni" th:if="${recUtente!=null and #request.userPrincipal}">
 			<div class="testo">
             <span id="titolo" th:text="${recUtente.utente.getName()}"> </span>

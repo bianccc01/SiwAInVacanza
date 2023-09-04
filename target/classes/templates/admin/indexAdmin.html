@@ -12,8 +12,6 @@
 	<header>
     <div style="float:left"><a href="/">Home</a></div>
     <div th:if="${#request.userPrincipal}">
-    		<span th:text="'  Bentornato ' + ${#request.userPrincipal.principal.username}"> </span>
-    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
     		<a href="/logout">Logout</a>
 		</div>
 
@@ -24,6 +22,10 @@
 
 	<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
 	<h1>Gestisci e modifica i viaggi</h1>
+	<div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
 	<div class="index">
   		<div id="img1">
 			<h2>
