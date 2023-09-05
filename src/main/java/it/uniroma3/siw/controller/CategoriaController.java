@@ -92,6 +92,7 @@ public class CategoriaController {
 	public String removeCategoria(@PathVariable("id") Long id, Model model) {
 		Categoria categ=this.categoriaService.findCategoriaById(id);
 		this.categoriaService.deleteCategoria(categ);
+		model.addAttribute("categorie",this.categoriaService.allCategorie());
 		return "admin/adminCategorie.html";
 		
 	}
