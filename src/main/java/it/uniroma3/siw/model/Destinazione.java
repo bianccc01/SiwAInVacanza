@@ -20,8 +20,8 @@ public class Destinazione {
 	@NotBlank
 	private String nome;
 	
-	
 	private String descrizione;
+	
 	@ManyToOne
 	private Categoria categoria;
 	
@@ -34,8 +34,8 @@ public class Destinazione {
 	@OneToMany(mappedBy="destinazionePrenotata")
 	private List<Prenotazione> prenotazioni = new ArrayList<>();
 	
-	//@NotBlank
-	//private int prezzoBase;
+	@NotBlank
+	private int prezzoBase;
 	
 	public Long getId() {
 		return id;
@@ -116,7 +116,6 @@ public class Destinazione {
 	}
 
 	
-
 	public List<Prenotazione> getPrenotazioni() {
 		return prenotazioni;
 	}
@@ -128,6 +127,20 @@ public class Destinazione {
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}
+
+	public int getPrezzoBase() {
+		return prezzoBase;
+	}
+
+	public void setPrezzoBase(int prezzoBase) {
+		this.prezzoBase = prezzoBase;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+	
+	
 	
 	
 

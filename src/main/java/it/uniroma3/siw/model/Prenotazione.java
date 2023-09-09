@@ -92,6 +92,10 @@ public class Prenotazione {
 	public void setPeriodo(Periodo periodo) {
 		this.periodo = periodo;
 	}
+	
+	public float getPrezzo(){
+		return this.destinazionePrenotata.getPrezzoBase() * this.periodo.getMoltiplicatore() * this.nPartecipanti;
+	}
 
 	@Override
 	public int hashCode() {

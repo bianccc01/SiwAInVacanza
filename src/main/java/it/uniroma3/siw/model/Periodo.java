@@ -20,8 +20,6 @@ public class Periodo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private int maxPartecipanti;
-
 	@ManyToMany
 	private List<Destinazione> destinazioni;
 
@@ -42,14 +40,6 @@ public class Periodo {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public int getMaxPartecipanti() {
-		return maxPartecipanti;
-	}
-
-	public void setMaxPartecipanti(int maxPartecipanti) {
-		this.maxPartecipanti = maxPartecipanti;
 	}
 
 	public List<Destinazione> getDestinazioni() {
@@ -83,10 +73,18 @@ public class Periodo {
 	public void setRitorno(LocalDate ritorno) {
 		this.ritorno = ritorno;
 	}
+	
+	public float getMoltiplicatore() {
+		return moltiplicatore;
+	}
+
+	public void setMoltiplicatore(float moltiplicatore) {
+		this.moltiplicatore = moltiplicatore;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(destinazioni, id, maxPartecipanti, partenza, prenotazione, ritorno);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -99,7 +97,7 @@ public class Periodo {
 			return false;
 		Periodo other = (Periodo) obj;
 		return Objects.equals(destinazioni, other.destinazioni) && Objects.equals(id, other.id)
-				&& maxPartecipanti == other.maxPartecipanti && Objects.equals(partenza, other.partenza)
+				&& Objects.equals(partenza, other.partenza)
 				&& Objects.equals(prenotazione, other.prenotazione) && Objects.equals(ritorno, other.ritorno);
 	}
 	
