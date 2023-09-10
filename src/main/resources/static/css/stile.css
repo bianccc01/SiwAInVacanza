@@ -370,6 +370,17 @@ border-radius: 10px;
       
 }
 
+.immagine_utente_vuota{
+  width: 180px;
+      height: 180px;
+      background: red;
+      border-radius: 50%;
+      margin-top: 10px;
+      margin-right: 20px;
+      background-size: cover;
+      background-image:url('/images/immagine_utente_vuota.jpeg');   
+}
+
 .immagine_utente img{
    width:100%;
   height:100%;
