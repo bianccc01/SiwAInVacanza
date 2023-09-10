@@ -100,7 +100,7 @@ public class Prenotazione {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cognome, destinazionePrenotata, id, nome);
+		return Objects.hash(cognome, user, destinazionePrenotata, nome);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class Prenotazione {
 			return false;
 		Prenotazione other = (Prenotazione) obj;
 		return Objects.equals(cognome, other.cognome)
-				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(id, other.id)
+				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(user, other.user)
 				&& Objects.equals(nome, other.nome);
 	}
 
