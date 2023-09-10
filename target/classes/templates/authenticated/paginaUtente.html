@@ -35,10 +35,10 @@
 			<span th:text=${user.email}> </span>
 		</div>
       </div>
-      <div class="immagine_utente" th:if="${user.image == null}"> 
+      <div class="immagine_utente" th:if="${user.getImage() == null}"> 
         <img src="/images/immagine_utente_vuota.jpeg" />
       </div>
-      <div class="immagine_utente" th:unless="${user.image == null}"> 
+      <div class="immagine_utente" th:if="${user.getImage() != null}"> 
     	<img th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
       </div>
     </div>

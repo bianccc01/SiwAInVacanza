@@ -60,7 +60,8 @@ public class DestinazioneService {
 	
 	@Transactional
 	public void newImagesDest(MultipartFile[] files, Destinazione destinazione) throws IOException {
-		   if (files != null && files.length > 0 && !files[0].isEmpty()) {
+		   
+		if (files != null && files.length > 0 && !files[0].isEmpty()) {
 	        for (MultipartFile file : files) {
 	            byte[] imageData = file.getBytes();
 	            String imageName = file.getOriginalFilename();

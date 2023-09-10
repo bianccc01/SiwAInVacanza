@@ -79,7 +79,8 @@ public class UserService {
     
     @Transactional
 	public void newImagesCat(MultipartFile file, User user) throws IOException {
-
+    	
+    	if (file != null && !file.isEmpty()) {
 		byte[] imageData = file.getBytes();
 		String imageName = file.getOriginalFilename();
 
@@ -92,4 +93,5 @@ public class UserService {
 		this.imageService.saveImage(image);
 
 	}
+}
 }
