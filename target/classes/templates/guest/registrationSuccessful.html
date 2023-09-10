@@ -37,7 +37,8 @@
 		<span th:text="${user.email}"></span>
 	</div>
 	<div class="immagine_utente"> 
-        <img th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
+        <img th:if="${user.image == null}" src="/images/immagine_utente_vuota.jpeg" />
+		<img th:if="${user.image != null}" th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
       </div>
 	<a href="/login">Torna alla pagina del login</a>
 

@@ -23,7 +23,8 @@
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
       <div class = "boxImage"> 
-         <img th:src="@{'data:image/png;base64,' + ${image.base64Image}}"/>
+         <img th:if="${image == null}" src="/images/SiwVLogo.png" />
+		<img th:if="${image != null}" th:src="@{'data:image/png;base64,' + ${image.base64Image}}"/>
       </div>
       <div class = "boxImageMini">
          <ul>

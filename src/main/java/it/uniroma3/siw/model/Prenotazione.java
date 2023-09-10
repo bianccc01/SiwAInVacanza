@@ -24,6 +24,7 @@ public class Prenotazione {
 	@ManyToOne
 	private User user;
 
+	@NotBlank
 	private int nPartecipanti;
 
 	@ManyToOne

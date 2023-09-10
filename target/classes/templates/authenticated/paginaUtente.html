@@ -35,11 +35,16 @@
 			<span th:text=${user.email}> </span>
 		</div>
       </div>
-      <div class="immagine_utente"> 
-        <img th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
+      <div class="immagine_utente" th:if="${user.image == null}"> 
+        <img src="/images/immagine_utente_vuota.jpeg" />
+      </div>
+      <div class="immagine_utente" th:unless="${user.image == null}"> 
+    	<img th:src="@{'data:image/png;base64,' + ${user.base64Image}}"/>
       </div>
     </div>
-    <h3>Visualizza e gestisci le tue prenotazioni</h3> 
+    <h3>
+		<a href="/authenticated/prenotazioni">Visualizza e gestisci le tue prenotazioni</a>
+	</h3> 
 	
 </body>
 

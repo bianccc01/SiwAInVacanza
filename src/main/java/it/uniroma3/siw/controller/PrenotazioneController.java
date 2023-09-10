@@ -45,6 +45,7 @@ public class PrenotazioneController {
 	public String formNewPrenotazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
 		Prenotazione prenotazione = new Prenotazione();
 		model.addAttribute("idDestinazione",idDestinazione);
+		model.addAttribute("destinazione",this.destinazioneService.findDestinazioneById(idDestinazione));
 		model.addAttribute("prenotazione", prenotazione);
 		return "authenticated/formNewPrenotazione.html";
 	}
@@ -67,7 +68,7 @@ public class PrenotazioneController {
 	
 	
 	@GetMapping("/authenticated/eliminaPrenotazione/{idPrenotazione}")
-	public String eliminaDestinazione(@PathVariable("idPrenotazione") Long idPrenotazione, Model model) {
+	public String eliminaPrenotazione(@PathVariable("idPrenotazione") Long idPrenotazione, Model model) {
 		this.prenotazioneService.eliminaPrenotazione(idPrenotazione);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		model.addAttribute("prenotazioni",this.prenotazioneService.getPrenotazioneUser(authentication));
