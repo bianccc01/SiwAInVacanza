@@ -84,7 +84,7 @@ public class Periodo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(partenza,ritorno);
 	}
 
 	@Override
@@ -96,9 +96,7 @@ public class Periodo {
 		if (getClass() != obj.getClass())
 			return false;
 		Periodo other = (Periodo) obj;
-		return Objects.equals(destinazioni, other.destinazioni) && Objects.equals(id, other.id)
-				&& Objects.equals(partenza, other.partenza)
-				&& Objects.equals(prenotazione, other.prenotazione) && Objects.equals(ritorno, other.ritorno);
+		return Objects.equals(partenza, other.partenza) && Objects.equals(ritorno, other.ritorno);
 	}
 	
 	
