@@ -40,7 +40,8 @@
          </ul>
       </div>
       <h3 class="destinazione" th:text="${destinazione.descrizione}"> </h3>
-      <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}">Effettua la prenotazione</a>
+	<span class="prenota1" th:text="'A partire da ' + ${destinazione.prezzoBase} + ' euro'"> </span>
+      <a class="prenota" th:href="@{'/authenticated/formNewPrenotazione/' + ${destinazione.id}}"> >>Effettua la prenotazione</a>
 
       <div class = "boxRecensioni" th:if="${#request.userPrincipal}" >
 		  <div class ="recensione" th:if="${recUtente}!=null">

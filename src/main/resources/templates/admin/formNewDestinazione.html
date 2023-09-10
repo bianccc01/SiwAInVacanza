@@ -41,6 +41,10 @@
     <label for="text"> <p>Descrizione: </p></label>
     <textarea id="text" class="descrizione" name="descrizione" th:field="${destinazione.descrizione}"></textarea>
 </div>
+<div>
+			<label>Prezzo base:</label> 
+			<span><input type="number" th:field="${destinazione.prezzoBase}" /></span>
+		</div>
 		<div>
     <label>Immagini:</label>
     <input type="file" th:name="file" multiple="multiple" />

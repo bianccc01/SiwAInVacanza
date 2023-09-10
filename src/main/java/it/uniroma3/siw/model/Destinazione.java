@@ -34,8 +34,8 @@ public class Destinazione {
 	@OneToMany(mappedBy="destinazionePrenotata")
 	private List<Prenotazione> prenotazioni = new ArrayList<>();
 	
-	@NotBlank
-	private int prezzoBase;
+	@NotNull
+	private float prezzoBase;
 	
 	public Long getId() {
 		return id;
@@ -128,11 +128,11 @@ public class Destinazione {
 		this.images = images;
 	}
 
-	public int getPrezzoBase() {
+	public float getPrezzoBase() {
 		return prezzoBase;
 	}
 
-	public void setPrezzoBase(int prezzoBase) {
+	public void setPrezzoBase(float prezzoBase) {
 		this.prezzoBase = prezzoBase;
 	}
 

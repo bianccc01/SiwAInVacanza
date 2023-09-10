@@ -39,16 +39,25 @@
          </ul>
       </div>
      
-	<h3 class="destinazione" th:text="${destinazione.descrizione}"> </h3>
-	<div class="descrizioneContainerAdmin">
+	<div class="ContainerAdmin">
+		<div class="descrizioneContainerAdmin">
+	<h3 th:text="${destinazione.descrizione}"> </h3>
     <form th:action="@{'/admin/updateDescrizione/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
 			<span><input type="text" th:value="${descrizione}" name="descrizione" placeholder="Cambia descrizione"/></span>
         	<a><input type="submit" value="Cambia"/></a>
-			</form> 
+	</form> 
+	</div>
+	<div class="prezzoBaseContainerAdmin">
+	<h3 th:text="${destinazione.prezzoBase}+' euro'"> </h3>
+	<form th:action="@{'/admin/updatePrezzoBase/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
+			<span><input type="number" th:value="${prezzoBase}" name="prezzoBase" placeholder="Cambia prezzo base"/></span>
+        	<a><input type="submit" value="Cambia"/></a>
+	</form>
+	</div>
 	</div>
 	
    
-      <h2>Visualizza e gestisci le recensioni </h2>
+      <h2 class="recensioniH2">Visualizza e gestisci le recensioni </h2>
 	
 		<div class ="recensioni" th:if="${recUtente!=null }">
 			<div class="testo">
