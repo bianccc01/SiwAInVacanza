@@ -52,7 +52,6 @@ public class PrenotazioneService {
 		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
 		user.addPrenotazione(prenotazione);
 		this.savePrenotazione(prenotazione);
-		prenotazione.getDestinazionePrenotata().getPrenotazioni().add(prenotazione);
 		
 	}
 	
@@ -60,7 +59,6 @@ public class PrenotazioneService {
 	public void eliminaPrenotazione(Long idPrenotazione) {
 		Prenotazione prenotazione = this.prenotazioneRepository.findById(idPrenotazione).get();
 		prenotazione.getUser().getPrenotazioni().remove(prenotazione);
-		prenotazione.getDestinazionePrenotata().getPrenotazioni().remove(prenotazione);
 		this.prenotazioneRepository.delete(prenotazione);
 	}
 

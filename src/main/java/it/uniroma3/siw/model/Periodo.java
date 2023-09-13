@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +26,7 @@ public class Periodo {
 	private List<Destinazione> destinazioni;
 
 	@OneToMany(mappedBy="periodo")
-	private List<Prenotazione> prenotazione;
+	private List<Prenotazione> prenotazioni;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate partenza;
@@ -32,7 +34,9 @@ public class Periodo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate ritorno;
 	
+	@NotBlank
 	private float moltiplicatore;
+	
 
 	public Long getId() {
 		return id;
@@ -50,12 +54,12 @@ public class Periodo {
 		this.destinazioni = destinazioni;
 	}
 
-	public List<Prenotazione> getPrenotazione() {
-		return prenotazione;
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni;
 	}
 
-	public void setPrenotazione(List<Prenotazione> prenotazione) {
-		this.prenotazione = prenotazione;
+	public void setPrenotazioni(List<Prenotazione> prenotazione) {
+		this.prenotazioni = prenotazione;
 	}
 
 	public LocalDate getPartenza() {
@@ -98,6 +102,9 @@ public class Periodo {
 		Periodo other = (Periodo) obj;
 		return Objects.equals(partenza, other.partenza) && Objects.equals(ritorno, other.ritorno);
 	}
+	
+	
+	
 	
 	
 

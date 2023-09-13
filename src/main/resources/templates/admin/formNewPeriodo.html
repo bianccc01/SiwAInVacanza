@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Inserisci una nuovo periodo per le tue destinazioni!
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	
+	<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+	
+	<h1>Aggiungi un periodo</h1>
+	<div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
+	<form th:action="@{/admin/newPeriodo}" method="POST" th:object="${periodo}">
+		
+	
+		<div>
+			<label>Partenza:</label> 
+			<span><input type="datetime-local" th:field="${periodo.partenza}" /></span>
+		</div>
+		
+		<div>
+			<label>Ritorno:</label> 
+			<span><input type="datetime-local" th:field="${periodo.ritorno}" /></span>
+		</div>
+		
+
+  
+		
+		<div>
+			<span><button class = "conferma" type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>
