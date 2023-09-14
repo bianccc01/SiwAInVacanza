@@ -23,9 +23,11 @@ import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.model.Periodo;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;
+import it.uniroma3.siw.service.PeriodoService;
 import it.uniroma3.siw.service.RecensioneService;
 
 
@@ -38,6 +40,9 @@ public class DestinazioneController {
 	private DestinazioneValidator destinazioneValidator;
 	@Autowired
 	private RecensioneService recensioneService;
+	
+	@Autowired
+	private PeriodoService periodoService;
 
 	@Autowired
 	private ImageService imageService;
@@ -135,7 +140,7 @@ public class DestinazioneController {
 	}
 	
 	@PostMapping("/admin/updateDescrizione/{destId}/{imageId}")
-	public String modificaDescrizione(Model model, @RequestParam String descrizione,@PathVariable("destId") Long destId, 
+	public String modificaDescrizione(Model model, @RequestParam String descrizione, @PathVariable("destId") Long destId, 
 			@PathVariable("imageId") Long imageId) {
 		
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(destId);
@@ -155,6 +160,29 @@ public class DestinazioneController {
 		
 		return "admin/updateDestinazione.html";
 	}
+	
+	
+	@GetMapping("/admin/listaPeriodiDestinazione/{idDestinazione}")
+	public String getListaPeriodiDestinazione(@PathVariable ("idDestinazione") Long idDest, Model model) {
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(idDest);
+		model.addAttribute("periodi",this.periodoService.getPeriodiDaSelezionare(destinazione));
+		model.addAttribute("periodiAggiunti",destinazione.getPeriodi());
+		return "admin/listaPeriodiDestinazione.html";
+	}
+	
+	@GetMapping("/admin/addPeriodoToDestinazione/{idDestinazione}/{idPeriodo}")
+	public String getListaPeriodiDestinazione(@PathVariable ("idDestinazione") Long idDest, @PathVariable ("idPeriodo") Long idPer, Model model) {
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(idDest);
+		this.periodoService.addPeriodoDestinazione(idPer, destinazione);
+		model.addAttribute("periodi",this.periodoService.getPeriodiDaSelezionare(destinazione));
+		model.addAttribute("periodiAggiunti",destinazione.getPeriodi());
+		return "admin/listaPeriodiDestinazione.html";
+	}
+	
+	
+	
+	
+	
 }
 
 

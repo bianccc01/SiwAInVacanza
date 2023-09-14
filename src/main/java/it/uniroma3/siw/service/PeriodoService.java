@@ -2,6 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +50,21 @@ public class PeriodoService {
 				d.getPeriodi().remove(periodo);
 				this.destinazioneRepository.save(d);
 			}
-
-
-			
 			this.periodoRepository.delete(periodo);
 		}
+	}
+	
+	@Transactional
+	public List<Periodo> getPeriodiDaSelezionare(Destinazione dest) {
+		return this.periodoRepository.findAllByDestinazioniNotContaining(dest);
+	}
 
+	public void addPeriodoDestinazione(Long idPer, Destinazione destinazione) {
+		Periodo periodo = this.periodoRepository.findById(idPer).get();
+		periodo.getDestinazioni().add(destinazione);
+		destinazione.getPeriodi().add(periodo);
+		this.destinazioneRepository.save(destinazione);
+		this.periodoRepository.save(periodo);
 	}
 
 

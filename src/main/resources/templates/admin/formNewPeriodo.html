@@ -34,12 +34,17 @@
 	
 		<div>
 			<label>Partenza:</label> 
-			<span><input type="datetime-local" th:field="${periodo.partenza}" /></span>
+			<span><input type="date" th:field="${periodo.partenza}" /></span>
 		</div>
 		
 		<div>
 			<label>Ritorno:</label> 
-			<span><input type="datetime-local" th:field="${periodo.ritorno}" /></span>
+			<span><input type="date" th:field="${periodo.ritorno}" /></span>
+		</div>
+		
+		<div>
+			<label>Ritorno:</label> 
+			<span><input type="number" step="0.5" th:field="${periodo.moltiplicatore}" /></span>
 		</div>
 		
 

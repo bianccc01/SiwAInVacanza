@@ -11,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,7 +36,10 @@ public class Periodo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate ritorno;
 	
-	@NotBlank
+	@Transient
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL");
+	
+	@NotNull
 	private float moltiplicatore;
 	
 
@@ -101,6 +106,11 @@ public class Periodo {
 			return false;
 		Periodo other = (Periodo) obj;
 		return Objects.equals(partenza, other.partenza) && Objects.equals(ritorno, other.ritorno);
+	}
+	
+	
+	public String getStringa() {
+		return this.partenza.format(formatter) + " - " + this.ritorno.format(formatter);
 	}
 	
 	
