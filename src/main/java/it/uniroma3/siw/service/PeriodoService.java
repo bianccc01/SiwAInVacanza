@@ -58,7 +58,8 @@ public class PeriodoService {
 	public List<Periodo> getPeriodiDaSelezionare(Destinazione dest) {
 		return this.periodoRepository.findAllByDestinazioniNotContaining(dest);
 	}
-
+	
+	@Transactional
 	public void addPeriodoDestinazione(Long idPer, Destinazione destinazione) {
 		Periodo periodo = this.periodoRepository.findById(idPer).get();
 		periodo.getDestinazioni().add(destinazione);
@@ -66,6 +67,16 @@ public class PeriodoService {
 		this.destinazioneRepository.save(destinazione);
 		this.periodoRepository.save(periodo);
 	}
+	
+	@Transactional
+	public void rmvPeriodoDestinazione(Long idPer, Destinazione destinazione) {
+		Periodo periodo = this.periodoRepository.findById(idPer).get();
+		periodo.getDestinazioni().remove(destinazione);
+		destinazione.getPeriodi().remove(periodo);
+		this.destinazioneRepository.save(destinazione);
+		this.periodoRepository.save(periodo);
+	}
+	
 
 
 

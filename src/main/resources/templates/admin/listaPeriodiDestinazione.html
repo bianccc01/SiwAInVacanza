@@ -31,7 +31,20 @@
 		
 		<ul>
 			<li th:each="p : ${periodi}">
-				<span th:text="${p.getStringa()}"></span>
+				<a th:text="${p.getStringa()}" th:href="@{'/admin/addPeriodoToDestinazione' + '/' + ${idDestinazione} + '/' + ${p.id}}"> </a>
+			</li>
+		</ul>
+		
+		</div>
+		
+		
+		<div>
+		Periodi aggiunti:
+		
+		<ul>
+			<li th:each="p : ${periodiAggiunti}">
+				<span th:text="${p.getStringa()}"> </span>
+				<a th:href="@{'/admin/rmvPeriodoToDestinazione' + '/' + ${idDestinazione} + '/' + ${p.id}}"> Rimuovi  </a>
 			</li>
 		</ul>
 		
