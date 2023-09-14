@@ -34,7 +34,6 @@ public class Destinazione {
 	@ManyToMany
 	private List<Periodo> periodi;
 	
-	
 	@NotNull
 	private float prezzoBase;
 	

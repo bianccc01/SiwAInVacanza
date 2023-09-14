@@ -43,7 +43,7 @@
   <li th:each="d : ${destinazioni}">
   <div class="boxdestinazione" th:if="${d.getFirstImage() == null}">
     <img src="/images/SiwVLogo.png" />
-    <a class="nome" th:href="@{'/guest/destinazione/' + ${d.id} + '/0'}" th:text="${d.nome}">Ibiza</a>
+    <a class="nome" th:href="@{'/admin/destinazione/' + ${d.id} + '/0'}" th:text="${d.nome}">Ibiza</a>
 </div>
 
 <div class="boxdestinazione" th:if="${d.getFirstImage() != null}">

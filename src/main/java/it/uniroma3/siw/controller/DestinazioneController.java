@@ -155,6 +155,28 @@ public class DestinazioneController {
 		
 		return "admin/updateDestinazione.html";
 	}
+	
+	@PostMapping("/admin/updatePrezzoBase/{destId}/{imageId}")
+	public String modificaPrezzoBase(Model model, @RequestParam Float prezzoBase,@PathVariable("destId") Long destId, 
+			@PathVariable("imageId") Long imageId) {
+		
+		Destinazione destinazione = this.destinazioneService.findDestinazioneById(destId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		destinazione.setPrezzoBase(prezzoBase);
+		this.destinazioneService.saveDestinazione(destinazione);
+
+		Image image = this.imageService.getImage(imageId);
+		model.addAttribute("recensioniNotUtente", this.recensioneService.getRecensioniNotUtente(authentication,destinazione));
+		model.addAttribute("recUtente", this.recensioneService.getRecensioneUtente(authentication,destinazione));
+		model.addAttribute("image",image);
+		model.addAttribute("images",this.destinazioneService.allImagesExcept(destinazione, imageId));
+		model.addAttribute("destinazione",destinazione);
+		model.addAttribute("categoria",destinazione.getCategoria());
+		model.addAttribute("recensioni", this.recensioneService.allRecensioniDestinazione(destinazione));
+		
+		return "admin/updateDestinazione.html";
+	}
 }
 
 
