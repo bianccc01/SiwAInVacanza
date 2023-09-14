@@ -42,14 +42,22 @@
 	<div class="ContainerAdmin">
 		<div class="descrizioneContainerAdmin">
 	<h3 th:text="${destinazione.descrizione}"> </h3>
-    <form th:action="@{'/admin/updateDescrizione/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
+	<form th:if="${image == null}" th:action="@{'/admin/updateDescrizione/'+ ${destinazione.id}+'/0'}" method="post">
+			<span><input type="text" th:value="${descrizione}" name="descrizione" placeholder="Cambia descrizione"/></span>
+        	<a><input type="submit" value="Cambia"/></a>
+	</form> 
+    <form th:unless="${image == null}"th:action="@{'/admin/updateDescrizione/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
 			<span><input type="text" th:value="${descrizione}" name="descrizione" placeholder="Cambia descrizione"/></span>
         	<a><input type="submit" value="Cambia"/></a>
 	</form> 
 	</div>
 	<div class="prezzoBaseContainerAdmin">
 	<h3 th:text="${destinazione.prezzoBase}+' euro'"> </h3>
-	<form th:action="@{'/admin/updatePrezzoBase/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
+	<form th:if="${image == null}" th:action="@{'/admin/updatePrezzoBase/'+ ${destinazione.id}+'/0'}" method="post">
+			<span><input type="number" th:value="${prezzoBase}" name="prezzoBase" placeholder="Cambia prezzo base"/></span>
+        	<a><input type="submit" value="Cambia"/></a>
+	</form>
+	<form th:unless="${image == null}" th:action="@{'/admin/updatePrezzoBase/'+ ${destinazione.id}+'/'+${image.id}}" method="post">
 			<span><input type="number" th:value="${prezzoBase}" name="prezzoBase" placeholder="Cambia prezzo base"/></span>
         	<a><input type="submit" value="Cambia"/></a>
 	</form>
