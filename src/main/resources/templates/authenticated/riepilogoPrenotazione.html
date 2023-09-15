@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		SiwAInVacanza - Riepilogo prenotazione
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
+    		<a href="/logout">Logout</a>
+		</div>
+
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+
+	<div class = "logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+
+	<h1>Riepilogo della tua prenotazione</h1>
+
+    <div>
+        <p>Nome: <span th:text=${prenotazione.nome}></span></p>
+        <p>Cognome: <span th:text=${prenotazione.cognome}></span></p>
+        <p>Numero Partecipanti: <span th:text=${prenotazione.nPartecipanti}></span></p>
+        <p>Periodo: <span th:text=${periodo.stringaPeriodo}></span></p>
+        <p>Prezzo: <span th:text=${prenotazione.getPrezzo()}></span></p>
+    </div>
+
+  
+
+</html>

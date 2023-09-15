@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import it.uniroma3.siw.model.Periodo;
 import it.uniroma3.siw.model.Prenotazione;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.PrenotazioneRepository;
@@ -25,6 +27,9 @@ public class PrenotazioneService {
 	
 	@Autowired
 	private DestinazioneService destinazioneService;
+	
+	@Autowired
+	private PeriodoService periodoService;
 	
 	@Transactional
 	public Prenotazione getPrenotazione(Long id) {
@@ -50,7 +55,9 @@ public class PrenotazioneService {
 	@Transactional
 	public void inizializzaPrenotazione(Prenotazione prenotazione, User user, Long idDestinazione) {
 		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
+		prenotazione.inizializzaPrezzo();
 		user.addPrenotazione(prenotazione);
+		this.userRepository.save(user);
 		this.savePrenotazione(prenotazione);
 		
 	}

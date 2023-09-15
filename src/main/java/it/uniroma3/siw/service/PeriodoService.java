@@ -2,6 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
@@ -25,6 +26,8 @@ public class PeriodoService {
 
 	@Autowired
 	private PeriodoRepository periodoRepository;
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL");
 
 	@Transactional
 	public Set<Periodo> allPeriodi(){
@@ -38,6 +41,7 @@ public class PeriodoService {
 
 	@Transactional
 	public void savePeriodo(Periodo periodo) {
+		periodo.setStringaPeriodo(periodo.getPartenza().format(formatter) + " - " + periodo.getRitorno().format(formatter));
 		this.periodoRepository.save(periodo);
 	}
 
@@ -76,6 +80,7 @@ public class PeriodoService {
 		this.destinazioneRepository.save(destinazione);
 		this.periodoRepository.save(periodo);
 	}
+
 	
 
 

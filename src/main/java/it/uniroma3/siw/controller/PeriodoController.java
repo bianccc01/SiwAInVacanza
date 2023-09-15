@@ -36,7 +36,7 @@ public class PeriodoController {
 	}
 
 	@PostMapping("/admin/newPeriodo")
-	public String newPeriodo(@ModelAttribute("categoria") Periodo periodo, Model model){
+	public String newPeriodo(@ModelAttribute("periodo") Periodo periodo, Model model){
 		this.periodoService.savePeriodo(periodo);
 		return "admin/adminDestinazioni.html";
 	}

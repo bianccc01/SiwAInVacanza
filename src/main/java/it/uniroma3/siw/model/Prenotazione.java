@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +25,7 @@ public class Prenotazione {
 	@ManyToOne
 	private User user;
 
-	@NotBlank
+	@NotNull
 	private int nPartecipanti;
 
 	@ManyToOne
@@ -32,6 +33,8 @@ public class Prenotazione {
 
 	@ManyToOne
 	private Periodo periodo;
+	
+	private float prezzo;
 
 	public Long getId() {
 		return id;
@@ -92,6 +95,10 @@ public class Prenotazione {
 
 	public void setPeriodo(Periodo periodo) {
 		this.periodo = periodo;
+	}
+	
+	public void inizializzaPrezzo() {
+		this.prezzo = this.destinazionePrenotata.getPrezzoBase() * this.periodo.getMoltiplicatore() * this.nPartecipanti;
 	}
 	
 	public float getPrezzo(){

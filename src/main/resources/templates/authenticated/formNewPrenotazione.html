@@ -42,8 +42,16 @@
 		
 		<div>
 			<label>Numero partecipanti:</label> 
-			<span><input type="number" th:field="${prenotazione.nPartecipanti}" /></span>
+			<span><input type="number" min="1" max="5" th:field="${prenotazione.nPartecipanti}" /></span>
 		</div>
+		
+		<label class="categoriaTesto" for="selezionaPeriodo">Seleziona un periodo:</label>
+		<select class="selezionaPeriodo" id="selezionaPeriodo" th:field="${prenotazione.periodo.id}"> 
+    <option value="">Scegli il periodo</option>
+    <th:block th:each="periodo : ${destinazione.periodi}">
+        <option th:text="${periodo.getStringaPeriodo()}" th:value="${periodo.id}"></option>
+    </th:block>
+</select>
 		
 		<div>
 			<span><button class = "conferma" type="submit">Conferma</button></span>

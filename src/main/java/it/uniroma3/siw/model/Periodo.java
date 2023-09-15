@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,10 +26,10 @@ public class Periodo {
 	private Long id;
 
 	@ManyToMany
-	private List<Destinazione> destinazioni;
+	private List<Destinazione> destinazioni = new ArrayList<>();
 
 	@OneToMany(mappedBy="periodo")
-	private List<Prenotazione> prenotazioni;
+	private List<Prenotazione> prenotazioni = new ArrayList<>();
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate partenza;
@@ -36,8 +37,7 @@ public class Periodo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate ritorno;
 	
-	@Transient
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL");
+	private String stringaPeriodo;
 	
 	@NotNull
 	private float moltiplicatore;
@@ -108,10 +108,19 @@ public class Periodo {
 		return Objects.equals(partenza, other.partenza) && Objects.equals(ritorno, other.ritorno);
 	}
 	
-	
-	public String getStringa() {
-		return this.partenza.format(formatter) + " - " + this.ritorno.format(formatter);
+
+	public String getStringaPeriodo() {
+		if(stringaPeriodo==null) {
+			return "Ciao, e' null la stringa";
+		}
+		else return stringaPeriodo;
 	}
+
+	public void setStringaPeriodo(String stringaPeriodo) {
+		this.stringaPeriodo = stringaPeriodo;
+	}
+	
+	
 	
 	
 	

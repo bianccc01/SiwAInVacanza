@@ -34,7 +34,8 @@
       <span th:text="${p.nome}"> Nome</span>
     <span th:text="${p.cognome}"> Cognome</span>
     <span th:text="${p.nPartecipanti}"> 5</span>
-    <span th:text="'Prezzo totale: '+${p.getPrezzo()}"> </span>
+    <span th:text="'Prezzo totale: '+ ${p.getPrezzo()}"> </span>
+    <span th:text="${p.periodo.getStringaPeriodo()}"> 5</span>
      <a class = "eliminaPrenotazione" th:href="@{'/authenticated/eliminaPrenotazione' + '/' + ${p.id}}"> Elimina</a>
     </div>
   </li>

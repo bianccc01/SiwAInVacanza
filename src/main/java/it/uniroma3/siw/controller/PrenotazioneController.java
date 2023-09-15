@@ -61,9 +61,11 @@ public class PrenotazioneController {
 	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
 			Model model) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		prenotazione.getPeriodo().getPrenotazioni().add(prenotazione);
 		prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
-		model.addAttribute("prenotazioni", this.prenotazioneService.getPrenotazioneUser(authentication));
-		return "authenticated/prenotazioni.html";
+		model.addAttribute("prenotazione", prenotazione);
+		model.addAttribute("periodo",prenotazione.getPeriodo());
+		return "authenticated/riepilogoPrenotazione.html";
 	}
 	
 	
@@ -75,6 +77,7 @@ public class PrenotazioneController {
 		return "authenticated/prenotazioni.html";
 		
 	}
+
 	
 
 }
