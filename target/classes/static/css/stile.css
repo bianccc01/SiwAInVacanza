@@ -476,11 +476,11 @@ margin: 75px 200px;
 #img1{
 	height: 400px;
  width: 600px;
-background-image:url('/images/categoria_index.jpg'); /* Inserisci il percorso dell'immagine qui */
-            background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
-            background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
-            color: white; /* Colore del testo sull'immagine */
-            text-align: center; /* Allinea il testo al centro */
+background-image:url('/images/categoria_index.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: white; 
+            text-align: center;
             padding: 20px;
              margin-bottom: 2em;
   margin: 40px;
@@ -505,11 +505,11 @@ background-image:url('/images/categoria_index.jpg'); /* Inserisci il percorso de
 #img2{
 	height: 400px;
  width: 600px;
-background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso dell'immagine qui */
-            background-size: cover; /* Adatta l'immagine per coprire l'intero elemento */
-            background-position: center; /* Centra l'immagine orizzontalmente e verticalmente */
-            color: white; /* Colore del testo sull'immagine */
-            text-align: center; /* Allinea il testo al centro */
+background-image:url('/images/destinazione_index.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            color: white; 
+            text-align: center; 
             padding: 20px;
              margin-bottom: 2em;
   margin: 40px;
