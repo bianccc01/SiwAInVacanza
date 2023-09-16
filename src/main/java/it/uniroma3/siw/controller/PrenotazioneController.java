@@ -23,6 +23,7 @@ import it.uniroma3.siw.model.Prenotazione;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.DestinazioneService;
+import it.uniroma3.siw.service.PeriodoService;
 import it.uniroma3.siw.service.PrenotazioneService;
 import it.uniroma3.siw.service.UserService;
 
@@ -40,6 +41,9 @@ public class PrenotazioneController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PeriodoService periodoService;
 	
 	@GetMapping("/authenticated/formNewPrenotazione/{idDestinazione}")
 	public String formNewPrenotazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
@@ -62,9 +66,8 @@ public class PrenotazioneController {
 			Model model) throws IOException {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		prenotazione.getPeriodo().getPrenotazioni().add(prenotazione);
-		prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
-		model.addAttribute("prenotazione", prenotazione);
-		model.addAttribute("periodo",prenotazione.getPeriodo());
+		this.prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
+		model.addAttribute("destinazione",this.destinazioneService.findDestinazioneById(idDestinazione));
 		return "authenticated/riepilogoPrenotazione.html";
 	}
 	

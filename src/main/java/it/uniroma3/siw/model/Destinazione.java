@@ -34,6 +34,9 @@ public class Destinazione {
 	@ManyToMany
 	private List<Periodo> periodi;
 	
+	@OneToMany(mappedBy="destinazionePrenotata")
+	private List<Prenotazione> prenotazioni= new ArrayList<>();
+	
 	@NotNull
 	private float prezzoBase;
 	
@@ -137,6 +140,14 @@ public class Destinazione {
 
 	public void setPeriodi(List<Periodo> periodi) {
 		this.periodi = periodi;
+	}
+	
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni;
+	}
+
+	public void setPrenotazioni(List<Prenotazione> pren) {
+		this.prenotazioni = pren;
 	}
 	
 	

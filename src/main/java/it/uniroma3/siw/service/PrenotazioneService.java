@@ -55,7 +55,8 @@ public class PrenotazioneService {
 	@Transactional
 	public void inizializzaPrenotazione(Prenotazione prenotazione, User user, Long idDestinazione) {
 		prenotazione.setDestinazionePrenotata(this.destinazioneService.findDestinazioneById(idDestinazione));
-		prenotazione.inizializzaPrezzo();
+		prenotazione.setPrezzo();
+		prenotazione.getPeriodo().getPrenotazioni().add(prenotazione);
 		user.addPrenotazione(prenotazione);
 		this.userRepository.save(user);
 		this.savePrenotazione(prenotazione);

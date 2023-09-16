@@ -97,7 +97,7 @@ public class Prenotazione {
 		this.periodo = periodo;
 	}
 	
-	public void inizializzaPrezzo() {
+	public void setPrezzo() {
 		this.prezzo = this.destinazionePrenotata.getPrezzoBase() * this.periodo.getMoltiplicatore() * this.nPartecipanti;
 	}
 	
