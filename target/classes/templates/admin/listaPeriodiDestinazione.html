@@ -25,13 +25,14 @@
 		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
-		
+	<div class="container">	
 	<div>
 		Periodi che si possono aggiungere:
 		
 		<ul>
 			<li th:each="p : ${periodi}">
-				<a th:text="${p.stringaPeriodo}" th:href="@{'/admin/addPeriodoToDestinazione' + '/' + ${idDestinazione} + '/' + ${p.id}}"> </a>
+				<span th:text="${p.stringaPeriodo}" > </span>
+				<a th:href="@{'/admin/addPeriodoToDestinazione' + '/' + ${idDestinazione} + '/' + ${p.id}}">Aggiungi </a>
 			</li>
 		</ul>
 		
@@ -49,9 +50,6 @@
 		</ul>
 		
 		</div>
-		
-		
-	<div>
 	</div>
 	
 	

@@ -180,15 +180,17 @@ public class DestinazioneController {
 		this.periodoService.addPeriodoDestinazione(idPer, destinazione);
 		model.addAttribute("periodi",this.periodoService.getPeriodiDaSelezionare(destinazione));
 		model.addAttribute("periodiAggiunti",destinazione.getPeriodi());
+		model.addAttribute("idDestinazione",idDest);
 		return "admin/listaPeriodiDestinazione.html";
 	}
 	
-	@GetMapping("/admin/rmvPeriodoToDestinazione/{idDestinazione}/{idPeriodo}/{imgId}")
+	@GetMapping("/admin/rmvPeriodoToDestinazione/{idDestinazione}/{idPeriodo}")
 	public String rmvPeriodiDestinazione(@PathVariable ("idDestinazione") Long idDest, @PathVariable ("idPeriodo") Long idPer, Model model) {
 		Destinazione destinazione = this.destinazioneService.findDestinazioneById(idDest);
 		this.periodoService.rmvPeriodoDestinazione(idPer, destinazione);
 		model.addAttribute("periodi",this.periodoService.getPeriodiDaSelezionare(destinazione));
 		model.addAttribute("periodiAggiunti",destinazione.getPeriodi());
+		model.addAttribute("idDestinazione",idDest);
 		return "admin/listaPeriodiDestinazione.html";
 	}
 	
@@ -212,7 +214,6 @@ public class DestinazioneController {
 		model.addAttribute("recensioni", this.recensioneService.allRecensioniDestinazione(destinazione));
 		model.addAttribute("periodi",this.periodoService.getPeriodiDaSelezionare(destinazione));
 		model.addAttribute("periodiAggiunti",destinazione.getPeriodi());
-		
 		return "admin/updateDestinazione.html";
 	}
 }
