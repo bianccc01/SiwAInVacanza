@@ -9,9 +9,7 @@
    <body>
       <header>
          <a class = "home" href="/"> Home </a>
-         
-         <a class ="home" th:href="@{'/admin/listaPeriodiDestinazione' + '/' + ${destinazione.id}}">Aggiungi Periodo alla destinazione</a>
-         
+                
          
          <div th:if="${#request.userPrincipal}">
             <a href="/logout">Logout</a>
@@ -68,6 +66,9 @@
         	<a><input type="submit" value="Cambia"/></a>
 	</form>
 	</div>
+	<div id="periodiDest">
+		<a th:href="@{'/admin/listaPeriodiDestinazione' + '/' + ${destinazione.id}}">Visualizza e gestisci i periodi </a>
+	 </div>
 	</div>
 	
    

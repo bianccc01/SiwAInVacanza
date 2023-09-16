@@ -240,8 +240,8 @@ border:solid;
 
 .recensioni .conferma{
   position:absolute;
-  bottom:0px;
-  right:0px;
+  bottom:0;
+  right:0;
   
 }
 
@@ -334,6 +334,8 @@ position:relative;
 }
 .recensioni {
   border:solid;
+  height: 100px;
+  position: relative;
 }
 .recensioniH2{
 	margin-top: 5%;	
@@ -530,7 +532,10 @@ background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso
 	margin-right: 10%;
 }
 
-
+.ContainerAdmin #periodiDest{
+	margin-right: 290px;
+	margin-top:10px;
+}
 
 
 
