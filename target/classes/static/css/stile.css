@@ -316,9 +316,9 @@ position:relative;
 
 .prenotazione{
   position:relative;
-  top:15px;
   border:solid;
-  margin-top:50px;
+ height: 40px;
+ margin-left:-40px;
 }
 
 .prenotazione span{
@@ -537,5 +537,7 @@ background-image:url('/images/destinazione_index.jpg'); /* Inserisci il percorso
 	margin-top:10px;
 }
 
-
+#prenComp{
+	text-align: center;
+}
 

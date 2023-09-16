@@ -22,7 +22,7 @@
 	</header>
 
 	
-	<a href="/"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
+	<a class="logo"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
 	<div class="utente" th:if="${#request.userPrincipal}">
 		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
@@ -45,7 +45,7 @@
 			<span><input type="number" min="1" max="5" th:field="${prenotazione.nPartecipanti}" /></span>
 		</div>
 		
-		<label class="categoriaTesto" for="selezionaPeriodo">Seleziona un periodo:</label>
+		<label class="categoriaTesto" for="selezionaPeriodo"> </label>
 		<select class="selezionaPeriodo" id="selezionaPeriodo" th:field="${prenotazione.periodo.id}"> 
     <option value="">Scegli il periodo</option>
     <th:block th:each="periodo : ${destinazione.periodi}">

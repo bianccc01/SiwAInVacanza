@@ -10,27 +10,34 @@
 
 <body>
 	<header>
-    <div style="float:left"><a href="/">Home</a></div>
-		<div th:if="${#request.userPrincipal}">
-    		<span th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"></span>
+    <a class = "home" href="/"> Home </a>
+		
+    <div th:if="${#request.userPrincipal}">
     		<a href="/logout">Logout</a>
 		</div>
 
 		<div th:unless="${#request.userPrincipal}">
 			<a href="/login">Login</a>
 		</div>
-</header>
-		<div class="logo"><img src="/images/SiwVLogo.png" width="20%" /></div>
+	</header>
+
+	
+	<a class="logo"><img src="/images/SiwVLogo.png" width="20%"/></a></div>
+	<div class="utente" th:if="${#request.userPrincipal}">
+		<div th:text="'Bentornato ' + ${#request.userPrincipal.principal.username}"> </div>
+    		<a href="/authenticated/userDetails">>Vai al tuo account </a>
+	</div>
 		
 	<div class="container">
 	
-	<h1 class="log3" th:text="'Si parte per ...'+ ${destinazione.nome}+'!'"></h1>
+	<h1 class="log3" th:text="'Si parte per ...'+ ${destinazione.nome}+'!'"> </h1>
 	
-	<div>
+	<div id="prenComp">
 		<span>Congratulazioni la tua prenotazione e' andata a buon fine </span>
-	<span>	
+	<p>	
 	<a href="/authenticated/prenotazioni">Vai alle tue prenotazioni</a>
-	</span>
+	</p>
+	</div>
 	</div>
 
 </body>
