@@ -2,12 +2,8 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
-
-
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,6 +103,7 @@ public class CategoriaController {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
 		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);
 		List<Destinazione> destinazioni = categ.getDestinazioni();
+		if(dest!=null) {
 		if(!destinazioni.contains(dest)) {
 			destinazioni.add(dest);
 			dest.setCategoria(categ);
@@ -120,12 +117,19 @@ public class CategoriaController {
 		model.addAttribute("notDestinazioni", notDestinazioni);
 
 		return "admin/adminCategoria.html";
+		}
+		
+		else {
+			
+			return "redirect:/admin/updateCategoria/"+ categoriaId;
+		}
 	}
 	
 	@PostMapping(value="/admin/removeDestinazioneToCategoria/{categoriaId}")
 	public String removeDestinazioneToCategoria(@PathVariable("categoriaId") Long categoriaId,@RequestParam String nome, Model model) {
 		Categoria categ = this.categoriaService.findCategoriaById(categoriaId);
 		Destinazione dest = this.destinazioneService.findDestinazioneByNome(nome);
+		if(dest!=null) {
 		List<Destinazione> destinazioni = categ.getDestinazioni();
 		if(destinazioni.contains(dest)) {
 			destinazioni.remove(dest);
@@ -140,6 +144,11 @@ public class CategoriaController {
 		model.addAttribute("notDestinazioni", notDestinazioni);
 
 		return "admin/adminCategoria.html";
+		}
+		else {
+			
+			return "redirect:/admin/updateCategoria/"+ categoriaId;
+		}
 	}
 	
 	
