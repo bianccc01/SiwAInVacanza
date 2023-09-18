@@ -28,6 +28,9 @@
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
 	<form class="container" th:action="@{'/authenticated/newPrenotazione/' + ${idDestinazione}}" method="POST" th:object="${prenotazione}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
 		<h1 class="log1" th:text="'Prenota per ' + ${destinazione.nome}"> </h1>
 		<div class="log">
 		<div>

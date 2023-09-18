@@ -2,6 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
+
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.CategoriaRepository;
 import it.uniroma3.siw.repository.DestinazioneRepository;
-import it.uniroma3.siw.repository.ImageRepository;
 
 @Service
 public class CategoriaService {

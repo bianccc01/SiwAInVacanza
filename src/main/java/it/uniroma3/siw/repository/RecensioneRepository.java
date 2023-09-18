@@ -3,11 +3,10 @@ package it.uniroma3.siw.repository;
 
 import java.util.List;
 
+
 import java.util.Set;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Recensione;

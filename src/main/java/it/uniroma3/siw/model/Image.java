@@ -1,8 +1,7 @@
 package it.uniroma3.siw.model;
 
-import java.util.ArrayList;
+
 import java.util.Base64;
-import java.util.List;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;

@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
+
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +24,6 @@ import it.uniroma3.siw.controller.validation.DestinazioneValidator;
 import it.uniroma3.siw.model.Categoria;
 import it.uniroma3.siw.model.Destinazione;
 import it.uniroma3.siw.model.Image;
-import it.uniroma3.siw.model.Periodo;
 import it.uniroma3.siw.service.CategoriaService;
 import it.uniroma3.siw.service.DestinazioneService;
 import it.uniroma3.siw.service.ImageService;

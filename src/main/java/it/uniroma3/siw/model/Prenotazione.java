@@ -1,13 +1,11 @@
 package it.uniroma3.siw.model;
 
-import java.time.LocalDate;
+
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Prenotazione {
@@ -107,7 +105,7 @@ public class Prenotazione {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cognome, user, destinazionePrenotata, nome);
+		return Objects.hash(user,destinazionePrenotata, periodo);
 	}
 
 	@Override
@@ -119,9 +117,8 @@ public class Prenotazione {
 		if (getClass() != obj.getClass())
 			return false;
 		Prenotazione other = (Prenotazione) obj;
-		return Objects.equals(cognome, other.cognome)
-				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(user, other.user)
-				&& Objects.equals(nome, other.nome);
+		return Objects.equals(user, other.user)
+				&& Objects.equals(destinazionePrenotata, other.destinazionePrenotata) && Objects.equals(periodo, other.periodo);
 	}
 
 

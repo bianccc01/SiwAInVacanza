@@ -30,16 +30,20 @@
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
 	<form th:action="@{/admin/newPeriodo}" method="POST" th:object="${periodo}">
-		
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
 	
 		<div>
 			<label>Partenza:</label> 
 			<span><input type="date" th:field="${periodo.partenza}" /></span>
+			 <span th:if="${#fields.hasErrors('partenza')}" th:errors="*{partenza}"> </span>
 		</div>
 		
 		<div>
 			<label>Ritorno:</label> 
 			<span><input type="date" th:field="${periodo.ritorno}" /></span>
+			 <span th:if="${#fields.hasErrors('ritorno')}" th:errors="*{ritorno}"> </span>
 		</div>
 		
 		<div>

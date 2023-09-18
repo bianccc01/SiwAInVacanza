@@ -2,9 +2,6 @@ package it.uniroma3.siw.controller;
 
 
 
-
-import java.util.Set;
-
 import javax.validation.Valid;
 
 
@@ -21,11 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validation.RecensioneValidator;
 import it.uniroma3.siw.model.Destinazione;
-import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.DestinazioneService;
-import it.uniroma3.siw.service.ImageService;
 import it.uniroma3.siw.service.RecensioneService;
 import it.uniroma3.siw.service.UserService;
 

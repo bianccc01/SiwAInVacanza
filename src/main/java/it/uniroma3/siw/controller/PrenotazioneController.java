@@ -2,28 +2,21 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.siw.model.Categoria;
-import it.uniroma3.siw.model.Credentials;
-import it.uniroma3.siw.model.Destinazione;
-import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.controller.validation.PrenotazioneValidator;
 import it.uniroma3.siw.model.Prenotazione;
-import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.DestinazioneService;
-import it.uniroma3.siw.service.PeriodoService;
 import it.uniroma3.siw.service.PrenotazioneService;
 import it.uniroma3.siw.service.UserService;
 
@@ -34,16 +27,13 @@ public class PrenotazioneController {
 	private PrenotazioneService prenotazioneService;
 	
 	@Autowired
-	private CredentialsService credentialsService;
-	
-	@Autowired
 	private DestinazioneService destinazioneService;
 	
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
-	private PeriodoService periodoService;
+	private PrenotazioneValidator prenotazioneValidator;
 	
 	@GetMapping("/authenticated/formNewPrenotazione/{idDestinazione}")
 	public String formNewPrenotazione(@PathVariable ("idDestinazione") Long idDestinazione , Model model) {
@@ -62,13 +52,18 @@ public class PrenotazioneController {
 	}
 	
 	@PostMapping("/authenticated/newPrenotazione/{idDestinazione}")
-	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, @PathVariable("idDestinazione") Long idDestinazione,
+	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione,BindingResult bindingResult, @PathVariable("idDestinazione") Long idDestinazione,
 			Model model) throws IOException {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		prenotazione.getPeriodo().getPrenotazioni().add(prenotazione);
-		this.prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
-		model.addAttribute("destinazione",this.destinazioneService.findDestinazioneById(idDestinazione));
-		return "authenticated/riepilogoPrenotazione.html";
+		this.prenotazioneValidator.validate(prenotazione, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			prenotazione.getPeriodo().getPrenotazioni().add(prenotazione);
+			this.prenotazioneService.inizializzaPrenotazione(prenotazione, this.userService.getUserAuthentication(authentication), idDestinazione);
+			model.addAttribute("destinazione",this.destinazioneService.findDestinazioneById(idDestinazione));
+			return "authenticated/riepilogoPrenotazione.html";
+		}
+		else
+			return "redirect:/authenticated/formNewPrenotazione/"+idDestinazione;
 	}
 	
 	

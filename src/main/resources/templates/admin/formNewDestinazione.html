@@ -29,17 +29,21 @@
     		<a href="/authenticated/userDetails">>Vai al tuo account </a>
 	</div>
 	<form th:action="@{/admin/newDestinazione}" method="POST" th:object="${destinazione}" enctype="multipart/form-data">
-		
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
 	
 		
 		<div>
 			<label>Nome:</label> 
 			<span><input type="text" th:field="${destinazione.nome}" /></span>
+			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"> </span>
 		</div>
 
 	<div class= "descrizioneContainer">
     <label for="text"> <p>Descrizione: </p></label>
     <textarea id="text" class="descrizione" name="descrizione" th:field="${destinazione.descrizione}"></textarea>
+    <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"> </span>
 </div>
 <div>
 			<label>Prezzo base:</label> 

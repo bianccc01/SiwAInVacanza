@@ -17,8 +17,8 @@ public class PrenotazioneValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		Prenotazione pren = (Prenotazione)o;
-		if (pren.getNome()!=null && pren.getCognome()!=null && pren.getUser()!=null && pren.getDestinazionePrenotata()!=null &&  
-				prenotazioneRepository.existsByNomeAndCognomeAndUserAndDestinazionePrenotata(pren.getNome(),pren.getCognome(),pren.getUser(),pren.getDestinazionePrenotata())) {
+		if (pren.getUser()!=null && pren.getDestinazionePrenotata()!=null &&  pren.getPeriodo()!=null &&
+				prenotazioneRepository.existsByUserAndDestinazionePrenotataAndPeriodo(pren.getUser(),pren.getDestinazionePrenotata(),pren.getPeriodo())) {
 			errors.reject("prenotazione.duplicate");
 		}
 	}
