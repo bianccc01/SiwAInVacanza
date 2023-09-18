@@ -101,7 +101,7 @@ public class RecensioneController {
 		
 	}
 	
-	@GetMapping("/authenticated/rimuoviRecensione/{recId}/{destId}/{imageId}")
+	@GetMapping("/authenticated/rimuoviRecensione/{recId}")
 	public String removeRecensione(@PathVariable("recId") Long id, Model model) {
 		Recensione rec=this.recensioneService.findRecensioneById(id);
 		this.recensioneService.rimuoviRecensione(rec);
