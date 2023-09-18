@@ -105,8 +105,9 @@ public class Destinazione {
 	}
 	
 	public Long getFirstImageId() {
+		
 		if(images.isEmpty())
-			return null;
+			return (long) 0;
 		else return this.images.get(0).getId();
 	}
 	

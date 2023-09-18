@@ -82,7 +82,7 @@ public class RecensioneController {
 				return "authenticated/formNewRecensione.html";
 		}
 		
-		return "guest/index.html";
+		return "redirect:/guest/destinazione/"+ destId + "/" + dest.getFirstImageId();
 	}
 
 	
@@ -104,8 +104,9 @@ public class RecensioneController {
 	@GetMapping("/authenticated/rimuoviRecensione/{recId}")
 	public String removeRecensione(@PathVariable("recId") Long id, Model model) {
 		Recensione rec=this.recensioneService.findRecensioneById(id);
+		Destinazione dest = rec.getDestinazione();
 		this.recensioneService.rimuoviRecensione(rec);
-		return "guest/index.html";
+		return "redirect:/guest/destinazione/"+ dest.getId() + "/" + dest.getFirstImageId();
 		
 	}
 	
